@@ -1,0 +1,19 @@
+%{
+#include <stdio.h>
+#include "y.tab.h"
+extern char *yytext_start;  // Adicione esta linha para declarar externamente yytext_start
+
+%}
+
+%%
+
+[0-9]+      { yylval = atoi(yytext); return NUMBER; }
+[-+*/()\n]  { return yytext[0]; }
+[ \t]       ; // Ignora espaços em branco e tabulações
+.           { 
+                fprintf(stderr, "Caractere desconhecido: %s\n", yytext);
+                yyerror("Erro léxico"); // Adiciona uma chamada a yyerror para relatar o erro
+            }
+
+%%
+

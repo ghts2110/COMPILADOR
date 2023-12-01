@@ -1,0 +1,42 @@
+%{
+#include <stdio.h>
+#include <math.h>
+#include "y.tab.h"
+int yylex(void);
+int yyerror(const char *s);
+%}
+
+%token NUMBER
+%token ADD SUB MUL DIV
+%token LPAREN RPAREN
+
+%%
+
+expression: 
+    expression ADD term
+    | expression SUB term
+    | term
+    ;
+
+term:
+    term MUL factor
+    | term DIV factor
+    | factor
+    ;
+
+factor:
+    NUMBER
+    | LPAREN expression RPAREN
+    ;
+
+%%
+
+int main() {
+    yyparse();
+    return 0;
+}
+
+int yyerror(const char *s) {
+    fprintf(stderr, "Erro de análise: %s\n", s);
+    return 0;
+}
