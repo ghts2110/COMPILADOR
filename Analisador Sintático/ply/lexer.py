@@ -16,7 +16,6 @@ tokens = (
     'RBRACE',
     'COMMA',
     'COMMENT',
-    'PARAMETRO',
     'LBRACKET',
     'RBRACKET',
     'DOTDOTDOT',
@@ -34,7 +33,14 @@ tokens = (
     'ARROW',
     'NUM_INT',
     'NUM_DEC',
-    'TEXTO'
+    'TEXTO',
+    'PLUSEQUAL',
+    'MINUSEQUAL',
+    'TIMESEQUAL',
+    'DIVEQUAL',
+    'MODEQUAL',
+    'ANDANDEQUAL',
+    'OROREQUAL',
 )
 
 # Regras para cada token
@@ -64,6 +70,13 @@ t_EQUAL = r'=='
 t_MODULO = r'%'
 t_DOT = r'.'
 t_ARROW = r'->'
+t_PLUSEQUAL = r'\+='
+t_MINUSEQUAL = r'-='
+t_TIMESEQUAL = r'\*='
+t_DIVEQUAL = r'/='
+t_MODEQUAL = r'%='
+t_ANDANDEQUAL = r'&&='
+t_OROREQUAL = r'\|\|='
 
 
 # Regra para tipo

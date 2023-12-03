@@ -2,6 +2,7 @@ from lexer import lexer
 from parser import parser
 from parser import linha
 
+
 def main():
     data = """int x; // Declaracao de variavel
         float y;

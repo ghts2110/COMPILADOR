@@ -15,11 +15,11 @@ Rule 9     declaracaoVariavel -> TIPO array SEMICOLON
 Rule 10    declaracaoVariavel -> TIPO array EQUALS TEXTO SEMICOLON
 Rule 11    array -> ID LBRACKET RBRACKET
 Rule 12    declaracaoFuncao -> TIPO ID LPAREN parametros RPAREN bloco
-Rule 13    parametros -> PARAMETRO
-Rule 14    parametros -> PARAMETRO COMMA parametros
-Rule 15    parametros -> TIPO ID
-Rule 16    parametros -> TIPO ID LBRACKET RBRACKET
-Rule 17    parametros -> TIPO DOTDOTDOT ID
+Rule 13    parametros -> parametro
+Rule 14    parametros -> parametro COMMA parametros
+Rule 15    parametro -> TIPO ID
+Rule 16    parametro -> TIPO ID LBRACKET RBRACKET
+Rule 17    parametro -> TIPO DOTDOTDOT ID
 Rule 18    comentario -> COMMENT
 Rule 19    bloco -> LBRACE declaracao RBRACE
 Rule 20    declaracaoEstrutura -> LBRACE declaracaoVariavel RBRACE SEMICOLON
@@ -35,84 +35,102 @@ Rule 29    expressaoRelacional -> expressaoAritmetica LESSEQUAL expressaoAritmet
 Rule 30    expressaoRelacional -> expressaoAritmetica NOTEQUAL expressaoAritmetica
 Rule 31    expressaoRelacional -> expressaoAritmetica EQUAL expressaoAritmetica
 Rule 32    expressao -> expressaoLogica
-Rule 33    expressaoAritmetica -> expressaoMultiplicativa
-Rule 34    expressaoAritmetica -> expressaoMultiplicativa PLUS expressaoMultiplicativa
-Rule 35    expressaoAritmetica -> expressaoMultiplicativa MINUS expressaoMultiplicativa
-Rule 36    expressaoMultiplicativa -> expressaoMultiplicativa TIMES expressaoUnaria
-Rule 37    expressaoMultiplicativa -> expressaoMultiplicativa DIVIDE expressaoUnaria
-Rule 38    expressaoMultiplicativa -> expressaoMultiplicativa MODULO expressaoUnaria
-Rule 39    expressaoMultiplicativa -> expressaoUnaria
-Rule 40    expressaoUnaria -> expressaoPostfix
-Rule 41    expressaoUnaria -> MINUS expressaoPostfix
-Rule 42    expressaoUnaria -> PLUS PLUS expressaoPostfix
-Rule 43    expressaoUnaria -> MINUS MINUS expressaoPostfix
-Rule 44    expressaoPostfix -> primaria
-Rule 45    expressaoPostfix -> primaria LBRACKET expressao RBRACKET
-Rule 46    expressaoPostfix -> primaria LPAREN argumentos RPAREN
-Rule 47    expressaoPostfix -> primaria DOT ID
-Rule 48    expressaoPostfix -> primaria ARROW ID
-Rule 49    argumentos -> <empty>
-Rule 50    primaria -> ID
-Rule 51    primaria -> NUM_INT
-Rule 52    primaria -> NUM_DEC
-Rule 53    primaria -> LPAREN expressao LPAREN
+Rule 33    expressao -> atribuicao
+Rule 34    atribuicao -> ID EQUALS expressao
+Rule 35    atribuicao -> ID PLUSEQUAL expressao
+Rule 36    atribuicao -> ID MINUSEQUAL expressao
+Rule 37    atribuicao -> ID TIMESEQUAL expressao
+Rule 38    atribuicao -> ID DIVEQUAL expressao
+Rule 39    atribuicao -> ID MODEQUAL expressao
+Rule 40    atribuicao -> ID ANDANDEQUAL expressao
+Rule 41    atribuicao -> ID OROREQUAL expressao
+Rule 42    expressaoAritmetica -> expressaoMultiplicativa
+Rule 43    expressaoAritmetica -> expressaoAritmetica PLUS expressaoMultiplicativa
+Rule 44    expressaoAritmetica -> expressaoAritmetica MINUS expressaoMultiplicativa
+Rule 45    expressaoMultiplicativa -> expressaoMultiplicativa TIMES expressaoUnaria
+Rule 46    expressaoMultiplicativa -> expressaoMultiplicativa DIVIDE expressaoUnaria
+Rule 47    expressaoMultiplicativa -> expressaoMultiplicativa MODULO expressaoUnaria
+Rule 48    expressaoMultiplicativa -> expressaoUnaria
+Rule 49    expressaoUnaria -> expressaoPostfix
+Rule 50    expressaoUnaria -> MINUS expressaoPostfix
+Rule 51    expressaoUnaria -> PLUS PLUS expressaoPostfix
+Rule 52    expressaoUnaria -> MINUS MINUS expressaoPostfix
+Rule 53    expressaoPostfix -> primaria
+Rule 54    expressaoPostfix -> primaria LBRACKET expressao RBRACKET
+Rule 55    expressaoPostfix -> primaria LPAREN argumentos RPAREN
+Rule 56    expressaoPostfix -> primaria DOT ID
+Rule 57    expressaoPostfix -> primaria ARROW ID
+Rule 58    argumentos -> <empty>
+Rule 59    primaria -> ID
+Rule 60    primaria -> NUM_INT
+Rule 61    primaria -> NUM_DEC
+Rule 62    primaria -> LPAREN expressao LPAREN
+Rule 63    primaria -> TEXTO
 
 Terminals, with rules where they appear
 
 ANDAND               : 23
-ARROW                : 48
+ANDANDEQUAL          : 40
+ARROW                : 57
 COMMA                : 14
 COMMENT              : 18
-DIVIDE               : 37
-DOT                  : 47
+DIVEQUAL             : 38
+DIVIDE               : 46
+DOT                  : 56
 DOTDOTDOT            : 17
 EQUAL                : 31
-EQUALS               : 8 10
+EQUALS               : 8 10 34
 GREATER              : 26
 GREATEREQUAL         : 28
-ID                   : 7 8 11 12 15 16 17 47 48 50
+ID                   : 7 8 11 12 15 16 17 34 35 36 37 38 39 40 41 56 57 59
 LBRACE               : 19 20
-LBRACKET             : 11 16 45
+LBRACKET             : 11 16 54
 LESS                 : 27
 LESSEQUAL            : 29
-LPAREN               : 12 46 53 53
-MINUS                : 35 41 43 43
-MODULO               : 38
+LPAREN               : 12 55 62 62
+MINUS                : 44 50 52 52
+MINUSEQUAL           : 36
+MODEQUAL             : 39
+MODULO               : 47
 NOT                  : 24
 NOTEQUAL             : 30
-NUM_DEC              : 52
-NUM_INT              : 51
+NUM_DEC              : 61
+NUM_INT              : 60
 OROR                 : 22
-PARAMETRO            : 13 14
-PLUS                 : 34 42 42
+OROREQUAL            : 41
+PLUS                 : 43 51 51
+PLUSEQUAL            : 35
 RBRACE               : 19 20
-RBRACKET             : 11 16 45
-RPAREN               : 12 46
+RBRACKET             : 11 16 54
+RPAREN               : 12 55
 SEMICOLON            : 7 8 9 10 20
-TEXTO                : 10
-TIMES                : 36
+TEXTO                : 10 63
+TIMES                : 45
+TIMESEQUAL           : 37
 TIPO                 : 7 8 9 10 12 15 16 17
 error                : 
 
 Nonterminals, with rules where they appear
 
-argumentos           : 46
+argumentos           : 55
 array                : 9 10
+atribuicao           : 33
 bloco                : 12
 comentario           : 6
 declaracao           : 1 2 19
 declaracaoEstrutura  : 5
 declaracaoFuncao     : 4
 declaracaoVariavel   : 3 20
-expressao            : 8 45 53
-expressaoAritmetica  : 25 26 26 27 27 28 28 29 29 30 30 31 31
+expressao            : 8 34 35 36 37 38 39 40 41 54 62
+expressaoAritmetica  : 25 26 26 27 27 28 28 29 29 30 30 31 31 43 44
 expressaoLogica      : 22 23 32
-expressaoMultiplicativa : 33 34 34 35 35 36 37 38
-expressaoPostfix     : 40 41 42 43
+expressaoMultiplicativa : 42 43 44 45 46 47
+expressaoPostfix     : 49 50 51 52
 expressaoRelacional  : 21 22 23 24
-expressaoUnaria      : 36 37 38 39
+expressaoUnaria      : 45 46 47 48
+parametro            : 13 14
 parametros           : 12 14
-primaria             : 44 45 46 47 48
+primaria             : 53 54 55 56 57
 programa             : 2 0
 
 Parsing method: LALR
@@ -324,10 +342,19 @@ state 16
 
     (8) declaracaoVariavel -> TIPO ID EQUALS . expressao SEMICOLON
     (32) expressao -> . expressaoLogica
+    (33) expressao -> . atribuicao
     (21) expressaoLogica -> . expressaoRelacional
     (22) expressaoLogica -> . expressaoLogica OROR expressaoRelacional
     (23) expressaoLogica -> . expressaoLogica ANDAND expressaoRelacional
     (24) expressaoLogica -> . NOT expressaoRelacional
+    (34) atribuicao -> . ID EQUALS expressao
+    (35) atribuicao -> . ID PLUSEQUAL expressao
+    (36) atribuicao -> . ID MINUSEQUAL expressao
+    (37) atribuicao -> . ID TIMESEQUAL expressao
+    (38) atribuicao -> . ID DIVEQUAL expressao
+    (39) atribuicao -> . ID MODEQUAL expressao
+    (40) atribuicao -> . ID ANDANDEQUAL expressao
+    (41) atribuicao -> . ID OROREQUAL expressao
     (25) expressaoRelacional -> . expressaoAritmetica
     (26) expressaoRelacional -> . expressaoAritmetica GREATER expressaoAritmetica
     (27) expressaoRelacional -> . expressaoAritmetica LESS expressaoAritmetica
@@ -335,63 +362,66 @@ state 16
     (29) expressaoRelacional -> . expressaoAritmetica LESSEQUAL expressaoAritmetica
     (30) expressaoRelacional -> . expressaoAritmetica NOTEQUAL expressaoAritmetica
     (31) expressaoRelacional -> . expressaoAritmetica EQUAL expressaoAritmetica
-    (33) expressaoAritmetica -> . expressaoMultiplicativa
-    (34) expressaoAritmetica -> . expressaoMultiplicativa PLUS expressaoMultiplicativa
-    (35) expressaoAritmetica -> . expressaoMultiplicativa MINUS expressaoMultiplicativa
-    (36) expressaoMultiplicativa -> . expressaoMultiplicativa TIMES expressaoUnaria
-    (37) expressaoMultiplicativa -> . expressaoMultiplicativa DIVIDE expressaoUnaria
-    (38) expressaoMultiplicativa -> . expressaoMultiplicativa MODULO expressaoUnaria
-    (39) expressaoMultiplicativa -> . expressaoUnaria
-    (40) expressaoUnaria -> . expressaoPostfix
-    (41) expressaoUnaria -> . MINUS expressaoPostfix
-    (42) expressaoUnaria -> . PLUS PLUS expressaoPostfix
-    (43) expressaoUnaria -> . MINUS MINUS expressaoPostfix
-    (44) expressaoPostfix -> . primaria
-    (45) expressaoPostfix -> . primaria LBRACKET expressao RBRACKET
-    (46) expressaoPostfix -> . primaria LPAREN argumentos RPAREN
-    (47) expressaoPostfix -> . primaria DOT ID
-    (48) expressaoPostfix -> . primaria ARROW ID
-    (50) primaria -> . ID
-    (51) primaria -> . NUM_INT
-    (52) primaria -> . NUM_DEC
-    (53) primaria -> . LPAREN expressao LPAREN
+    (42) expressaoAritmetica -> . expressaoMultiplicativa
+    (43) expressaoAritmetica -> . expressaoAritmetica PLUS expressaoMultiplicativa
+    (44) expressaoAritmetica -> . expressaoAritmetica MINUS expressaoMultiplicativa
+    (45) expressaoMultiplicativa -> . expressaoMultiplicativa TIMES expressaoUnaria
+    (46) expressaoMultiplicativa -> . expressaoMultiplicativa DIVIDE expressaoUnaria
+    (47) expressaoMultiplicativa -> . expressaoMultiplicativa MODULO expressaoUnaria
+    (48) expressaoMultiplicativa -> . expressaoUnaria
+    (49) expressaoUnaria -> . expressaoPostfix
+    (50) expressaoUnaria -> . MINUS expressaoPostfix
+    (51) expressaoUnaria -> . PLUS PLUS expressaoPostfix
+    (52) expressaoUnaria -> . MINUS MINUS expressaoPostfix
+    (53) expressaoPostfix -> . primaria
+    (54) expressaoPostfix -> . primaria LBRACKET expressao RBRACKET
+    (55) expressaoPostfix -> . primaria LPAREN argumentos RPAREN
+    (56) expressaoPostfix -> . primaria DOT ID
+    (57) expressaoPostfix -> . primaria ARROW ID
+    (59) primaria -> . ID
+    (60) primaria -> . NUM_INT
+    (61) primaria -> . NUM_DEC
+    (62) primaria -> . LPAREN expressao LPAREN
+    (63) primaria -> . TEXTO
 
-    NOT             shift and go to state 27
-    MINUS           shift and go to state 31
-    PLUS            shift and go to state 30
+    NOT             shift and go to state 28
     ID              shift and go to state 23
-    NUM_INT         shift and go to state 36
-    NUM_DEC         shift and go to state 37
-    LPAREN          shift and go to state 35
+    MINUS           shift and go to state 32
+    PLUS            shift and go to state 31
+    NUM_INT         shift and go to state 37
+    NUM_DEC         shift and go to state 38
+    LPAREN          shift and go to state 36
+    TEXTO           shift and go to state 39
 
     expressao                      shift and go to state 24
     expressaoLogica                shift and go to state 25
-    expressaoRelacional            shift and go to state 26
-    expressaoAritmetica            shift and go to state 28
-    expressaoMultiplicativa        shift and go to state 29
-    expressaoUnaria                shift and go to state 32
-    expressaoPostfix               shift and go to state 33
-    primaria                       shift and go to state 34
+    atribuicao                     shift and go to state 26
+    expressaoRelacional            shift and go to state 27
+    expressaoAritmetica            shift and go to state 29
+    expressaoMultiplicativa        shift and go to state 30
+    expressaoUnaria                shift and go to state 33
+    expressaoPostfix               shift and go to state 34
+    primaria                       shift and go to state 35
 
 state 17
 
     (12) declaracaoFuncao -> TIPO ID LPAREN . parametros RPAREN bloco
-    (13) parametros -> . PARAMETRO
-    (14) parametros -> . PARAMETRO COMMA parametros
-    (15) parametros -> . TIPO ID
-    (16) parametros -> . TIPO ID LBRACKET RBRACKET
-    (17) parametros -> . TIPO DOTDOTDOT ID
+    (13) parametros -> . parametro
+    (14) parametros -> . parametro COMMA parametros
+    (15) parametro -> . TIPO ID
+    (16) parametro -> . TIPO ID LBRACKET RBRACKET
+    (17) parametro -> . TIPO DOTDOTDOT ID
 
-    PARAMETRO       shift and go to state 40
-    TIPO            shift and go to state 38
+    TIPO            shift and go to state 40
 
-    parametros                     shift and go to state 39
+    parametros                     shift and go to state 41
+    parametro                      shift and go to state 42
 
 state 18
 
     (11) array -> ID LBRACKET . RBRACKET
 
-    RBRACKET        shift and go to state 41
+    RBRACKET        shift and go to state 43
 
 
 state 19
@@ -409,14 +439,14 @@ state 20
 
     (10) declaracaoVariavel -> TIPO array EQUALS . TEXTO SEMICOLON
 
-    TEXTO           shift and go to state 42
+    TEXTO           shift and go to state 44
 
 
 state 21
 
     (20) declaracaoEstrutura -> LBRACE declaracaoVariavel RBRACE . SEMICOLON
 
-    SEMICOLON       shift and go to state 43
+    SEMICOLON       shift and go to state 45
 
 
 state 22
@@ -432,34 +462,50 @@ state 22
 
 state 23
 
-    (50) primaria -> ID .
+    (34) atribuicao -> ID . EQUALS expressao
+    (35) atribuicao -> ID . PLUSEQUAL expressao
+    (36) atribuicao -> ID . MINUSEQUAL expressao
+    (37) atribuicao -> ID . TIMESEQUAL expressao
+    (38) atribuicao -> ID . DIVEQUAL expressao
+    (39) atribuicao -> ID . MODEQUAL expressao
+    (40) atribuicao -> ID . ANDANDEQUAL expressao
+    (41) atribuicao -> ID . OROREQUAL expressao
+    (59) primaria -> ID .
 
-    LBRACKET        reduce using rule 50 (primaria -> ID .)
-    LPAREN          reduce using rule 50 (primaria -> ID .)
-    DOT             reduce using rule 50 (primaria -> ID .)
-    ARROW           reduce using rule 50 (primaria -> ID .)
-    PLUS            reduce using rule 50 (primaria -> ID .)
-    MINUS           reduce using rule 50 (primaria -> ID .)
-    TIMES           reduce using rule 50 (primaria -> ID .)
-    DIVIDE          reduce using rule 50 (primaria -> ID .)
-    MODULO          reduce using rule 50 (primaria -> ID .)
-    GREATER         reduce using rule 50 (primaria -> ID .)
-    LESS            reduce using rule 50 (primaria -> ID .)
-    GREATEREQUAL    reduce using rule 50 (primaria -> ID .)
-    LESSEQUAL       reduce using rule 50 (primaria -> ID .)
-    NOTEQUAL        reduce using rule 50 (primaria -> ID .)
-    EQUAL           reduce using rule 50 (primaria -> ID .)
-    OROR            reduce using rule 50 (primaria -> ID .)
-    ANDAND          reduce using rule 50 (primaria -> ID .)
-    SEMICOLON       reduce using rule 50 (primaria -> ID .)
-    RBRACKET        reduce using rule 50 (primaria -> ID .)
+    EQUALS          shift and go to state 46
+    PLUSEQUAL       shift and go to state 47
+    MINUSEQUAL      shift and go to state 48
+    TIMESEQUAL      shift and go to state 49
+    DIVEQUAL        shift and go to state 50
+    MODEQUAL        shift and go to state 51
+    ANDANDEQUAL     shift and go to state 52
+    OROREQUAL       shift and go to state 53
+    LBRACKET        reduce using rule 59 (primaria -> ID .)
+    LPAREN          reduce using rule 59 (primaria -> ID .)
+    DOT             reduce using rule 59 (primaria -> ID .)
+    ARROW           reduce using rule 59 (primaria -> ID .)
+    TIMES           reduce using rule 59 (primaria -> ID .)
+    DIVIDE          reduce using rule 59 (primaria -> ID .)
+    MODULO          reduce using rule 59 (primaria -> ID .)
+    GREATER         reduce using rule 59 (primaria -> ID .)
+    LESS            reduce using rule 59 (primaria -> ID .)
+    GREATEREQUAL    reduce using rule 59 (primaria -> ID .)
+    LESSEQUAL       reduce using rule 59 (primaria -> ID .)
+    NOTEQUAL        reduce using rule 59 (primaria -> ID .)
+    EQUAL           reduce using rule 59 (primaria -> ID .)
+    PLUS            reduce using rule 59 (primaria -> ID .)
+    MINUS           reduce using rule 59 (primaria -> ID .)
+    OROR            reduce using rule 59 (primaria -> ID .)
+    ANDAND          reduce using rule 59 (primaria -> ID .)
+    SEMICOLON       reduce using rule 59 (primaria -> ID .)
+    RBRACKET        reduce using rule 59 (primaria -> ID .)
 
 
 state 24
 
     (8) declaracaoVariavel -> TIPO ID EQUALS expressao . SEMICOLON
 
-    SEMICOLON       shift and go to state 44
+    SEMICOLON       shift and go to state 54
 
 
 state 25
@@ -471,11 +517,20 @@ state 25
     SEMICOLON       reduce using rule 32 (expressao -> expressaoLogica .)
     LPAREN          reduce using rule 32 (expressao -> expressaoLogica .)
     RBRACKET        reduce using rule 32 (expressao -> expressaoLogica .)
-    OROR            shift and go to state 45
-    ANDAND          shift and go to state 46
+    OROR            shift and go to state 55
+    ANDAND          shift and go to state 56
 
 
 state 26
+
+    (33) expressao -> atribuicao .
+
+    SEMICOLON       reduce using rule 33 (expressao -> atribuicao .)
+    LPAREN          reduce using rule 33 (expressao -> atribuicao .)
+    RBRACKET        reduce using rule 33 (expressao -> atribuicao .)
+
+
+state 27
 
     (21) expressaoLogica -> expressaoRelacional .
 
@@ -486,7 +541,7 @@ state 26
     RBRACKET        reduce using rule 21 (expressaoLogica -> expressaoRelacional .)
 
 
-state 27
+state 28
 
     (24) expressaoLogica -> NOT . expressaoRelacional
     (25) expressaoRelacional -> . expressaoAritmetica
@@ -496,42 +551,44 @@ state 27
     (29) expressaoRelacional -> . expressaoAritmetica LESSEQUAL expressaoAritmetica
     (30) expressaoRelacional -> . expressaoAritmetica NOTEQUAL expressaoAritmetica
     (31) expressaoRelacional -> . expressaoAritmetica EQUAL expressaoAritmetica
-    (33) expressaoAritmetica -> . expressaoMultiplicativa
-    (34) expressaoAritmetica -> . expressaoMultiplicativa PLUS expressaoMultiplicativa
-    (35) expressaoAritmetica -> . expressaoMultiplicativa MINUS expressaoMultiplicativa
-    (36) expressaoMultiplicativa -> . expressaoMultiplicativa TIMES expressaoUnaria
-    (37) expressaoMultiplicativa -> . expressaoMultiplicativa DIVIDE expressaoUnaria
-    (38) expressaoMultiplicativa -> . expressaoMultiplicativa MODULO expressaoUnaria
-    (39) expressaoMultiplicativa -> . expressaoUnaria
-    (40) expressaoUnaria -> . expressaoPostfix
-    (41) expressaoUnaria -> . MINUS expressaoPostfix
-    (42) expressaoUnaria -> . PLUS PLUS expressaoPostfix
-    (43) expressaoUnaria -> . MINUS MINUS expressaoPostfix
-    (44) expressaoPostfix -> . primaria
-    (45) expressaoPostfix -> . primaria LBRACKET expressao RBRACKET
-    (46) expressaoPostfix -> . primaria LPAREN argumentos RPAREN
-    (47) expressaoPostfix -> . primaria DOT ID
-    (48) expressaoPostfix -> . primaria ARROW ID
-    (50) primaria -> . ID
-    (51) primaria -> . NUM_INT
-    (52) primaria -> . NUM_DEC
-    (53) primaria -> . LPAREN expressao LPAREN
+    (42) expressaoAritmetica -> . expressaoMultiplicativa
+    (43) expressaoAritmetica -> . expressaoAritmetica PLUS expressaoMultiplicativa
+    (44) expressaoAritmetica -> . expressaoAritmetica MINUS expressaoMultiplicativa
+    (45) expressaoMultiplicativa -> . expressaoMultiplicativa TIMES expressaoUnaria
+    (46) expressaoMultiplicativa -> . expressaoMultiplicativa DIVIDE expressaoUnaria
+    (47) expressaoMultiplicativa -> . expressaoMultiplicativa MODULO expressaoUnaria
+    (48) expressaoMultiplicativa -> . expressaoUnaria
+    (49) expressaoUnaria -> . expressaoPostfix
+    (50) expressaoUnaria -> . MINUS expressaoPostfix
+    (51) expressaoUnaria -> . PLUS PLUS expressaoPostfix
+    (52) expressaoUnaria -> . MINUS MINUS expressaoPostfix
+    (53) expressaoPostfix -> . primaria
+    (54) expressaoPostfix -> . primaria LBRACKET expressao RBRACKET
+    (55) expressaoPostfix -> . primaria LPAREN argumentos RPAREN
+    (56) expressaoPostfix -> . primaria DOT ID
+    (57) expressaoPostfix -> . primaria ARROW ID
+    (59) primaria -> . ID
+    (60) primaria -> . NUM_INT
+    (61) primaria -> . NUM_DEC
+    (62) primaria -> . LPAREN expressao LPAREN
+    (63) primaria -> . TEXTO
 
-    MINUS           shift and go to state 31
-    PLUS            shift and go to state 30
-    ID              shift and go to state 23
-    NUM_INT         shift and go to state 36
-    NUM_DEC         shift and go to state 37
-    LPAREN          shift and go to state 35
+    MINUS           shift and go to state 32
+    PLUS            shift and go to state 31
+    ID              shift and go to state 58
+    NUM_INT         shift and go to state 37
+    NUM_DEC         shift and go to state 38
+    LPAREN          shift and go to state 36
+    TEXTO           shift and go to state 39
 
-    expressaoRelacional            shift and go to state 47
-    expressaoAritmetica            shift and go to state 28
-    expressaoMultiplicativa        shift and go to state 29
-    expressaoUnaria                shift and go to state 32
-    expressaoPostfix               shift and go to state 33
-    primaria                       shift and go to state 34
+    expressaoRelacional            shift and go to state 57
+    expressaoAritmetica            shift and go to state 29
+    expressaoMultiplicativa        shift and go to state 30
+    expressaoUnaria                shift and go to state 33
+    expressaoPostfix               shift and go to state 34
+    primaria                       shift and go to state 35
 
-state 28
+state 29
 
     (25) expressaoRelacional -> expressaoAritmetica .
     (26) expressaoRelacional -> expressaoAritmetica . GREATER expressaoAritmetica
@@ -540,161 +597,174 @@ state 28
     (29) expressaoRelacional -> expressaoAritmetica . LESSEQUAL expressaoAritmetica
     (30) expressaoRelacional -> expressaoAritmetica . NOTEQUAL expressaoAritmetica
     (31) expressaoRelacional -> expressaoAritmetica . EQUAL expressaoAritmetica
+    (43) expressaoAritmetica -> expressaoAritmetica . PLUS expressaoMultiplicativa
+    (44) expressaoAritmetica -> expressaoAritmetica . MINUS expressaoMultiplicativa
 
     OROR            reduce using rule 25 (expressaoRelacional -> expressaoAritmetica .)
     ANDAND          reduce using rule 25 (expressaoRelacional -> expressaoAritmetica .)
     SEMICOLON       reduce using rule 25 (expressaoRelacional -> expressaoAritmetica .)
     LPAREN          reduce using rule 25 (expressaoRelacional -> expressaoAritmetica .)
     RBRACKET        reduce using rule 25 (expressaoRelacional -> expressaoAritmetica .)
-    GREATER         shift and go to state 48
-    LESS            shift and go to state 49
-    GREATEREQUAL    shift and go to state 50
-    LESSEQUAL       shift and go to state 51
-    NOTEQUAL        shift and go to state 52
-    EQUAL           shift and go to state 53
-
-
-state 29
-
-    (33) expressaoAritmetica -> expressaoMultiplicativa .
-    (34) expressaoAritmetica -> expressaoMultiplicativa . PLUS expressaoMultiplicativa
-    (35) expressaoAritmetica -> expressaoMultiplicativa . MINUS expressaoMultiplicativa
-    (36) expressaoMultiplicativa -> expressaoMultiplicativa . TIMES expressaoUnaria
-    (37) expressaoMultiplicativa -> expressaoMultiplicativa . DIVIDE expressaoUnaria
-    (38) expressaoMultiplicativa -> expressaoMultiplicativa . MODULO expressaoUnaria
-
-    GREATER         reduce using rule 33 (expressaoAritmetica -> expressaoMultiplicativa .)
-    LESS            reduce using rule 33 (expressaoAritmetica -> expressaoMultiplicativa .)
-    GREATEREQUAL    reduce using rule 33 (expressaoAritmetica -> expressaoMultiplicativa .)
-    LESSEQUAL       reduce using rule 33 (expressaoAritmetica -> expressaoMultiplicativa .)
-    NOTEQUAL        reduce using rule 33 (expressaoAritmetica -> expressaoMultiplicativa .)
-    EQUAL           reduce using rule 33 (expressaoAritmetica -> expressaoMultiplicativa .)
-    OROR            reduce using rule 33 (expressaoAritmetica -> expressaoMultiplicativa .)
-    ANDAND          reduce using rule 33 (expressaoAritmetica -> expressaoMultiplicativa .)
-    SEMICOLON       reduce using rule 33 (expressaoAritmetica -> expressaoMultiplicativa .)
-    LPAREN          reduce using rule 33 (expressaoAritmetica -> expressaoMultiplicativa .)
-    RBRACKET        reduce using rule 33 (expressaoAritmetica -> expressaoMultiplicativa .)
-    PLUS            shift and go to state 54
-    MINUS           shift and go to state 55
-    TIMES           shift and go to state 56
-    DIVIDE          shift and go to state 57
-    MODULO          shift and go to state 58
+    GREATER         shift and go to state 59
+    LESS            shift and go to state 60
+    GREATEREQUAL    shift and go to state 61
+    LESSEQUAL       shift and go to state 62
+    NOTEQUAL        shift and go to state 63
+    EQUAL           shift and go to state 64
+    PLUS            shift and go to state 65
+    MINUS           shift and go to state 66
 
 
 state 30
 
-    (42) expressaoUnaria -> PLUS . PLUS expressaoPostfix
+    (42) expressaoAritmetica -> expressaoMultiplicativa .
+    (45) expressaoMultiplicativa -> expressaoMultiplicativa . TIMES expressaoUnaria
+    (46) expressaoMultiplicativa -> expressaoMultiplicativa . DIVIDE expressaoUnaria
+    (47) expressaoMultiplicativa -> expressaoMultiplicativa . MODULO expressaoUnaria
 
-    PLUS            shift and go to state 59
+    GREATER         reduce using rule 42 (expressaoAritmetica -> expressaoMultiplicativa .)
+    LESS            reduce using rule 42 (expressaoAritmetica -> expressaoMultiplicativa .)
+    GREATEREQUAL    reduce using rule 42 (expressaoAritmetica -> expressaoMultiplicativa .)
+    LESSEQUAL       reduce using rule 42 (expressaoAritmetica -> expressaoMultiplicativa .)
+    NOTEQUAL        reduce using rule 42 (expressaoAritmetica -> expressaoMultiplicativa .)
+    EQUAL           reduce using rule 42 (expressaoAritmetica -> expressaoMultiplicativa .)
+    PLUS            reduce using rule 42 (expressaoAritmetica -> expressaoMultiplicativa .)
+    MINUS           reduce using rule 42 (expressaoAritmetica -> expressaoMultiplicativa .)
+    OROR            reduce using rule 42 (expressaoAritmetica -> expressaoMultiplicativa .)
+    ANDAND          reduce using rule 42 (expressaoAritmetica -> expressaoMultiplicativa .)
+    SEMICOLON       reduce using rule 42 (expressaoAritmetica -> expressaoMultiplicativa .)
+    LPAREN          reduce using rule 42 (expressaoAritmetica -> expressaoMultiplicativa .)
+    RBRACKET        reduce using rule 42 (expressaoAritmetica -> expressaoMultiplicativa .)
+    TIMES           shift and go to state 67
+    DIVIDE          shift and go to state 68
+    MODULO          shift and go to state 69
 
 
 state 31
 
-    (41) expressaoUnaria -> MINUS . expressaoPostfix
-    (43) expressaoUnaria -> MINUS . MINUS expressaoPostfix
-    (44) expressaoPostfix -> . primaria
-    (45) expressaoPostfix -> . primaria LBRACKET expressao RBRACKET
-    (46) expressaoPostfix -> . primaria LPAREN argumentos RPAREN
-    (47) expressaoPostfix -> . primaria DOT ID
-    (48) expressaoPostfix -> . primaria ARROW ID
-    (50) primaria -> . ID
-    (51) primaria -> . NUM_INT
-    (52) primaria -> . NUM_DEC
-    (53) primaria -> . LPAREN expressao LPAREN
+    (51) expressaoUnaria -> PLUS . PLUS expressaoPostfix
 
-    MINUS           shift and go to state 60
-    ID              shift and go to state 23
-    NUM_INT         shift and go to state 36
-    NUM_DEC         shift and go to state 37
-    LPAREN          shift and go to state 35
+    PLUS            shift and go to state 70
 
-    expressaoPostfix               shift and go to state 61
-    primaria                       shift and go to state 34
 
 state 32
 
-    (39) expressaoMultiplicativa -> expressaoUnaria .
+    (50) expressaoUnaria -> MINUS . expressaoPostfix
+    (52) expressaoUnaria -> MINUS . MINUS expressaoPostfix
+    (53) expressaoPostfix -> . primaria
+    (54) expressaoPostfix -> . primaria LBRACKET expressao RBRACKET
+    (55) expressaoPostfix -> . primaria LPAREN argumentos RPAREN
+    (56) expressaoPostfix -> . primaria DOT ID
+    (57) expressaoPostfix -> . primaria ARROW ID
+    (59) primaria -> . ID
+    (60) primaria -> . NUM_INT
+    (61) primaria -> . NUM_DEC
+    (62) primaria -> . LPAREN expressao LPAREN
+    (63) primaria -> . TEXTO
 
-    PLUS            reduce using rule 39 (expressaoMultiplicativa -> expressaoUnaria .)
-    MINUS           reduce using rule 39 (expressaoMultiplicativa -> expressaoUnaria .)
-    TIMES           reduce using rule 39 (expressaoMultiplicativa -> expressaoUnaria .)
-    DIVIDE          reduce using rule 39 (expressaoMultiplicativa -> expressaoUnaria .)
-    MODULO          reduce using rule 39 (expressaoMultiplicativa -> expressaoUnaria .)
-    GREATER         reduce using rule 39 (expressaoMultiplicativa -> expressaoUnaria .)
-    LESS            reduce using rule 39 (expressaoMultiplicativa -> expressaoUnaria .)
-    GREATEREQUAL    reduce using rule 39 (expressaoMultiplicativa -> expressaoUnaria .)
-    LESSEQUAL       reduce using rule 39 (expressaoMultiplicativa -> expressaoUnaria .)
-    NOTEQUAL        reduce using rule 39 (expressaoMultiplicativa -> expressaoUnaria .)
-    EQUAL           reduce using rule 39 (expressaoMultiplicativa -> expressaoUnaria .)
-    OROR            reduce using rule 39 (expressaoMultiplicativa -> expressaoUnaria .)
-    ANDAND          reduce using rule 39 (expressaoMultiplicativa -> expressaoUnaria .)
-    SEMICOLON       reduce using rule 39 (expressaoMultiplicativa -> expressaoUnaria .)
-    LPAREN          reduce using rule 39 (expressaoMultiplicativa -> expressaoUnaria .)
-    RBRACKET        reduce using rule 39 (expressaoMultiplicativa -> expressaoUnaria .)
+    MINUS           shift and go to state 71
+    ID              shift and go to state 58
+    NUM_INT         shift and go to state 37
+    NUM_DEC         shift and go to state 38
+    LPAREN          shift and go to state 36
+    TEXTO           shift and go to state 39
 
+    expressaoPostfix               shift and go to state 72
+    primaria                       shift and go to state 35
 
 state 33
 
-    (40) expressaoUnaria -> expressaoPostfix .
+    (48) expressaoMultiplicativa -> expressaoUnaria .
 
-    PLUS            reduce using rule 40 (expressaoUnaria -> expressaoPostfix .)
-    MINUS           reduce using rule 40 (expressaoUnaria -> expressaoPostfix .)
-    TIMES           reduce using rule 40 (expressaoUnaria -> expressaoPostfix .)
-    DIVIDE          reduce using rule 40 (expressaoUnaria -> expressaoPostfix .)
-    MODULO          reduce using rule 40 (expressaoUnaria -> expressaoPostfix .)
-    GREATER         reduce using rule 40 (expressaoUnaria -> expressaoPostfix .)
-    LESS            reduce using rule 40 (expressaoUnaria -> expressaoPostfix .)
-    GREATEREQUAL    reduce using rule 40 (expressaoUnaria -> expressaoPostfix .)
-    LESSEQUAL       reduce using rule 40 (expressaoUnaria -> expressaoPostfix .)
-    NOTEQUAL        reduce using rule 40 (expressaoUnaria -> expressaoPostfix .)
-    EQUAL           reduce using rule 40 (expressaoUnaria -> expressaoPostfix .)
-    OROR            reduce using rule 40 (expressaoUnaria -> expressaoPostfix .)
-    ANDAND          reduce using rule 40 (expressaoUnaria -> expressaoPostfix .)
-    SEMICOLON       reduce using rule 40 (expressaoUnaria -> expressaoPostfix .)
-    LPAREN          reduce using rule 40 (expressaoUnaria -> expressaoPostfix .)
-    RBRACKET        reduce using rule 40 (expressaoUnaria -> expressaoPostfix .)
+    TIMES           reduce using rule 48 (expressaoMultiplicativa -> expressaoUnaria .)
+    DIVIDE          reduce using rule 48 (expressaoMultiplicativa -> expressaoUnaria .)
+    MODULO          reduce using rule 48 (expressaoMultiplicativa -> expressaoUnaria .)
+    GREATER         reduce using rule 48 (expressaoMultiplicativa -> expressaoUnaria .)
+    LESS            reduce using rule 48 (expressaoMultiplicativa -> expressaoUnaria .)
+    GREATEREQUAL    reduce using rule 48 (expressaoMultiplicativa -> expressaoUnaria .)
+    LESSEQUAL       reduce using rule 48 (expressaoMultiplicativa -> expressaoUnaria .)
+    NOTEQUAL        reduce using rule 48 (expressaoMultiplicativa -> expressaoUnaria .)
+    EQUAL           reduce using rule 48 (expressaoMultiplicativa -> expressaoUnaria .)
+    PLUS            reduce using rule 48 (expressaoMultiplicativa -> expressaoUnaria .)
+    MINUS           reduce using rule 48 (expressaoMultiplicativa -> expressaoUnaria .)
+    OROR            reduce using rule 48 (expressaoMultiplicativa -> expressaoUnaria .)
+    ANDAND          reduce using rule 48 (expressaoMultiplicativa -> expressaoUnaria .)
+    SEMICOLON       reduce using rule 48 (expressaoMultiplicativa -> expressaoUnaria .)
+    LPAREN          reduce using rule 48 (expressaoMultiplicativa -> expressaoUnaria .)
+    RBRACKET        reduce using rule 48 (expressaoMultiplicativa -> expressaoUnaria .)
 
 
 state 34
 
-    (44) expressaoPostfix -> primaria .
-    (45) expressaoPostfix -> primaria . LBRACKET expressao RBRACKET
-    (46) expressaoPostfix -> primaria . LPAREN argumentos RPAREN
-    (47) expressaoPostfix -> primaria . DOT ID
-    (48) expressaoPostfix -> primaria . ARROW ID
+    (49) expressaoUnaria -> expressaoPostfix .
 
-  ! shift/reduce conflict for LPAREN resolved as shift
-    PLUS            reduce using rule 44 (expressaoPostfix -> primaria .)
-    MINUS           reduce using rule 44 (expressaoPostfix -> primaria .)
-    TIMES           reduce using rule 44 (expressaoPostfix -> primaria .)
-    DIVIDE          reduce using rule 44 (expressaoPostfix -> primaria .)
-    MODULO          reduce using rule 44 (expressaoPostfix -> primaria .)
-    GREATER         reduce using rule 44 (expressaoPostfix -> primaria .)
-    LESS            reduce using rule 44 (expressaoPostfix -> primaria .)
-    GREATEREQUAL    reduce using rule 44 (expressaoPostfix -> primaria .)
-    LESSEQUAL       reduce using rule 44 (expressaoPostfix -> primaria .)
-    NOTEQUAL        reduce using rule 44 (expressaoPostfix -> primaria .)
-    EQUAL           reduce using rule 44 (expressaoPostfix -> primaria .)
-    OROR            reduce using rule 44 (expressaoPostfix -> primaria .)
-    ANDAND          reduce using rule 44 (expressaoPostfix -> primaria .)
-    SEMICOLON       reduce using rule 44 (expressaoPostfix -> primaria .)
-    RBRACKET        reduce using rule 44 (expressaoPostfix -> primaria .)
-    LBRACKET        shift and go to state 62
-    LPAREN          shift and go to state 63
-    DOT             shift and go to state 64
-    ARROW           shift and go to state 65
-
-  ! LPAREN          [ reduce using rule 44 (expressaoPostfix -> primaria .) ]
+    TIMES           reduce using rule 49 (expressaoUnaria -> expressaoPostfix .)
+    DIVIDE          reduce using rule 49 (expressaoUnaria -> expressaoPostfix .)
+    MODULO          reduce using rule 49 (expressaoUnaria -> expressaoPostfix .)
+    GREATER         reduce using rule 49 (expressaoUnaria -> expressaoPostfix .)
+    LESS            reduce using rule 49 (expressaoUnaria -> expressaoPostfix .)
+    GREATEREQUAL    reduce using rule 49 (expressaoUnaria -> expressaoPostfix .)
+    LESSEQUAL       reduce using rule 49 (expressaoUnaria -> expressaoPostfix .)
+    NOTEQUAL        reduce using rule 49 (expressaoUnaria -> expressaoPostfix .)
+    EQUAL           reduce using rule 49 (expressaoUnaria -> expressaoPostfix .)
+    PLUS            reduce using rule 49 (expressaoUnaria -> expressaoPostfix .)
+    MINUS           reduce using rule 49 (expressaoUnaria -> expressaoPostfix .)
+    OROR            reduce using rule 49 (expressaoUnaria -> expressaoPostfix .)
+    ANDAND          reduce using rule 49 (expressaoUnaria -> expressaoPostfix .)
+    SEMICOLON       reduce using rule 49 (expressaoUnaria -> expressaoPostfix .)
+    LPAREN          reduce using rule 49 (expressaoUnaria -> expressaoPostfix .)
+    RBRACKET        reduce using rule 49 (expressaoUnaria -> expressaoPostfix .)
 
 
 state 35
 
-    (53) primaria -> LPAREN . expressao LPAREN
+    (53) expressaoPostfix -> primaria .
+    (54) expressaoPostfix -> primaria . LBRACKET expressao RBRACKET
+    (55) expressaoPostfix -> primaria . LPAREN argumentos RPAREN
+    (56) expressaoPostfix -> primaria . DOT ID
+    (57) expressaoPostfix -> primaria . ARROW ID
+
+  ! shift/reduce conflict for LPAREN resolved as shift
+    TIMES           reduce using rule 53 (expressaoPostfix -> primaria .)
+    DIVIDE          reduce using rule 53 (expressaoPostfix -> primaria .)
+    MODULO          reduce using rule 53 (expressaoPostfix -> primaria .)
+    GREATER         reduce using rule 53 (expressaoPostfix -> primaria .)
+    LESS            reduce using rule 53 (expressaoPostfix -> primaria .)
+    GREATEREQUAL    reduce using rule 53 (expressaoPostfix -> primaria .)
+    LESSEQUAL       reduce using rule 53 (expressaoPostfix -> primaria .)
+    NOTEQUAL        reduce using rule 53 (expressaoPostfix -> primaria .)
+    EQUAL           reduce using rule 53 (expressaoPostfix -> primaria .)
+    PLUS            reduce using rule 53 (expressaoPostfix -> primaria .)
+    MINUS           reduce using rule 53 (expressaoPostfix -> primaria .)
+    OROR            reduce using rule 53 (expressaoPostfix -> primaria .)
+    ANDAND          reduce using rule 53 (expressaoPostfix -> primaria .)
+    SEMICOLON       reduce using rule 53 (expressaoPostfix -> primaria .)
+    RBRACKET        reduce using rule 53 (expressaoPostfix -> primaria .)
+    LBRACKET        shift and go to state 73
+    LPAREN          shift and go to state 74
+    DOT             shift and go to state 75
+    ARROW           shift and go to state 76
+
+  ! LPAREN          [ reduce using rule 53 (expressaoPostfix -> primaria .) ]
+
+
+state 36
+
+    (62) primaria -> LPAREN . expressao LPAREN
     (32) expressao -> . expressaoLogica
+    (33) expressao -> . atribuicao
     (21) expressaoLogica -> . expressaoRelacional
     (22) expressaoLogica -> . expressaoLogica OROR expressaoRelacional
     (23) expressaoLogica -> . expressaoLogica ANDAND expressaoRelacional
     (24) expressaoLogica -> . NOT expressaoRelacional
+    (34) atribuicao -> . ID EQUALS expressao
+    (35) atribuicao -> . ID PLUSEQUAL expressao
+    (36) atribuicao -> . ID MINUSEQUAL expressao
+    (37) atribuicao -> . ID TIMESEQUAL expressao
+    (38) atribuicao -> . ID DIVEQUAL expressao
+    (39) atribuicao -> . ID MODEQUAL expressao
+    (40) atribuicao -> . ID ANDANDEQUAL expressao
+    (41) atribuicao -> . ID OROREQUAL expressao
     (25) expressaoRelacional -> . expressaoAritmetica
     (26) expressaoRelacional -> . expressaoAritmetica GREATER expressaoAritmetica
     (27) expressaoRelacional -> . expressaoAritmetica LESS expressaoAritmetica
@@ -702,121 +772,149 @@ state 35
     (29) expressaoRelacional -> . expressaoAritmetica LESSEQUAL expressaoAritmetica
     (30) expressaoRelacional -> . expressaoAritmetica NOTEQUAL expressaoAritmetica
     (31) expressaoRelacional -> . expressaoAritmetica EQUAL expressaoAritmetica
-    (33) expressaoAritmetica -> . expressaoMultiplicativa
-    (34) expressaoAritmetica -> . expressaoMultiplicativa PLUS expressaoMultiplicativa
-    (35) expressaoAritmetica -> . expressaoMultiplicativa MINUS expressaoMultiplicativa
-    (36) expressaoMultiplicativa -> . expressaoMultiplicativa TIMES expressaoUnaria
-    (37) expressaoMultiplicativa -> . expressaoMultiplicativa DIVIDE expressaoUnaria
-    (38) expressaoMultiplicativa -> . expressaoMultiplicativa MODULO expressaoUnaria
-    (39) expressaoMultiplicativa -> . expressaoUnaria
-    (40) expressaoUnaria -> . expressaoPostfix
-    (41) expressaoUnaria -> . MINUS expressaoPostfix
-    (42) expressaoUnaria -> . PLUS PLUS expressaoPostfix
-    (43) expressaoUnaria -> . MINUS MINUS expressaoPostfix
-    (44) expressaoPostfix -> . primaria
-    (45) expressaoPostfix -> . primaria LBRACKET expressao RBRACKET
-    (46) expressaoPostfix -> . primaria LPAREN argumentos RPAREN
-    (47) expressaoPostfix -> . primaria DOT ID
-    (48) expressaoPostfix -> . primaria ARROW ID
-    (50) primaria -> . ID
-    (51) primaria -> . NUM_INT
-    (52) primaria -> . NUM_DEC
-    (53) primaria -> . LPAREN expressao LPAREN
+    (42) expressaoAritmetica -> . expressaoMultiplicativa
+    (43) expressaoAritmetica -> . expressaoAritmetica PLUS expressaoMultiplicativa
+    (44) expressaoAritmetica -> . expressaoAritmetica MINUS expressaoMultiplicativa
+    (45) expressaoMultiplicativa -> . expressaoMultiplicativa TIMES expressaoUnaria
+    (46) expressaoMultiplicativa -> . expressaoMultiplicativa DIVIDE expressaoUnaria
+    (47) expressaoMultiplicativa -> . expressaoMultiplicativa MODULO expressaoUnaria
+    (48) expressaoMultiplicativa -> . expressaoUnaria
+    (49) expressaoUnaria -> . expressaoPostfix
+    (50) expressaoUnaria -> . MINUS expressaoPostfix
+    (51) expressaoUnaria -> . PLUS PLUS expressaoPostfix
+    (52) expressaoUnaria -> . MINUS MINUS expressaoPostfix
+    (53) expressaoPostfix -> . primaria
+    (54) expressaoPostfix -> . primaria LBRACKET expressao RBRACKET
+    (55) expressaoPostfix -> . primaria LPAREN argumentos RPAREN
+    (56) expressaoPostfix -> . primaria DOT ID
+    (57) expressaoPostfix -> . primaria ARROW ID
+    (59) primaria -> . ID
+    (60) primaria -> . NUM_INT
+    (61) primaria -> . NUM_DEC
+    (62) primaria -> . LPAREN expressao LPAREN
+    (63) primaria -> . TEXTO
 
-    NOT             shift and go to state 27
-    MINUS           shift and go to state 31
-    PLUS            shift and go to state 30
+    NOT             shift and go to state 28
     ID              shift and go to state 23
-    NUM_INT         shift and go to state 36
-    NUM_DEC         shift and go to state 37
-    LPAREN          shift and go to state 35
+    MINUS           shift and go to state 32
+    PLUS            shift and go to state 31
+    NUM_INT         shift and go to state 37
+    NUM_DEC         shift and go to state 38
+    LPAREN          shift and go to state 36
+    TEXTO           shift and go to state 39
 
-    expressao                      shift and go to state 66
+    expressao                      shift and go to state 77
     expressaoLogica                shift and go to state 25
-    expressaoRelacional            shift and go to state 26
-    expressaoAritmetica            shift and go to state 28
-    expressaoMultiplicativa        shift and go to state 29
-    expressaoUnaria                shift and go to state 32
-    expressaoPostfix               shift and go to state 33
-    primaria                       shift and go to state 34
-
-state 36
-
-    (51) primaria -> NUM_INT .
-
-    LBRACKET        reduce using rule 51 (primaria -> NUM_INT .)
-    LPAREN          reduce using rule 51 (primaria -> NUM_INT .)
-    DOT             reduce using rule 51 (primaria -> NUM_INT .)
-    ARROW           reduce using rule 51 (primaria -> NUM_INT .)
-    PLUS            reduce using rule 51 (primaria -> NUM_INT .)
-    MINUS           reduce using rule 51 (primaria -> NUM_INT .)
-    TIMES           reduce using rule 51 (primaria -> NUM_INT .)
-    DIVIDE          reduce using rule 51 (primaria -> NUM_INT .)
-    MODULO          reduce using rule 51 (primaria -> NUM_INT .)
-    GREATER         reduce using rule 51 (primaria -> NUM_INT .)
-    LESS            reduce using rule 51 (primaria -> NUM_INT .)
-    GREATEREQUAL    reduce using rule 51 (primaria -> NUM_INT .)
-    LESSEQUAL       reduce using rule 51 (primaria -> NUM_INT .)
-    NOTEQUAL        reduce using rule 51 (primaria -> NUM_INT .)
-    EQUAL           reduce using rule 51 (primaria -> NUM_INT .)
-    OROR            reduce using rule 51 (primaria -> NUM_INT .)
-    ANDAND          reduce using rule 51 (primaria -> NUM_INT .)
-    SEMICOLON       reduce using rule 51 (primaria -> NUM_INT .)
-    RBRACKET        reduce using rule 51 (primaria -> NUM_INT .)
-
+    atribuicao                     shift and go to state 26
+    expressaoRelacional            shift and go to state 27
+    expressaoAritmetica            shift and go to state 29
+    expressaoMultiplicativa        shift and go to state 30
+    expressaoUnaria                shift and go to state 33
+    expressaoPostfix               shift and go to state 34
+    primaria                       shift and go to state 35
 
 state 37
 
-    (52) primaria -> NUM_DEC .
+    (60) primaria -> NUM_INT .
 
-    LBRACKET        reduce using rule 52 (primaria -> NUM_DEC .)
-    LPAREN          reduce using rule 52 (primaria -> NUM_DEC .)
-    DOT             reduce using rule 52 (primaria -> NUM_DEC .)
-    ARROW           reduce using rule 52 (primaria -> NUM_DEC .)
-    PLUS            reduce using rule 52 (primaria -> NUM_DEC .)
-    MINUS           reduce using rule 52 (primaria -> NUM_DEC .)
-    TIMES           reduce using rule 52 (primaria -> NUM_DEC .)
-    DIVIDE          reduce using rule 52 (primaria -> NUM_DEC .)
-    MODULO          reduce using rule 52 (primaria -> NUM_DEC .)
-    GREATER         reduce using rule 52 (primaria -> NUM_DEC .)
-    LESS            reduce using rule 52 (primaria -> NUM_DEC .)
-    GREATEREQUAL    reduce using rule 52 (primaria -> NUM_DEC .)
-    LESSEQUAL       reduce using rule 52 (primaria -> NUM_DEC .)
-    NOTEQUAL        reduce using rule 52 (primaria -> NUM_DEC .)
-    EQUAL           reduce using rule 52 (primaria -> NUM_DEC .)
-    OROR            reduce using rule 52 (primaria -> NUM_DEC .)
-    ANDAND          reduce using rule 52 (primaria -> NUM_DEC .)
-    SEMICOLON       reduce using rule 52 (primaria -> NUM_DEC .)
-    RBRACKET        reduce using rule 52 (primaria -> NUM_DEC .)
+    LBRACKET        reduce using rule 60 (primaria -> NUM_INT .)
+    LPAREN          reduce using rule 60 (primaria -> NUM_INT .)
+    DOT             reduce using rule 60 (primaria -> NUM_INT .)
+    ARROW           reduce using rule 60 (primaria -> NUM_INT .)
+    TIMES           reduce using rule 60 (primaria -> NUM_INT .)
+    DIVIDE          reduce using rule 60 (primaria -> NUM_INT .)
+    MODULO          reduce using rule 60 (primaria -> NUM_INT .)
+    GREATER         reduce using rule 60 (primaria -> NUM_INT .)
+    LESS            reduce using rule 60 (primaria -> NUM_INT .)
+    GREATEREQUAL    reduce using rule 60 (primaria -> NUM_INT .)
+    LESSEQUAL       reduce using rule 60 (primaria -> NUM_INT .)
+    NOTEQUAL        reduce using rule 60 (primaria -> NUM_INT .)
+    EQUAL           reduce using rule 60 (primaria -> NUM_INT .)
+    PLUS            reduce using rule 60 (primaria -> NUM_INT .)
+    MINUS           reduce using rule 60 (primaria -> NUM_INT .)
+    OROR            reduce using rule 60 (primaria -> NUM_INT .)
+    ANDAND          reduce using rule 60 (primaria -> NUM_INT .)
+    SEMICOLON       reduce using rule 60 (primaria -> NUM_INT .)
+    RBRACKET        reduce using rule 60 (primaria -> NUM_INT .)
 
 
 state 38
 
-    (15) parametros -> TIPO . ID
-    (16) parametros -> TIPO . ID LBRACKET RBRACKET
-    (17) parametros -> TIPO . DOTDOTDOT ID
+    (61) primaria -> NUM_DEC .
 
-    ID              shift and go to state 67
-    DOTDOTDOT       shift and go to state 68
+    LBRACKET        reduce using rule 61 (primaria -> NUM_DEC .)
+    LPAREN          reduce using rule 61 (primaria -> NUM_DEC .)
+    DOT             reduce using rule 61 (primaria -> NUM_DEC .)
+    ARROW           reduce using rule 61 (primaria -> NUM_DEC .)
+    TIMES           reduce using rule 61 (primaria -> NUM_DEC .)
+    DIVIDE          reduce using rule 61 (primaria -> NUM_DEC .)
+    MODULO          reduce using rule 61 (primaria -> NUM_DEC .)
+    GREATER         reduce using rule 61 (primaria -> NUM_DEC .)
+    LESS            reduce using rule 61 (primaria -> NUM_DEC .)
+    GREATEREQUAL    reduce using rule 61 (primaria -> NUM_DEC .)
+    LESSEQUAL       reduce using rule 61 (primaria -> NUM_DEC .)
+    NOTEQUAL        reduce using rule 61 (primaria -> NUM_DEC .)
+    EQUAL           reduce using rule 61 (primaria -> NUM_DEC .)
+    PLUS            reduce using rule 61 (primaria -> NUM_DEC .)
+    MINUS           reduce using rule 61 (primaria -> NUM_DEC .)
+    OROR            reduce using rule 61 (primaria -> NUM_DEC .)
+    ANDAND          reduce using rule 61 (primaria -> NUM_DEC .)
+    SEMICOLON       reduce using rule 61 (primaria -> NUM_DEC .)
+    RBRACKET        reduce using rule 61 (primaria -> NUM_DEC .)
 
 
 state 39
 
-    (12) declaracaoFuncao -> TIPO ID LPAREN parametros . RPAREN bloco
+    (63) primaria -> TEXTO .
 
-    RPAREN          shift and go to state 69
+    LBRACKET        reduce using rule 63 (primaria -> TEXTO .)
+    LPAREN          reduce using rule 63 (primaria -> TEXTO .)
+    DOT             reduce using rule 63 (primaria -> TEXTO .)
+    ARROW           reduce using rule 63 (primaria -> TEXTO .)
+    TIMES           reduce using rule 63 (primaria -> TEXTO .)
+    DIVIDE          reduce using rule 63 (primaria -> TEXTO .)
+    MODULO          reduce using rule 63 (primaria -> TEXTO .)
+    GREATER         reduce using rule 63 (primaria -> TEXTO .)
+    LESS            reduce using rule 63 (primaria -> TEXTO .)
+    GREATEREQUAL    reduce using rule 63 (primaria -> TEXTO .)
+    LESSEQUAL       reduce using rule 63 (primaria -> TEXTO .)
+    NOTEQUAL        reduce using rule 63 (primaria -> TEXTO .)
+    EQUAL           reduce using rule 63 (primaria -> TEXTO .)
+    PLUS            reduce using rule 63 (primaria -> TEXTO .)
+    MINUS           reduce using rule 63 (primaria -> TEXTO .)
+    OROR            reduce using rule 63 (primaria -> TEXTO .)
+    ANDAND          reduce using rule 63 (primaria -> TEXTO .)
+    SEMICOLON       reduce using rule 63 (primaria -> TEXTO .)
+    RBRACKET        reduce using rule 63 (primaria -> TEXTO .)
 
 
 state 40
 
-    (13) parametros -> PARAMETRO .
-    (14) parametros -> PARAMETRO . COMMA parametros
+    (15) parametro -> TIPO . ID
+    (16) parametro -> TIPO . ID LBRACKET RBRACKET
+    (17) parametro -> TIPO . DOTDOTDOT ID
 
-    RPAREN          reduce using rule 13 (parametros -> PARAMETRO .)
-    COMMA           shift and go to state 70
+    ID              shift and go to state 78
+    DOTDOTDOT       shift and go to state 79
 
 
 state 41
+
+    (12) declaracaoFuncao -> TIPO ID LPAREN parametros . RPAREN bloco
+
+    RPAREN          shift and go to state 80
+
+
+state 42
+
+    (13) parametros -> parametro .
+    (14) parametros -> parametro . COMMA parametros
+
+    RPAREN          reduce using rule 13 (parametros -> parametro .)
+    COMMA           shift and go to state 81
+
+
+state 43
 
     (11) array -> ID LBRACKET RBRACKET .
 
@@ -824,14 +922,14 @@ state 41
     EQUALS          reduce using rule 11 (array -> ID LBRACKET RBRACKET .)
 
 
-state 42
+state 44
 
     (10) declaracaoVariavel -> TIPO array EQUALS TEXTO . SEMICOLON
 
-    SEMICOLON       shift and go to state 71
+    SEMICOLON       shift and go to state 82
 
 
-state 43
+state 45
 
     (20) declaracaoEstrutura -> LBRACE declaracaoVariavel RBRACE SEMICOLON .
 
@@ -842,7 +940,527 @@ state 43
     RBRACE          reduce using rule 20 (declaracaoEstrutura -> LBRACE declaracaoVariavel RBRACE SEMICOLON .)
 
 
-state 44
+state 46
+
+    (34) atribuicao -> ID EQUALS . expressao
+    (32) expressao -> . expressaoLogica
+    (33) expressao -> . atribuicao
+    (21) expressaoLogica -> . expressaoRelacional
+    (22) expressaoLogica -> . expressaoLogica OROR expressaoRelacional
+    (23) expressaoLogica -> . expressaoLogica ANDAND expressaoRelacional
+    (24) expressaoLogica -> . NOT expressaoRelacional
+    (34) atribuicao -> . ID EQUALS expressao
+    (35) atribuicao -> . ID PLUSEQUAL expressao
+    (36) atribuicao -> . ID MINUSEQUAL expressao
+    (37) atribuicao -> . ID TIMESEQUAL expressao
+    (38) atribuicao -> . ID DIVEQUAL expressao
+    (39) atribuicao -> . ID MODEQUAL expressao
+    (40) atribuicao -> . ID ANDANDEQUAL expressao
+    (41) atribuicao -> . ID OROREQUAL expressao
+    (25) expressaoRelacional -> . expressaoAritmetica
+    (26) expressaoRelacional -> . expressaoAritmetica GREATER expressaoAritmetica
+    (27) expressaoRelacional -> . expressaoAritmetica LESS expressaoAritmetica
+    (28) expressaoRelacional -> . expressaoAritmetica GREATEREQUAL expressaoAritmetica
+    (29) expressaoRelacional -> . expressaoAritmetica LESSEQUAL expressaoAritmetica
+    (30) expressaoRelacional -> . expressaoAritmetica NOTEQUAL expressaoAritmetica
+    (31) expressaoRelacional -> . expressaoAritmetica EQUAL expressaoAritmetica
+    (42) expressaoAritmetica -> . expressaoMultiplicativa
+    (43) expressaoAritmetica -> . expressaoAritmetica PLUS expressaoMultiplicativa
+    (44) expressaoAritmetica -> . expressaoAritmetica MINUS expressaoMultiplicativa
+    (45) expressaoMultiplicativa -> . expressaoMultiplicativa TIMES expressaoUnaria
+    (46) expressaoMultiplicativa -> . expressaoMultiplicativa DIVIDE expressaoUnaria
+    (47) expressaoMultiplicativa -> . expressaoMultiplicativa MODULO expressaoUnaria
+    (48) expressaoMultiplicativa -> . expressaoUnaria
+    (49) expressaoUnaria -> . expressaoPostfix
+    (50) expressaoUnaria -> . MINUS expressaoPostfix
+    (51) expressaoUnaria -> . PLUS PLUS expressaoPostfix
+    (52) expressaoUnaria -> . MINUS MINUS expressaoPostfix
+    (53) expressaoPostfix -> . primaria
+    (54) expressaoPostfix -> . primaria LBRACKET expressao RBRACKET
+    (55) expressaoPostfix -> . primaria LPAREN argumentos RPAREN
+    (56) expressaoPostfix -> . primaria DOT ID
+    (57) expressaoPostfix -> . primaria ARROW ID
+    (59) primaria -> . ID
+    (60) primaria -> . NUM_INT
+    (61) primaria -> . NUM_DEC
+    (62) primaria -> . LPAREN expressao LPAREN
+    (63) primaria -> . TEXTO
+
+    NOT             shift and go to state 28
+    ID              shift and go to state 23
+    MINUS           shift and go to state 32
+    PLUS            shift and go to state 31
+    NUM_INT         shift and go to state 37
+    NUM_DEC         shift and go to state 38
+    LPAREN          shift and go to state 36
+    TEXTO           shift and go to state 39
+
+    expressao                      shift and go to state 83
+    expressaoLogica                shift and go to state 25
+    atribuicao                     shift and go to state 26
+    expressaoRelacional            shift and go to state 27
+    expressaoAritmetica            shift and go to state 29
+    expressaoMultiplicativa        shift and go to state 30
+    expressaoUnaria                shift and go to state 33
+    expressaoPostfix               shift and go to state 34
+    primaria                       shift and go to state 35
+
+state 47
+
+    (35) atribuicao -> ID PLUSEQUAL . expressao
+    (32) expressao -> . expressaoLogica
+    (33) expressao -> . atribuicao
+    (21) expressaoLogica -> . expressaoRelacional
+    (22) expressaoLogica -> . expressaoLogica OROR expressaoRelacional
+    (23) expressaoLogica -> . expressaoLogica ANDAND expressaoRelacional
+    (24) expressaoLogica -> . NOT expressaoRelacional
+    (34) atribuicao -> . ID EQUALS expressao
+    (35) atribuicao -> . ID PLUSEQUAL expressao
+    (36) atribuicao -> . ID MINUSEQUAL expressao
+    (37) atribuicao -> . ID TIMESEQUAL expressao
+    (38) atribuicao -> . ID DIVEQUAL expressao
+    (39) atribuicao -> . ID MODEQUAL expressao
+    (40) atribuicao -> . ID ANDANDEQUAL expressao
+    (41) atribuicao -> . ID OROREQUAL expressao
+    (25) expressaoRelacional -> . expressaoAritmetica
+    (26) expressaoRelacional -> . expressaoAritmetica GREATER expressaoAritmetica
+    (27) expressaoRelacional -> . expressaoAritmetica LESS expressaoAritmetica
+    (28) expressaoRelacional -> . expressaoAritmetica GREATEREQUAL expressaoAritmetica
+    (29) expressaoRelacional -> . expressaoAritmetica LESSEQUAL expressaoAritmetica
+    (30) expressaoRelacional -> . expressaoAritmetica NOTEQUAL expressaoAritmetica
+    (31) expressaoRelacional -> . expressaoAritmetica EQUAL expressaoAritmetica
+    (42) expressaoAritmetica -> . expressaoMultiplicativa
+    (43) expressaoAritmetica -> . expressaoAritmetica PLUS expressaoMultiplicativa
+    (44) expressaoAritmetica -> . expressaoAritmetica MINUS expressaoMultiplicativa
+    (45) expressaoMultiplicativa -> . expressaoMultiplicativa TIMES expressaoUnaria
+    (46) expressaoMultiplicativa -> . expressaoMultiplicativa DIVIDE expressaoUnaria
+    (47) expressaoMultiplicativa -> . expressaoMultiplicativa MODULO expressaoUnaria
+    (48) expressaoMultiplicativa -> . expressaoUnaria
+    (49) expressaoUnaria -> . expressaoPostfix
+    (50) expressaoUnaria -> . MINUS expressaoPostfix
+    (51) expressaoUnaria -> . PLUS PLUS expressaoPostfix
+    (52) expressaoUnaria -> . MINUS MINUS expressaoPostfix
+    (53) expressaoPostfix -> . primaria
+    (54) expressaoPostfix -> . primaria LBRACKET expressao RBRACKET
+    (55) expressaoPostfix -> . primaria LPAREN argumentos RPAREN
+    (56) expressaoPostfix -> . primaria DOT ID
+    (57) expressaoPostfix -> . primaria ARROW ID
+    (59) primaria -> . ID
+    (60) primaria -> . NUM_INT
+    (61) primaria -> . NUM_DEC
+    (62) primaria -> . LPAREN expressao LPAREN
+    (63) primaria -> . TEXTO
+
+    NOT             shift and go to state 28
+    ID              shift and go to state 23
+    MINUS           shift and go to state 32
+    PLUS            shift and go to state 31
+    NUM_INT         shift and go to state 37
+    NUM_DEC         shift and go to state 38
+    LPAREN          shift and go to state 36
+    TEXTO           shift and go to state 39
+
+    expressao                      shift and go to state 84
+    expressaoLogica                shift and go to state 25
+    atribuicao                     shift and go to state 26
+    expressaoRelacional            shift and go to state 27
+    expressaoAritmetica            shift and go to state 29
+    expressaoMultiplicativa        shift and go to state 30
+    expressaoUnaria                shift and go to state 33
+    expressaoPostfix               shift and go to state 34
+    primaria                       shift and go to state 35
+
+state 48
+
+    (36) atribuicao -> ID MINUSEQUAL . expressao
+    (32) expressao -> . expressaoLogica
+    (33) expressao -> . atribuicao
+    (21) expressaoLogica -> . expressaoRelacional
+    (22) expressaoLogica -> . expressaoLogica OROR expressaoRelacional
+    (23) expressaoLogica -> . expressaoLogica ANDAND expressaoRelacional
+    (24) expressaoLogica -> . NOT expressaoRelacional
+    (34) atribuicao -> . ID EQUALS expressao
+    (35) atribuicao -> . ID PLUSEQUAL expressao
+    (36) atribuicao -> . ID MINUSEQUAL expressao
+    (37) atribuicao -> . ID TIMESEQUAL expressao
+    (38) atribuicao -> . ID DIVEQUAL expressao
+    (39) atribuicao -> . ID MODEQUAL expressao
+    (40) atribuicao -> . ID ANDANDEQUAL expressao
+    (41) atribuicao -> . ID OROREQUAL expressao
+    (25) expressaoRelacional -> . expressaoAritmetica
+    (26) expressaoRelacional -> . expressaoAritmetica GREATER expressaoAritmetica
+    (27) expressaoRelacional -> . expressaoAritmetica LESS expressaoAritmetica
+    (28) expressaoRelacional -> . expressaoAritmetica GREATEREQUAL expressaoAritmetica
+    (29) expressaoRelacional -> . expressaoAritmetica LESSEQUAL expressaoAritmetica
+    (30) expressaoRelacional -> . expressaoAritmetica NOTEQUAL expressaoAritmetica
+    (31) expressaoRelacional -> . expressaoAritmetica EQUAL expressaoAritmetica
+    (42) expressaoAritmetica -> . expressaoMultiplicativa
+    (43) expressaoAritmetica -> . expressaoAritmetica PLUS expressaoMultiplicativa
+    (44) expressaoAritmetica -> . expressaoAritmetica MINUS expressaoMultiplicativa
+    (45) expressaoMultiplicativa -> . expressaoMultiplicativa TIMES expressaoUnaria
+    (46) expressaoMultiplicativa -> . expressaoMultiplicativa DIVIDE expressaoUnaria
+    (47) expressaoMultiplicativa -> . expressaoMultiplicativa MODULO expressaoUnaria
+    (48) expressaoMultiplicativa -> . expressaoUnaria
+    (49) expressaoUnaria -> . expressaoPostfix
+    (50) expressaoUnaria -> . MINUS expressaoPostfix
+    (51) expressaoUnaria -> . PLUS PLUS expressaoPostfix
+    (52) expressaoUnaria -> . MINUS MINUS expressaoPostfix
+    (53) expressaoPostfix -> . primaria
+    (54) expressaoPostfix -> . primaria LBRACKET expressao RBRACKET
+    (55) expressaoPostfix -> . primaria LPAREN argumentos RPAREN
+    (56) expressaoPostfix -> . primaria DOT ID
+    (57) expressaoPostfix -> . primaria ARROW ID
+    (59) primaria -> . ID
+    (60) primaria -> . NUM_INT
+    (61) primaria -> . NUM_DEC
+    (62) primaria -> . LPAREN expressao LPAREN
+    (63) primaria -> . TEXTO
+
+    NOT             shift and go to state 28
+    ID              shift and go to state 23
+    MINUS           shift and go to state 32
+    PLUS            shift and go to state 31
+    NUM_INT         shift and go to state 37
+    NUM_DEC         shift and go to state 38
+    LPAREN          shift and go to state 36
+    TEXTO           shift and go to state 39
+
+    expressao                      shift and go to state 85
+    expressaoLogica                shift and go to state 25
+    atribuicao                     shift and go to state 26
+    expressaoRelacional            shift and go to state 27
+    expressaoAritmetica            shift and go to state 29
+    expressaoMultiplicativa        shift and go to state 30
+    expressaoUnaria                shift and go to state 33
+    expressaoPostfix               shift and go to state 34
+    primaria                       shift and go to state 35
+
+state 49
+
+    (37) atribuicao -> ID TIMESEQUAL . expressao
+    (32) expressao -> . expressaoLogica
+    (33) expressao -> . atribuicao
+    (21) expressaoLogica -> . expressaoRelacional
+    (22) expressaoLogica -> . expressaoLogica OROR expressaoRelacional
+    (23) expressaoLogica -> . expressaoLogica ANDAND expressaoRelacional
+    (24) expressaoLogica -> . NOT expressaoRelacional
+    (34) atribuicao -> . ID EQUALS expressao
+    (35) atribuicao -> . ID PLUSEQUAL expressao
+    (36) atribuicao -> . ID MINUSEQUAL expressao
+    (37) atribuicao -> . ID TIMESEQUAL expressao
+    (38) atribuicao -> . ID DIVEQUAL expressao
+    (39) atribuicao -> . ID MODEQUAL expressao
+    (40) atribuicao -> . ID ANDANDEQUAL expressao
+    (41) atribuicao -> . ID OROREQUAL expressao
+    (25) expressaoRelacional -> . expressaoAritmetica
+    (26) expressaoRelacional -> . expressaoAritmetica GREATER expressaoAritmetica
+    (27) expressaoRelacional -> . expressaoAritmetica LESS expressaoAritmetica
+    (28) expressaoRelacional -> . expressaoAritmetica GREATEREQUAL expressaoAritmetica
+    (29) expressaoRelacional -> . expressaoAritmetica LESSEQUAL expressaoAritmetica
+    (30) expressaoRelacional -> . expressaoAritmetica NOTEQUAL expressaoAritmetica
+    (31) expressaoRelacional -> . expressaoAritmetica EQUAL expressaoAritmetica
+    (42) expressaoAritmetica -> . expressaoMultiplicativa
+    (43) expressaoAritmetica -> . expressaoAritmetica PLUS expressaoMultiplicativa
+    (44) expressaoAritmetica -> . expressaoAritmetica MINUS expressaoMultiplicativa
+    (45) expressaoMultiplicativa -> . expressaoMultiplicativa TIMES expressaoUnaria
+    (46) expressaoMultiplicativa -> . expressaoMultiplicativa DIVIDE expressaoUnaria
+    (47) expressaoMultiplicativa -> . expressaoMultiplicativa MODULO expressaoUnaria
+    (48) expressaoMultiplicativa -> . expressaoUnaria
+    (49) expressaoUnaria -> . expressaoPostfix
+    (50) expressaoUnaria -> . MINUS expressaoPostfix
+    (51) expressaoUnaria -> . PLUS PLUS expressaoPostfix
+    (52) expressaoUnaria -> . MINUS MINUS expressaoPostfix
+    (53) expressaoPostfix -> . primaria
+    (54) expressaoPostfix -> . primaria LBRACKET expressao RBRACKET
+    (55) expressaoPostfix -> . primaria LPAREN argumentos RPAREN
+    (56) expressaoPostfix -> . primaria DOT ID
+    (57) expressaoPostfix -> . primaria ARROW ID
+    (59) primaria -> . ID
+    (60) primaria -> . NUM_INT
+    (61) primaria -> . NUM_DEC
+    (62) primaria -> . LPAREN expressao LPAREN
+    (63) primaria -> . TEXTO
+
+    NOT             shift and go to state 28
+    ID              shift and go to state 23
+    MINUS           shift and go to state 32
+    PLUS            shift and go to state 31
+    NUM_INT         shift and go to state 37
+    NUM_DEC         shift and go to state 38
+    LPAREN          shift and go to state 36
+    TEXTO           shift and go to state 39
+
+    expressao                      shift and go to state 86
+    expressaoLogica                shift and go to state 25
+    atribuicao                     shift and go to state 26
+    expressaoRelacional            shift and go to state 27
+    expressaoAritmetica            shift and go to state 29
+    expressaoMultiplicativa        shift and go to state 30
+    expressaoUnaria                shift and go to state 33
+    expressaoPostfix               shift and go to state 34
+    primaria                       shift and go to state 35
+
+state 50
+
+    (38) atribuicao -> ID DIVEQUAL . expressao
+    (32) expressao -> . expressaoLogica
+    (33) expressao -> . atribuicao
+    (21) expressaoLogica -> . expressaoRelacional
+    (22) expressaoLogica -> . expressaoLogica OROR expressaoRelacional
+    (23) expressaoLogica -> . expressaoLogica ANDAND expressaoRelacional
+    (24) expressaoLogica -> . NOT expressaoRelacional
+    (34) atribuicao -> . ID EQUALS expressao
+    (35) atribuicao -> . ID PLUSEQUAL expressao
+    (36) atribuicao -> . ID MINUSEQUAL expressao
+    (37) atribuicao -> . ID TIMESEQUAL expressao
+    (38) atribuicao -> . ID DIVEQUAL expressao
+    (39) atribuicao -> . ID MODEQUAL expressao
+    (40) atribuicao -> . ID ANDANDEQUAL expressao
+    (41) atribuicao -> . ID OROREQUAL expressao
+    (25) expressaoRelacional -> . expressaoAritmetica
+    (26) expressaoRelacional -> . expressaoAritmetica GREATER expressaoAritmetica
+    (27) expressaoRelacional -> . expressaoAritmetica LESS expressaoAritmetica
+    (28) expressaoRelacional -> . expressaoAritmetica GREATEREQUAL expressaoAritmetica
+    (29) expressaoRelacional -> . expressaoAritmetica LESSEQUAL expressaoAritmetica
+    (30) expressaoRelacional -> . expressaoAritmetica NOTEQUAL expressaoAritmetica
+    (31) expressaoRelacional -> . expressaoAritmetica EQUAL expressaoAritmetica
+    (42) expressaoAritmetica -> . expressaoMultiplicativa
+    (43) expressaoAritmetica -> . expressaoAritmetica PLUS expressaoMultiplicativa
+    (44) expressaoAritmetica -> . expressaoAritmetica MINUS expressaoMultiplicativa
+    (45) expressaoMultiplicativa -> . expressaoMultiplicativa TIMES expressaoUnaria
+    (46) expressaoMultiplicativa -> . expressaoMultiplicativa DIVIDE expressaoUnaria
+    (47) expressaoMultiplicativa -> . expressaoMultiplicativa MODULO expressaoUnaria
+    (48) expressaoMultiplicativa -> . expressaoUnaria
+    (49) expressaoUnaria -> . expressaoPostfix
+    (50) expressaoUnaria -> . MINUS expressaoPostfix
+    (51) expressaoUnaria -> . PLUS PLUS expressaoPostfix
+    (52) expressaoUnaria -> . MINUS MINUS expressaoPostfix
+    (53) expressaoPostfix -> . primaria
+    (54) expressaoPostfix -> . primaria LBRACKET expressao RBRACKET
+    (55) expressaoPostfix -> . primaria LPAREN argumentos RPAREN
+    (56) expressaoPostfix -> . primaria DOT ID
+    (57) expressaoPostfix -> . primaria ARROW ID
+    (59) primaria -> . ID
+    (60) primaria -> . NUM_INT
+    (61) primaria -> . NUM_DEC
+    (62) primaria -> . LPAREN expressao LPAREN
+    (63) primaria -> . TEXTO
+
+    NOT             shift and go to state 28
+    ID              shift and go to state 23
+    MINUS           shift and go to state 32
+    PLUS            shift and go to state 31
+    NUM_INT         shift and go to state 37
+    NUM_DEC         shift and go to state 38
+    LPAREN          shift and go to state 36
+    TEXTO           shift and go to state 39
+
+    expressao                      shift and go to state 87
+    expressaoLogica                shift and go to state 25
+    atribuicao                     shift and go to state 26
+    expressaoRelacional            shift and go to state 27
+    expressaoAritmetica            shift and go to state 29
+    expressaoMultiplicativa        shift and go to state 30
+    expressaoUnaria                shift and go to state 33
+    expressaoPostfix               shift and go to state 34
+    primaria                       shift and go to state 35
+
+state 51
+
+    (39) atribuicao -> ID MODEQUAL . expressao
+    (32) expressao -> . expressaoLogica
+    (33) expressao -> . atribuicao
+    (21) expressaoLogica -> . expressaoRelacional
+    (22) expressaoLogica -> . expressaoLogica OROR expressaoRelacional
+    (23) expressaoLogica -> . expressaoLogica ANDAND expressaoRelacional
+    (24) expressaoLogica -> . NOT expressaoRelacional
+    (34) atribuicao -> . ID EQUALS expressao
+    (35) atribuicao -> . ID PLUSEQUAL expressao
+    (36) atribuicao -> . ID MINUSEQUAL expressao
+    (37) atribuicao -> . ID TIMESEQUAL expressao
+    (38) atribuicao -> . ID DIVEQUAL expressao
+    (39) atribuicao -> . ID MODEQUAL expressao
+    (40) atribuicao -> . ID ANDANDEQUAL expressao
+    (41) atribuicao -> . ID OROREQUAL expressao
+    (25) expressaoRelacional -> . expressaoAritmetica
+    (26) expressaoRelacional -> . expressaoAritmetica GREATER expressaoAritmetica
+    (27) expressaoRelacional -> . expressaoAritmetica LESS expressaoAritmetica
+    (28) expressaoRelacional -> . expressaoAritmetica GREATEREQUAL expressaoAritmetica
+    (29) expressaoRelacional -> . expressaoAritmetica LESSEQUAL expressaoAritmetica
+    (30) expressaoRelacional -> . expressaoAritmetica NOTEQUAL expressaoAritmetica
+    (31) expressaoRelacional -> . expressaoAritmetica EQUAL expressaoAritmetica
+    (42) expressaoAritmetica -> . expressaoMultiplicativa
+    (43) expressaoAritmetica -> . expressaoAritmetica PLUS expressaoMultiplicativa
+    (44) expressaoAritmetica -> . expressaoAritmetica MINUS expressaoMultiplicativa
+    (45) expressaoMultiplicativa -> . expressaoMultiplicativa TIMES expressaoUnaria
+    (46) expressaoMultiplicativa -> . expressaoMultiplicativa DIVIDE expressaoUnaria
+    (47) expressaoMultiplicativa -> . expressaoMultiplicativa MODULO expressaoUnaria
+    (48) expressaoMultiplicativa -> . expressaoUnaria
+    (49) expressaoUnaria -> . expressaoPostfix
+    (50) expressaoUnaria -> . MINUS expressaoPostfix
+    (51) expressaoUnaria -> . PLUS PLUS expressaoPostfix
+    (52) expressaoUnaria -> . MINUS MINUS expressaoPostfix
+    (53) expressaoPostfix -> . primaria
+    (54) expressaoPostfix -> . primaria LBRACKET expressao RBRACKET
+    (55) expressaoPostfix -> . primaria LPAREN argumentos RPAREN
+    (56) expressaoPostfix -> . primaria DOT ID
+    (57) expressaoPostfix -> . primaria ARROW ID
+    (59) primaria -> . ID
+    (60) primaria -> . NUM_INT
+    (61) primaria -> . NUM_DEC
+    (62) primaria -> . LPAREN expressao LPAREN
+    (63) primaria -> . TEXTO
+
+    NOT             shift and go to state 28
+    ID              shift and go to state 23
+    MINUS           shift and go to state 32
+    PLUS            shift and go to state 31
+    NUM_INT         shift and go to state 37
+    NUM_DEC         shift and go to state 38
+    LPAREN          shift and go to state 36
+    TEXTO           shift and go to state 39
+
+    expressao                      shift and go to state 88
+    expressaoLogica                shift and go to state 25
+    atribuicao                     shift and go to state 26
+    expressaoRelacional            shift and go to state 27
+    expressaoAritmetica            shift and go to state 29
+    expressaoMultiplicativa        shift and go to state 30
+    expressaoUnaria                shift and go to state 33
+    expressaoPostfix               shift and go to state 34
+    primaria                       shift and go to state 35
+
+state 52
+
+    (40) atribuicao -> ID ANDANDEQUAL . expressao
+    (32) expressao -> . expressaoLogica
+    (33) expressao -> . atribuicao
+    (21) expressaoLogica -> . expressaoRelacional
+    (22) expressaoLogica -> . expressaoLogica OROR expressaoRelacional
+    (23) expressaoLogica -> . expressaoLogica ANDAND expressaoRelacional
+    (24) expressaoLogica -> . NOT expressaoRelacional
+    (34) atribuicao -> . ID EQUALS expressao
+    (35) atribuicao -> . ID PLUSEQUAL expressao
+    (36) atribuicao -> . ID MINUSEQUAL expressao
+    (37) atribuicao -> . ID TIMESEQUAL expressao
+    (38) atribuicao -> . ID DIVEQUAL expressao
+    (39) atribuicao -> . ID MODEQUAL expressao
+    (40) atribuicao -> . ID ANDANDEQUAL expressao
+    (41) atribuicao -> . ID OROREQUAL expressao
+    (25) expressaoRelacional -> . expressaoAritmetica
+    (26) expressaoRelacional -> . expressaoAritmetica GREATER expressaoAritmetica
+    (27) expressaoRelacional -> . expressaoAritmetica LESS expressaoAritmetica
+    (28) expressaoRelacional -> . expressaoAritmetica GREATEREQUAL expressaoAritmetica
+    (29) expressaoRelacional -> . expressaoAritmetica LESSEQUAL expressaoAritmetica
+    (30) expressaoRelacional -> . expressaoAritmetica NOTEQUAL expressaoAritmetica
+    (31) expressaoRelacional -> . expressaoAritmetica EQUAL expressaoAritmetica
+    (42) expressaoAritmetica -> . expressaoMultiplicativa
+    (43) expressaoAritmetica -> . expressaoAritmetica PLUS expressaoMultiplicativa
+    (44) expressaoAritmetica -> . expressaoAritmetica MINUS expressaoMultiplicativa
+    (45) expressaoMultiplicativa -> . expressaoMultiplicativa TIMES expressaoUnaria
+    (46) expressaoMultiplicativa -> . expressaoMultiplicativa DIVIDE expressaoUnaria
+    (47) expressaoMultiplicativa -> . expressaoMultiplicativa MODULO expressaoUnaria
+    (48) expressaoMultiplicativa -> . expressaoUnaria
+    (49) expressaoUnaria -> . expressaoPostfix
+    (50) expressaoUnaria -> . MINUS expressaoPostfix
+    (51) expressaoUnaria -> . PLUS PLUS expressaoPostfix
+    (52) expressaoUnaria -> . MINUS MINUS expressaoPostfix
+    (53) expressaoPostfix -> . primaria
+    (54) expressaoPostfix -> . primaria LBRACKET expressao RBRACKET
+    (55) expressaoPostfix -> . primaria LPAREN argumentos RPAREN
+    (56) expressaoPostfix -> . primaria DOT ID
+    (57) expressaoPostfix -> . primaria ARROW ID
+    (59) primaria -> . ID
+    (60) primaria -> . NUM_INT
+    (61) primaria -> . NUM_DEC
+    (62) primaria -> . LPAREN expressao LPAREN
+    (63) primaria -> . TEXTO
+
+    NOT             shift and go to state 28
+    ID              shift and go to state 23
+    MINUS           shift and go to state 32
+    PLUS            shift and go to state 31
+    NUM_INT         shift and go to state 37
+    NUM_DEC         shift and go to state 38
+    LPAREN          shift and go to state 36
+    TEXTO           shift and go to state 39
+
+    expressao                      shift and go to state 89
+    expressaoLogica                shift and go to state 25
+    atribuicao                     shift and go to state 26
+    expressaoRelacional            shift and go to state 27
+    expressaoAritmetica            shift and go to state 29
+    expressaoMultiplicativa        shift and go to state 30
+    expressaoUnaria                shift and go to state 33
+    expressaoPostfix               shift and go to state 34
+    primaria                       shift and go to state 35
+
+state 53
+
+    (41) atribuicao -> ID OROREQUAL . expressao
+    (32) expressao -> . expressaoLogica
+    (33) expressao -> . atribuicao
+    (21) expressaoLogica -> . expressaoRelacional
+    (22) expressaoLogica -> . expressaoLogica OROR expressaoRelacional
+    (23) expressaoLogica -> . expressaoLogica ANDAND expressaoRelacional
+    (24) expressaoLogica -> . NOT expressaoRelacional
+    (34) atribuicao -> . ID EQUALS expressao
+    (35) atribuicao -> . ID PLUSEQUAL expressao
+    (36) atribuicao -> . ID MINUSEQUAL expressao
+    (37) atribuicao -> . ID TIMESEQUAL expressao
+    (38) atribuicao -> . ID DIVEQUAL expressao
+    (39) atribuicao -> . ID MODEQUAL expressao
+    (40) atribuicao -> . ID ANDANDEQUAL expressao
+    (41) atribuicao -> . ID OROREQUAL expressao
+    (25) expressaoRelacional -> . expressaoAritmetica
+    (26) expressaoRelacional -> . expressaoAritmetica GREATER expressaoAritmetica
+    (27) expressaoRelacional -> . expressaoAritmetica LESS expressaoAritmetica
+    (28) expressaoRelacional -> . expressaoAritmetica GREATEREQUAL expressaoAritmetica
+    (29) expressaoRelacional -> . expressaoAritmetica LESSEQUAL expressaoAritmetica
+    (30) expressaoRelacional -> . expressaoAritmetica NOTEQUAL expressaoAritmetica
+    (31) expressaoRelacional -> . expressaoAritmetica EQUAL expressaoAritmetica
+    (42) expressaoAritmetica -> . expressaoMultiplicativa
+    (43) expressaoAritmetica -> . expressaoAritmetica PLUS expressaoMultiplicativa
+    (44) expressaoAritmetica -> . expressaoAritmetica MINUS expressaoMultiplicativa
+    (45) expressaoMultiplicativa -> . expressaoMultiplicativa TIMES expressaoUnaria
+    (46) expressaoMultiplicativa -> . expressaoMultiplicativa DIVIDE expressaoUnaria
+    (47) expressaoMultiplicativa -> . expressaoMultiplicativa MODULO expressaoUnaria
+    (48) expressaoMultiplicativa -> . expressaoUnaria
+    (49) expressaoUnaria -> . expressaoPostfix
+    (50) expressaoUnaria -> . MINUS expressaoPostfix
+    (51) expressaoUnaria -> . PLUS PLUS expressaoPostfix
+    (52) expressaoUnaria -> . MINUS MINUS expressaoPostfix
+    (53) expressaoPostfix -> . primaria
+    (54) expressaoPostfix -> . primaria LBRACKET expressao RBRACKET
+    (55) expressaoPostfix -> . primaria LPAREN argumentos RPAREN
+    (56) expressaoPostfix -> . primaria DOT ID
+    (57) expressaoPostfix -> . primaria ARROW ID
+    (59) primaria -> . ID
+    (60) primaria -> . NUM_INT
+    (61) primaria -> . NUM_DEC
+    (62) primaria -> . LPAREN expressao LPAREN
+    (63) primaria -> . TEXTO
+
+    NOT             shift and go to state 28
+    ID              shift and go to state 23
+    MINUS           shift and go to state 32
+    PLUS            shift and go to state 31
+    NUM_INT         shift and go to state 37
+    NUM_DEC         shift and go to state 38
+    LPAREN          shift and go to state 36
+    TEXTO           shift and go to state 39
+
+    expressao                      shift and go to state 90
+    expressaoLogica                shift and go to state 25
+    atribuicao                     shift and go to state 26
+    expressaoRelacional            shift and go to state 27
+    expressaoAritmetica            shift and go to state 29
+    expressaoMultiplicativa        shift and go to state 30
+    expressaoUnaria                shift and go to state 33
+    expressaoPostfix               shift and go to state 34
+    primaria                       shift and go to state 35
+
+state 54
 
     (8) declaracaoVariavel -> TIPO ID EQUALS expressao SEMICOLON .
 
@@ -853,7 +1471,7 @@ state 44
     RBRACE          reduce using rule 8 (declaracaoVariavel -> TIPO ID EQUALS expressao SEMICOLON .)
 
 
-state 45
+state 55
 
     (22) expressaoLogica -> expressaoLogica OROR . expressaoRelacional
     (25) expressaoRelacional -> . expressaoAritmetica
@@ -863,42 +1481,44 @@ state 45
     (29) expressaoRelacional -> . expressaoAritmetica LESSEQUAL expressaoAritmetica
     (30) expressaoRelacional -> . expressaoAritmetica NOTEQUAL expressaoAritmetica
     (31) expressaoRelacional -> . expressaoAritmetica EQUAL expressaoAritmetica
-    (33) expressaoAritmetica -> . expressaoMultiplicativa
-    (34) expressaoAritmetica -> . expressaoMultiplicativa PLUS expressaoMultiplicativa
-    (35) expressaoAritmetica -> . expressaoMultiplicativa MINUS expressaoMultiplicativa
-    (36) expressaoMultiplicativa -> . expressaoMultiplicativa TIMES expressaoUnaria
-    (37) expressaoMultiplicativa -> . expressaoMultiplicativa DIVIDE expressaoUnaria
-    (38) expressaoMultiplicativa -> . expressaoMultiplicativa MODULO expressaoUnaria
-    (39) expressaoMultiplicativa -> . expressaoUnaria
-    (40) expressaoUnaria -> . expressaoPostfix
-    (41) expressaoUnaria -> . MINUS expressaoPostfix
-    (42) expressaoUnaria -> . PLUS PLUS expressaoPostfix
-    (43) expressaoUnaria -> . MINUS MINUS expressaoPostfix
-    (44) expressaoPostfix -> . primaria
-    (45) expressaoPostfix -> . primaria LBRACKET expressao RBRACKET
-    (46) expressaoPostfix -> . primaria LPAREN argumentos RPAREN
-    (47) expressaoPostfix -> . primaria DOT ID
-    (48) expressaoPostfix -> . primaria ARROW ID
-    (50) primaria -> . ID
-    (51) primaria -> . NUM_INT
-    (52) primaria -> . NUM_DEC
-    (53) primaria -> . LPAREN expressao LPAREN
+    (42) expressaoAritmetica -> . expressaoMultiplicativa
+    (43) expressaoAritmetica -> . expressaoAritmetica PLUS expressaoMultiplicativa
+    (44) expressaoAritmetica -> . expressaoAritmetica MINUS expressaoMultiplicativa
+    (45) expressaoMultiplicativa -> . expressaoMultiplicativa TIMES expressaoUnaria
+    (46) expressaoMultiplicativa -> . expressaoMultiplicativa DIVIDE expressaoUnaria
+    (47) expressaoMultiplicativa -> . expressaoMultiplicativa MODULO expressaoUnaria
+    (48) expressaoMultiplicativa -> . expressaoUnaria
+    (49) expressaoUnaria -> . expressaoPostfix
+    (50) expressaoUnaria -> . MINUS expressaoPostfix
+    (51) expressaoUnaria -> . PLUS PLUS expressaoPostfix
+    (52) expressaoUnaria -> . MINUS MINUS expressaoPostfix
+    (53) expressaoPostfix -> . primaria
+    (54) expressaoPostfix -> . primaria LBRACKET expressao RBRACKET
+    (55) expressaoPostfix -> . primaria LPAREN argumentos RPAREN
+    (56) expressaoPostfix -> . primaria DOT ID
+    (57) expressaoPostfix -> . primaria ARROW ID
+    (59) primaria -> . ID
+    (60) primaria -> . NUM_INT
+    (61) primaria -> . NUM_DEC
+    (62) primaria -> . LPAREN expressao LPAREN
+    (63) primaria -> . TEXTO
 
-    MINUS           shift and go to state 31
-    PLUS            shift and go to state 30
-    ID              shift and go to state 23
-    NUM_INT         shift and go to state 36
-    NUM_DEC         shift and go to state 37
-    LPAREN          shift and go to state 35
+    MINUS           shift and go to state 32
+    PLUS            shift and go to state 31
+    ID              shift and go to state 58
+    NUM_INT         shift and go to state 37
+    NUM_DEC         shift and go to state 38
+    LPAREN          shift and go to state 36
+    TEXTO           shift and go to state 39
 
-    expressaoRelacional            shift and go to state 72
-    expressaoAritmetica            shift and go to state 28
-    expressaoMultiplicativa        shift and go to state 29
-    expressaoUnaria                shift and go to state 32
-    expressaoPostfix               shift and go to state 33
-    primaria                       shift and go to state 34
+    expressaoRelacional            shift and go to state 91
+    expressaoAritmetica            shift and go to state 29
+    expressaoMultiplicativa        shift and go to state 30
+    expressaoUnaria                shift and go to state 33
+    expressaoPostfix               shift and go to state 34
+    primaria                       shift and go to state 35
 
-state 46
+state 56
 
     (23) expressaoLogica -> expressaoLogica ANDAND . expressaoRelacional
     (25) expressaoRelacional -> . expressaoAritmetica
@@ -908,42 +1528,44 @@ state 46
     (29) expressaoRelacional -> . expressaoAritmetica LESSEQUAL expressaoAritmetica
     (30) expressaoRelacional -> . expressaoAritmetica NOTEQUAL expressaoAritmetica
     (31) expressaoRelacional -> . expressaoAritmetica EQUAL expressaoAritmetica
-    (33) expressaoAritmetica -> . expressaoMultiplicativa
-    (34) expressaoAritmetica -> . expressaoMultiplicativa PLUS expressaoMultiplicativa
-    (35) expressaoAritmetica -> . expressaoMultiplicativa MINUS expressaoMultiplicativa
-    (36) expressaoMultiplicativa -> . expressaoMultiplicativa TIMES expressaoUnaria
-    (37) expressaoMultiplicativa -> . expressaoMultiplicativa DIVIDE expressaoUnaria
-    (38) expressaoMultiplicativa -> . expressaoMultiplicativa MODULO expressaoUnaria
-    (39) expressaoMultiplicativa -> . expressaoUnaria
-    (40) expressaoUnaria -> . expressaoPostfix
-    (41) expressaoUnaria -> . MINUS expressaoPostfix
-    (42) expressaoUnaria -> . PLUS PLUS expressaoPostfix
-    (43) expressaoUnaria -> . MINUS MINUS expressaoPostfix
-    (44) expressaoPostfix -> . primaria
-    (45) expressaoPostfix -> . primaria LBRACKET expressao RBRACKET
-    (46) expressaoPostfix -> . primaria LPAREN argumentos RPAREN
-    (47) expressaoPostfix -> . primaria DOT ID
-    (48) expressaoPostfix -> . primaria ARROW ID
-    (50) primaria -> . ID
-    (51) primaria -> . NUM_INT
-    (52) primaria -> . NUM_DEC
-    (53) primaria -> . LPAREN expressao LPAREN
+    (42) expressaoAritmetica -> . expressaoMultiplicativa
+    (43) expressaoAritmetica -> . expressaoAritmetica PLUS expressaoMultiplicativa
+    (44) expressaoAritmetica -> . expressaoAritmetica MINUS expressaoMultiplicativa
+    (45) expressaoMultiplicativa -> . expressaoMultiplicativa TIMES expressaoUnaria
+    (46) expressaoMultiplicativa -> . expressaoMultiplicativa DIVIDE expressaoUnaria
+    (47) expressaoMultiplicativa -> . expressaoMultiplicativa MODULO expressaoUnaria
+    (48) expressaoMultiplicativa -> . expressaoUnaria
+    (49) expressaoUnaria -> . expressaoPostfix
+    (50) expressaoUnaria -> . MINUS expressaoPostfix
+    (51) expressaoUnaria -> . PLUS PLUS expressaoPostfix
+    (52) expressaoUnaria -> . MINUS MINUS expressaoPostfix
+    (53) expressaoPostfix -> . primaria
+    (54) expressaoPostfix -> . primaria LBRACKET expressao RBRACKET
+    (55) expressaoPostfix -> . primaria LPAREN argumentos RPAREN
+    (56) expressaoPostfix -> . primaria DOT ID
+    (57) expressaoPostfix -> . primaria ARROW ID
+    (59) primaria -> . ID
+    (60) primaria -> . NUM_INT
+    (61) primaria -> . NUM_DEC
+    (62) primaria -> . LPAREN expressao LPAREN
+    (63) primaria -> . TEXTO
 
-    MINUS           shift and go to state 31
-    PLUS            shift and go to state 30
-    ID              shift and go to state 23
-    NUM_INT         shift and go to state 36
-    NUM_DEC         shift and go to state 37
-    LPAREN          shift and go to state 35
+    MINUS           shift and go to state 32
+    PLUS            shift and go to state 31
+    ID              shift and go to state 58
+    NUM_INT         shift and go to state 37
+    NUM_DEC         shift and go to state 38
+    LPAREN          shift and go to state 36
+    TEXTO           shift and go to state 39
 
-    expressaoRelacional            shift and go to state 73
-    expressaoAritmetica            shift and go to state 28
-    expressaoMultiplicativa        shift and go to state 29
-    expressaoUnaria                shift and go to state 32
-    expressaoPostfix               shift and go to state 33
-    primaria                       shift and go to state 34
+    expressaoRelacional            shift and go to state 92
+    expressaoAritmetica            shift and go to state 29
+    expressaoMultiplicativa        shift and go to state 30
+    expressaoUnaria                shift and go to state 33
+    expressaoPostfix               shift and go to state 34
+    primaria                       shift and go to state 35
 
-state 47
+state 57
 
     (24) expressaoLogica -> NOT expressaoRelacional .
 
@@ -954,450 +1576,510 @@ state 47
     RBRACKET        reduce using rule 24 (expressaoLogica -> NOT expressaoRelacional .)
 
 
-state 48
-
-    (26) expressaoRelacional -> expressaoAritmetica GREATER . expressaoAritmetica
-    (33) expressaoAritmetica -> . expressaoMultiplicativa
-    (34) expressaoAritmetica -> . expressaoMultiplicativa PLUS expressaoMultiplicativa
-    (35) expressaoAritmetica -> . expressaoMultiplicativa MINUS expressaoMultiplicativa
-    (36) expressaoMultiplicativa -> . expressaoMultiplicativa TIMES expressaoUnaria
-    (37) expressaoMultiplicativa -> . expressaoMultiplicativa DIVIDE expressaoUnaria
-    (38) expressaoMultiplicativa -> . expressaoMultiplicativa MODULO expressaoUnaria
-    (39) expressaoMultiplicativa -> . expressaoUnaria
-    (40) expressaoUnaria -> . expressaoPostfix
-    (41) expressaoUnaria -> . MINUS expressaoPostfix
-    (42) expressaoUnaria -> . PLUS PLUS expressaoPostfix
-    (43) expressaoUnaria -> . MINUS MINUS expressaoPostfix
-    (44) expressaoPostfix -> . primaria
-    (45) expressaoPostfix -> . primaria LBRACKET expressao RBRACKET
-    (46) expressaoPostfix -> . primaria LPAREN argumentos RPAREN
-    (47) expressaoPostfix -> . primaria DOT ID
-    (48) expressaoPostfix -> . primaria ARROW ID
-    (50) primaria -> . ID
-    (51) primaria -> . NUM_INT
-    (52) primaria -> . NUM_DEC
-    (53) primaria -> . LPAREN expressao LPAREN
-
-    MINUS           shift and go to state 31
-    PLUS            shift and go to state 30
-    ID              shift and go to state 23
-    NUM_INT         shift and go to state 36
-    NUM_DEC         shift and go to state 37
-    LPAREN          shift and go to state 35
-
-    expressaoAritmetica            shift and go to state 74
-    expressaoMultiplicativa        shift and go to state 29
-    expressaoUnaria                shift and go to state 32
-    expressaoPostfix               shift and go to state 33
-    primaria                       shift and go to state 34
-
-state 49
-
-    (27) expressaoRelacional -> expressaoAritmetica LESS . expressaoAritmetica
-    (33) expressaoAritmetica -> . expressaoMultiplicativa
-    (34) expressaoAritmetica -> . expressaoMultiplicativa PLUS expressaoMultiplicativa
-    (35) expressaoAritmetica -> . expressaoMultiplicativa MINUS expressaoMultiplicativa
-    (36) expressaoMultiplicativa -> . expressaoMultiplicativa TIMES expressaoUnaria
-    (37) expressaoMultiplicativa -> . expressaoMultiplicativa DIVIDE expressaoUnaria
-    (38) expressaoMultiplicativa -> . expressaoMultiplicativa MODULO expressaoUnaria
-    (39) expressaoMultiplicativa -> . expressaoUnaria
-    (40) expressaoUnaria -> . expressaoPostfix
-    (41) expressaoUnaria -> . MINUS expressaoPostfix
-    (42) expressaoUnaria -> . PLUS PLUS expressaoPostfix
-    (43) expressaoUnaria -> . MINUS MINUS expressaoPostfix
-    (44) expressaoPostfix -> . primaria
-    (45) expressaoPostfix -> . primaria LBRACKET expressao RBRACKET
-    (46) expressaoPostfix -> . primaria LPAREN argumentos RPAREN
-    (47) expressaoPostfix -> . primaria DOT ID
-    (48) expressaoPostfix -> . primaria ARROW ID
-    (50) primaria -> . ID
-    (51) primaria -> . NUM_INT
-    (52) primaria -> . NUM_DEC
-    (53) primaria -> . LPAREN expressao LPAREN
-
-    MINUS           shift and go to state 31
-    PLUS            shift and go to state 30
-    ID              shift and go to state 23
-    NUM_INT         shift and go to state 36
-    NUM_DEC         shift and go to state 37
-    LPAREN          shift and go to state 35
-
-    expressaoAritmetica            shift and go to state 75
-    expressaoMultiplicativa        shift and go to state 29
-    expressaoUnaria                shift and go to state 32
-    expressaoPostfix               shift and go to state 33
-    primaria                       shift and go to state 34
-
-state 50
-
-    (28) expressaoRelacional -> expressaoAritmetica GREATEREQUAL . expressaoAritmetica
-    (33) expressaoAritmetica -> . expressaoMultiplicativa
-    (34) expressaoAritmetica -> . expressaoMultiplicativa PLUS expressaoMultiplicativa
-    (35) expressaoAritmetica -> . expressaoMultiplicativa MINUS expressaoMultiplicativa
-    (36) expressaoMultiplicativa -> . expressaoMultiplicativa TIMES expressaoUnaria
-    (37) expressaoMultiplicativa -> . expressaoMultiplicativa DIVIDE expressaoUnaria
-    (38) expressaoMultiplicativa -> . expressaoMultiplicativa MODULO expressaoUnaria
-    (39) expressaoMultiplicativa -> . expressaoUnaria
-    (40) expressaoUnaria -> . expressaoPostfix
-    (41) expressaoUnaria -> . MINUS expressaoPostfix
-    (42) expressaoUnaria -> . PLUS PLUS expressaoPostfix
-    (43) expressaoUnaria -> . MINUS MINUS expressaoPostfix
-    (44) expressaoPostfix -> . primaria
-    (45) expressaoPostfix -> . primaria LBRACKET expressao RBRACKET
-    (46) expressaoPostfix -> . primaria LPAREN argumentos RPAREN
-    (47) expressaoPostfix -> . primaria DOT ID
-    (48) expressaoPostfix -> . primaria ARROW ID
-    (50) primaria -> . ID
-    (51) primaria -> . NUM_INT
-    (52) primaria -> . NUM_DEC
-    (53) primaria -> . LPAREN expressao LPAREN
-
-    MINUS           shift and go to state 31
-    PLUS            shift and go to state 30
-    ID              shift and go to state 23
-    NUM_INT         shift and go to state 36
-    NUM_DEC         shift and go to state 37
-    LPAREN          shift and go to state 35
-
-    expressaoAritmetica            shift and go to state 76
-    expressaoMultiplicativa        shift and go to state 29
-    expressaoUnaria                shift and go to state 32
-    expressaoPostfix               shift and go to state 33
-    primaria                       shift and go to state 34
-
-state 51
-
-    (29) expressaoRelacional -> expressaoAritmetica LESSEQUAL . expressaoAritmetica
-    (33) expressaoAritmetica -> . expressaoMultiplicativa
-    (34) expressaoAritmetica -> . expressaoMultiplicativa PLUS expressaoMultiplicativa
-    (35) expressaoAritmetica -> . expressaoMultiplicativa MINUS expressaoMultiplicativa
-    (36) expressaoMultiplicativa -> . expressaoMultiplicativa TIMES expressaoUnaria
-    (37) expressaoMultiplicativa -> . expressaoMultiplicativa DIVIDE expressaoUnaria
-    (38) expressaoMultiplicativa -> . expressaoMultiplicativa MODULO expressaoUnaria
-    (39) expressaoMultiplicativa -> . expressaoUnaria
-    (40) expressaoUnaria -> . expressaoPostfix
-    (41) expressaoUnaria -> . MINUS expressaoPostfix
-    (42) expressaoUnaria -> . PLUS PLUS expressaoPostfix
-    (43) expressaoUnaria -> . MINUS MINUS expressaoPostfix
-    (44) expressaoPostfix -> . primaria
-    (45) expressaoPostfix -> . primaria LBRACKET expressao RBRACKET
-    (46) expressaoPostfix -> . primaria LPAREN argumentos RPAREN
-    (47) expressaoPostfix -> . primaria DOT ID
-    (48) expressaoPostfix -> . primaria ARROW ID
-    (50) primaria -> . ID
-    (51) primaria -> . NUM_INT
-    (52) primaria -> . NUM_DEC
-    (53) primaria -> . LPAREN expressao LPAREN
-
-    MINUS           shift and go to state 31
-    PLUS            shift and go to state 30
-    ID              shift and go to state 23
-    NUM_INT         shift and go to state 36
-    NUM_DEC         shift and go to state 37
-    LPAREN          shift and go to state 35
-
-    expressaoAritmetica            shift and go to state 77
-    expressaoMultiplicativa        shift and go to state 29
-    expressaoUnaria                shift and go to state 32
-    expressaoPostfix               shift and go to state 33
-    primaria                       shift and go to state 34
-
-state 52
-
-    (30) expressaoRelacional -> expressaoAritmetica NOTEQUAL . expressaoAritmetica
-    (33) expressaoAritmetica -> . expressaoMultiplicativa
-    (34) expressaoAritmetica -> . expressaoMultiplicativa PLUS expressaoMultiplicativa
-    (35) expressaoAritmetica -> . expressaoMultiplicativa MINUS expressaoMultiplicativa
-    (36) expressaoMultiplicativa -> . expressaoMultiplicativa TIMES expressaoUnaria
-    (37) expressaoMultiplicativa -> . expressaoMultiplicativa DIVIDE expressaoUnaria
-    (38) expressaoMultiplicativa -> . expressaoMultiplicativa MODULO expressaoUnaria
-    (39) expressaoMultiplicativa -> . expressaoUnaria
-    (40) expressaoUnaria -> . expressaoPostfix
-    (41) expressaoUnaria -> . MINUS expressaoPostfix
-    (42) expressaoUnaria -> . PLUS PLUS expressaoPostfix
-    (43) expressaoUnaria -> . MINUS MINUS expressaoPostfix
-    (44) expressaoPostfix -> . primaria
-    (45) expressaoPostfix -> . primaria LBRACKET expressao RBRACKET
-    (46) expressaoPostfix -> . primaria LPAREN argumentos RPAREN
-    (47) expressaoPostfix -> . primaria DOT ID
-    (48) expressaoPostfix -> . primaria ARROW ID
-    (50) primaria -> . ID
-    (51) primaria -> . NUM_INT
-    (52) primaria -> . NUM_DEC
-    (53) primaria -> . LPAREN expressao LPAREN
-
-    MINUS           shift and go to state 31
-    PLUS            shift and go to state 30
-    ID              shift and go to state 23
-    NUM_INT         shift and go to state 36
-    NUM_DEC         shift and go to state 37
-    LPAREN          shift and go to state 35
-
-    expressaoAritmetica            shift and go to state 78
-    expressaoMultiplicativa        shift and go to state 29
-    expressaoUnaria                shift and go to state 32
-    expressaoPostfix               shift and go to state 33
-    primaria                       shift and go to state 34
-
-state 53
-
-    (31) expressaoRelacional -> expressaoAritmetica EQUAL . expressaoAritmetica
-    (33) expressaoAritmetica -> . expressaoMultiplicativa
-    (34) expressaoAritmetica -> . expressaoMultiplicativa PLUS expressaoMultiplicativa
-    (35) expressaoAritmetica -> . expressaoMultiplicativa MINUS expressaoMultiplicativa
-    (36) expressaoMultiplicativa -> . expressaoMultiplicativa TIMES expressaoUnaria
-    (37) expressaoMultiplicativa -> . expressaoMultiplicativa DIVIDE expressaoUnaria
-    (38) expressaoMultiplicativa -> . expressaoMultiplicativa MODULO expressaoUnaria
-    (39) expressaoMultiplicativa -> . expressaoUnaria
-    (40) expressaoUnaria -> . expressaoPostfix
-    (41) expressaoUnaria -> . MINUS expressaoPostfix
-    (42) expressaoUnaria -> . PLUS PLUS expressaoPostfix
-    (43) expressaoUnaria -> . MINUS MINUS expressaoPostfix
-    (44) expressaoPostfix -> . primaria
-    (45) expressaoPostfix -> . primaria LBRACKET expressao RBRACKET
-    (46) expressaoPostfix -> . primaria LPAREN argumentos RPAREN
-    (47) expressaoPostfix -> . primaria DOT ID
-    (48) expressaoPostfix -> . primaria ARROW ID
-    (50) primaria -> . ID
-    (51) primaria -> . NUM_INT
-    (52) primaria -> . NUM_DEC
-    (53) primaria -> . LPAREN expressao LPAREN
-
-    MINUS           shift and go to state 31
-    PLUS            shift and go to state 30
-    ID              shift and go to state 23
-    NUM_INT         shift and go to state 36
-    NUM_DEC         shift and go to state 37
-    LPAREN          shift and go to state 35
-
-    expressaoAritmetica            shift and go to state 79
-    expressaoMultiplicativa        shift and go to state 29
-    expressaoUnaria                shift and go to state 32
-    expressaoPostfix               shift and go to state 33
-    primaria                       shift and go to state 34
-
-state 54
-
-    (34) expressaoAritmetica -> expressaoMultiplicativa PLUS . expressaoMultiplicativa
-    (36) expressaoMultiplicativa -> . expressaoMultiplicativa TIMES expressaoUnaria
-    (37) expressaoMultiplicativa -> . expressaoMultiplicativa DIVIDE expressaoUnaria
-    (38) expressaoMultiplicativa -> . expressaoMultiplicativa MODULO expressaoUnaria
-    (39) expressaoMultiplicativa -> . expressaoUnaria
-    (40) expressaoUnaria -> . expressaoPostfix
-    (41) expressaoUnaria -> . MINUS expressaoPostfix
-    (42) expressaoUnaria -> . PLUS PLUS expressaoPostfix
-    (43) expressaoUnaria -> . MINUS MINUS expressaoPostfix
-    (44) expressaoPostfix -> . primaria
-    (45) expressaoPostfix -> . primaria LBRACKET expressao RBRACKET
-    (46) expressaoPostfix -> . primaria LPAREN argumentos RPAREN
-    (47) expressaoPostfix -> . primaria DOT ID
-    (48) expressaoPostfix -> . primaria ARROW ID
-    (50) primaria -> . ID
-    (51) primaria -> . NUM_INT
-    (52) primaria -> . NUM_DEC
-    (53) primaria -> . LPAREN expressao LPAREN
-
-    MINUS           shift and go to state 31
-    PLUS            shift and go to state 30
-    ID              shift and go to state 23
-    NUM_INT         shift and go to state 36
-    NUM_DEC         shift and go to state 37
-    LPAREN          shift and go to state 35
-
-    expressaoMultiplicativa        shift and go to state 80
-    expressaoUnaria                shift and go to state 32
-    expressaoPostfix               shift and go to state 33
-    primaria                       shift and go to state 34
-
-state 55
-
-    (35) expressaoAritmetica -> expressaoMultiplicativa MINUS . expressaoMultiplicativa
-    (36) expressaoMultiplicativa -> . expressaoMultiplicativa TIMES expressaoUnaria
-    (37) expressaoMultiplicativa -> . expressaoMultiplicativa DIVIDE expressaoUnaria
-    (38) expressaoMultiplicativa -> . expressaoMultiplicativa MODULO expressaoUnaria
-    (39) expressaoMultiplicativa -> . expressaoUnaria
-    (40) expressaoUnaria -> . expressaoPostfix
-    (41) expressaoUnaria -> . MINUS expressaoPostfix
-    (42) expressaoUnaria -> . PLUS PLUS expressaoPostfix
-    (43) expressaoUnaria -> . MINUS MINUS expressaoPostfix
-    (44) expressaoPostfix -> . primaria
-    (45) expressaoPostfix -> . primaria LBRACKET expressao RBRACKET
-    (46) expressaoPostfix -> . primaria LPAREN argumentos RPAREN
-    (47) expressaoPostfix -> . primaria DOT ID
-    (48) expressaoPostfix -> . primaria ARROW ID
-    (50) primaria -> . ID
-    (51) primaria -> . NUM_INT
-    (52) primaria -> . NUM_DEC
-    (53) primaria -> . LPAREN expressao LPAREN
-
-    MINUS           shift and go to state 31
-    PLUS            shift and go to state 30
-    ID              shift and go to state 23
-    NUM_INT         shift and go to state 36
-    NUM_DEC         shift and go to state 37
-    LPAREN          shift and go to state 35
-
-    expressaoMultiplicativa        shift and go to state 81
-    expressaoUnaria                shift and go to state 32
-    expressaoPostfix               shift and go to state 33
-    primaria                       shift and go to state 34
-
-state 56
-
-    (36) expressaoMultiplicativa -> expressaoMultiplicativa TIMES . expressaoUnaria
-    (40) expressaoUnaria -> . expressaoPostfix
-    (41) expressaoUnaria -> . MINUS expressaoPostfix
-    (42) expressaoUnaria -> . PLUS PLUS expressaoPostfix
-    (43) expressaoUnaria -> . MINUS MINUS expressaoPostfix
-    (44) expressaoPostfix -> . primaria
-    (45) expressaoPostfix -> . primaria LBRACKET expressao RBRACKET
-    (46) expressaoPostfix -> . primaria LPAREN argumentos RPAREN
-    (47) expressaoPostfix -> . primaria DOT ID
-    (48) expressaoPostfix -> . primaria ARROW ID
-    (50) primaria -> . ID
-    (51) primaria -> . NUM_INT
-    (52) primaria -> . NUM_DEC
-    (53) primaria -> . LPAREN expressao LPAREN
-
-    MINUS           shift and go to state 31
-    PLUS            shift and go to state 30
-    ID              shift and go to state 23
-    NUM_INT         shift and go to state 36
-    NUM_DEC         shift and go to state 37
-    LPAREN          shift and go to state 35
-
-    expressaoUnaria                shift and go to state 82
-    expressaoPostfix               shift and go to state 33
-    primaria                       shift and go to state 34
-
-state 57
-
-    (37) expressaoMultiplicativa -> expressaoMultiplicativa DIVIDE . expressaoUnaria
-    (40) expressaoUnaria -> . expressaoPostfix
-    (41) expressaoUnaria -> . MINUS expressaoPostfix
-    (42) expressaoUnaria -> . PLUS PLUS expressaoPostfix
-    (43) expressaoUnaria -> . MINUS MINUS expressaoPostfix
-    (44) expressaoPostfix -> . primaria
-    (45) expressaoPostfix -> . primaria LBRACKET expressao RBRACKET
-    (46) expressaoPostfix -> . primaria LPAREN argumentos RPAREN
-    (47) expressaoPostfix -> . primaria DOT ID
-    (48) expressaoPostfix -> . primaria ARROW ID
-    (50) primaria -> . ID
-    (51) primaria -> . NUM_INT
-    (52) primaria -> . NUM_DEC
-    (53) primaria -> . LPAREN expressao LPAREN
-
-    MINUS           shift and go to state 31
-    PLUS            shift and go to state 30
-    ID              shift and go to state 23
-    NUM_INT         shift and go to state 36
-    NUM_DEC         shift and go to state 37
-    LPAREN          shift and go to state 35
-
-    expressaoUnaria                shift and go to state 83
-    expressaoPostfix               shift and go to state 33
-    primaria                       shift and go to state 34
-
 state 58
 
-    (38) expressaoMultiplicativa -> expressaoMultiplicativa MODULO . expressaoUnaria
-    (40) expressaoUnaria -> . expressaoPostfix
-    (41) expressaoUnaria -> . MINUS expressaoPostfix
-    (42) expressaoUnaria -> . PLUS PLUS expressaoPostfix
-    (43) expressaoUnaria -> . MINUS MINUS expressaoPostfix
-    (44) expressaoPostfix -> . primaria
-    (45) expressaoPostfix -> . primaria LBRACKET expressao RBRACKET
-    (46) expressaoPostfix -> . primaria LPAREN argumentos RPAREN
-    (47) expressaoPostfix -> . primaria DOT ID
-    (48) expressaoPostfix -> . primaria ARROW ID
-    (50) primaria -> . ID
-    (51) primaria -> . NUM_INT
-    (52) primaria -> . NUM_DEC
-    (53) primaria -> . LPAREN expressao LPAREN
+    (59) primaria -> ID .
 
-    MINUS           shift and go to state 31
-    PLUS            shift and go to state 30
-    ID              shift and go to state 23
-    NUM_INT         shift and go to state 36
-    NUM_DEC         shift and go to state 37
-    LPAREN          shift and go to state 35
+    LBRACKET        reduce using rule 59 (primaria -> ID .)
+    LPAREN          reduce using rule 59 (primaria -> ID .)
+    DOT             reduce using rule 59 (primaria -> ID .)
+    ARROW           reduce using rule 59 (primaria -> ID .)
+    TIMES           reduce using rule 59 (primaria -> ID .)
+    DIVIDE          reduce using rule 59 (primaria -> ID .)
+    MODULO          reduce using rule 59 (primaria -> ID .)
+    GREATER         reduce using rule 59 (primaria -> ID .)
+    LESS            reduce using rule 59 (primaria -> ID .)
+    GREATEREQUAL    reduce using rule 59 (primaria -> ID .)
+    LESSEQUAL       reduce using rule 59 (primaria -> ID .)
+    NOTEQUAL        reduce using rule 59 (primaria -> ID .)
+    EQUAL           reduce using rule 59 (primaria -> ID .)
+    PLUS            reduce using rule 59 (primaria -> ID .)
+    MINUS           reduce using rule 59 (primaria -> ID .)
+    OROR            reduce using rule 59 (primaria -> ID .)
+    ANDAND          reduce using rule 59 (primaria -> ID .)
+    SEMICOLON       reduce using rule 59 (primaria -> ID .)
+    RBRACKET        reduce using rule 59 (primaria -> ID .)
 
-    expressaoUnaria                shift and go to state 84
-    expressaoPostfix               shift and go to state 33
-    primaria                       shift and go to state 34
 
 state 59
 
-    (42) expressaoUnaria -> PLUS PLUS . expressaoPostfix
-    (44) expressaoPostfix -> . primaria
-    (45) expressaoPostfix -> . primaria LBRACKET expressao RBRACKET
-    (46) expressaoPostfix -> . primaria LPAREN argumentos RPAREN
-    (47) expressaoPostfix -> . primaria DOT ID
-    (48) expressaoPostfix -> . primaria ARROW ID
-    (50) primaria -> . ID
-    (51) primaria -> . NUM_INT
-    (52) primaria -> . NUM_DEC
-    (53) primaria -> . LPAREN expressao LPAREN
+    (26) expressaoRelacional -> expressaoAritmetica GREATER . expressaoAritmetica
+    (42) expressaoAritmetica -> . expressaoMultiplicativa
+    (43) expressaoAritmetica -> . expressaoAritmetica PLUS expressaoMultiplicativa
+    (44) expressaoAritmetica -> . expressaoAritmetica MINUS expressaoMultiplicativa
+    (45) expressaoMultiplicativa -> . expressaoMultiplicativa TIMES expressaoUnaria
+    (46) expressaoMultiplicativa -> . expressaoMultiplicativa DIVIDE expressaoUnaria
+    (47) expressaoMultiplicativa -> . expressaoMultiplicativa MODULO expressaoUnaria
+    (48) expressaoMultiplicativa -> . expressaoUnaria
+    (49) expressaoUnaria -> . expressaoPostfix
+    (50) expressaoUnaria -> . MINUS expressaoPostfix
+    (51) expressaoUnaria -> . PLUS PLUS expressaoPostfix
+    (52) expressaoUnaria -> . MINUS MINUS expressaoPostfix
+    (53) expressaoPostfix -> . primaria
+    (54) expressaoPostfix -> . primaria LBRACKET expressao RBRACKET
+    (55) expressaoPostfix -> . primaria LPAREN argumentos RPAREN
+    (56) expressaoPostfix -> . primaria DOT ID
+    (57) expressaoPostfix -> . primaria ARROW ID
+    (59) primaria -> . ID
+    (60) primaria -> . NUM_INT
+    (61) primaria -> . NUM_DEC
+    (62) primaria -> . LPAREN expressao LPAREN
+    (63) primaria -> . TEXTO
 
-    ID              shift and go to state 23
-    NUM_INT         shift and go to state 36
-    NUM_DEC         shift and go to state 37
-    LPAREN          shift and go to state 35
+    MINUS           shift and go to state 32
+    PLUS            shift and go to state 31
+    ID              shift and go to state 58
+    NUM_INT         shift and go to state 37
+    NUM_DEC         shift and go to state 38
+    LPAREN          shift and go to state 36
+    TEXTO           shift and go to state 39
 
-    expressaoPostfix               shift and go to state 85
-    primaria                       shift and go to state 34
+    expressaoAritmetica            shift and go to state 93
+    expressaoMultiplicativa        shift and go to state 30
+    expressaoUnaria                shift and go to state 33
+    expressaoPostfix               shift and go to state 34
+    primaria                       shift and go to state 35
 
 state 60
 
-    (43) expressaoUnaria -> MINUS MINUS . expressaoPostfix
-    (44) expressaoPostfix -> . primaria
-    (45) expressaoPostfix -> . primaria LBRACKET expressao RBRACKET
-    (46) expressaoPostfix -> . primaria LPAREN argumentos RPAREN
-    (47) expressaoPostfix -> . primaria DOT ID
-    (48) expressaoPostfix -> . primaria ARROW ID
-    (50) primaria -> . ID
-    (51) primaria -> . NUM_INT
-    (52) primaria -> . NUM_DEC
-    (53) primaria -> . LPAREN expressao LPAREN
+    (27) expressaoRelacional -> expressaoAritmetica LESS . expressaoAritmetica
+    (42) expressaoAritmetica -> . expressaoMultiplicativa
+    (43) expressaoAritmetica -> . expressaoAritmetica PLUS expressaoMultiplicativa
+    (44) expressaoAritmetica -> . expressaoAritmetica MINUS expressaoMultiplicativa
+    (45) expressaoMultiplicativa -> . expressaoMultiplicativa TIMES expressaoUnaria
+    (46) expressaoMultiplicativa -> . expressaoMultiplicativa DIVIDE expressaoUnaria
+    (47) expressaoMultiplicativa -> . expressaoMultiplicativa MODULO expressaoUnaria
+    (48) expressaoMultiplicativa -> . expressaoUnaria
+    (49) expressaoUnaria -> . expressaoPostfix
+    (50) expressaoUnaria -> . MINUS expressaoPostfix
+    (51) expressaoUnaria -> . PLUS PLUS expressaoPostfix
+    (52) expressaoUnaria -> . MINUS MINUS expressaoPostfix
+    (53) expressaoPostfix -> . primaria
+    (54) expressaoPostfix -> . primaria LBRACKET expressao RBRACKET
+    (55) expressaoPostfix -> . primaria LPAREN argumentos RPAREN
+    (56) expressaoPostfix -> . primaria DOT ID
+    (57) expressaoPostfix -> . primaria ARROW ID
+    (59) primaria -> . ID
+    (60) primaria -> . NUM_INT
+    (61) primaria -> . NUM_DEC
+    (62) primaria -> . LPAREN expressao LPAREN
+    (63) primaria -> . TEXTO
 
-    ID              shift and go to state 23
-    NUM_INT         shift and go to state 36
-    NUM_DEC         shift and go to state 37
-    LPAREN          shift and go to state 35
+    MINUS           shift and go to state 32
+    PLUS            shift and go to state 31
+    ID              shift and go to state 58
+    NUM_INT         shift and go to state 37
+    NUM_DEC         shift and go to state 38
+    LPAREN          shift and go to state 36
+    TEXTO           shift and go to state 39
 
-    expressaoPostfix               shift and go to state 86
-    primaria                       shift and go to state 34
+    expressaoAritmetica            shift and go to state 94
+    expressaoMultiplicativa        shift and go to state 30
+    expressaoUnaria                shift and go to state 33
+    expressaoPostfix               shift and go to state 34
+    primaria                       shift and go to state 35
 
 state 61
 
-    (41) expressaoUnaria -> MINUS expressaoPostfix .
+    (28) expressaoRelacional -> expressaoAritmetica GREATEREQUAL . expressaoAritmetica
+    (42) expressaoAritmetica -> . expressaoMultiplicativa
+    (43) expressaoAritmetica -> . expressaoAritmetica PLUS expressaoMultiplicativa
+    (44) expressaoAritmetica -> . expressaoAritmetica MINUS expressaoMultiplicativa
+    (45) expressaoMultiplicativa -> . expressaoMultiplicativa TIMES expressaoUnaria
+    (46) expressaoMultiplicativa -> . expressaoMultiplicativa DIVIDE expressaoUnaria
+    (47) expressaoMultiplicativa -> . expressaoMultiplicativa MODULO expressaoUnaria
+    (48) expressaoMultiplicativa -> . expressaoUnaria
+    (49) expressaoUnaria -> . expressaoPostfix
+    (50) expressaoUnaria -> . MINUS expressaoPostfix
+    (51) expressaoUnaria -> . PLUS PLUS expressaoPostfix
+    (52) expressaoUnaria -> . MINUS MINUS expressaoPostfix
+    (53) expressaoPostfix -> . primaria
+    (54) expressaoPostfix -> . primaria LBRACKET expressao RBRACKET
+    (55) expressaoPostfix -> . primaria LPAREN argumentos RPAREN
+    (56) expressaoPostfix -> . primaria DOT ID
+    (57) expressaoPostfix -> . primaria ARROW ID
+    (59) primaria -> . ID
+    (60) primaria -> . NUM_INT
+    (61) primaria -> . NUM_DEC
+    (62) primaria -> . LPAREN expressao LPAREN
+    (63) primaria -> . TEXTO
 
-    PLUS            reduce using rule 41 (expressaoUnaria -> MINUS expressaoPostfix .)
-    MINUS           reduce using rule 41 (expressaoUnaria -> MINUS expressaoPostfix .)
-    TIMES           reduce using rule 41 (expressaoUnaria -> MINUS expressaoPostfix .)
-    DIVIDE          reduce using rule 41 (expressaoUnaria -> MINUS expressaoPostfix .)
-    MODULO          reduce using rule 41 (expressaoUnaria -> MINUS expressaoPostfix .)
-    GREATER         reduce using rule 41 (expressaoUnaria -> MINUS expressaoPostfix .)
-    LESS            reduce using rule 41 (expressaoUnaria -> MINUS expressaoPostfix .)
-    GREATEREQUAL    reduce using rule 41 (expressaoUnaria -> MINUS expressaoPostfix .)
-    LESSEQUAL       reduce using rule 41 (expressaoUnaria -> MINUS expressaoPostfix .)
-    NOTEQUAL        reduce using rule 41 (expressaoUnaria -> MINUS expressaoPostfix .)
-    EQUAL           reduce using rule 41 (expressaoUnaria -> MINUS expressaoPostfix .)
-    OROR            reduce using rule 41 (expressaoUnaria -> MINUS expressaoPostfix .)
-    ANDAND          reduce using rule 41 (expressaoUnaria -> MINUS expressaoPostfix .)
-    SEMICOLON       reduce using rule 41 (expressaoUnaria -> MINUS expressaoPostfix .)
-    LPAREN          reduce using rule 41 (expressaoUnaria -> MINUS expressaoPostfix .)
-    RBRACKET        reduce using rule 41 (expressaoUnaria -> MINUS expressaoPostfix .)
+    MINUS           shift and go to state 32
+    PLUS            shift and go to state 31
+    ID              shift and go to state 58
+    NUM_INT         shift and go to state 37
+    NUM_DEC         shift and go to state 38
+    LPAREN          shift and go to state 36
+    TEXTO           shift and go to state 39
 
+    expressaoAritmetica            shift and go to state 95
+    expressaoMultiplicativa        shift and go to state 30
+    expressaoUnaria                shift and go to state 33
+    expressaoPostfix               shift and go to state 34
+    primaria                       shift and go to state 35
 
 state 62
 
-    (45) expressaoPostfix -> primaria LBRACKET . expressao RBRACKET
+    (29) expressaoRelacional -> expressaoAritmetica LESSEQUAL . expressaoAritmetica
+    (42) expressaoAritmetica -> . expressaoMultiplicativa
+    (43) expressaoAritmetica -> . expressaoAritmetica PLUS expressaoMultiplicativa
+    (44) expressaoAritmetica -> . expressaoAritmetica MINUS expressaoMultiplicativa
+    (45) expressaoMultiplicativa -> . expressaoMultiplicativa TIMES expressaoUnaria
+    (46) expressaoMultiplicativa -> . expressaoMultiplicativa DIVIDE expressaoUnaria
+    (47) expressaoMultiplicativa -> . expressaoMultiplicativa MODULO expressaoUnaria
+    (48) expressaoMultiplicativa -> . expressaoUnaria
+    (49) expressaoUnaria -> . expressaoPostfix
+    (50) expressaoUnaria -> . MINUS expressaoPostfix
+    (51) expressaoUnaria -> . PLUS PLUS expressaoPostfix
+    (52) expressaoUnaria -> . MINUS MINUS expressaoPostfix
+    (53) expressaoPostfix -> . primaria
+    (54) expressaoPostfix -> . primaria LBRACKET expressao RBRACKET
+    (55) expressaoPostfix -> . primaria LPAREN argumentos RPAREN
+    (56) expressaoPostfix -> . primaria DOT ID
+    (57) expressaoPostfix -> . primaria ARROW ID
+    (59) primaria -> . ID
+    (60) primaria -> . NUM_INT
+    (61) primaria -> . NUM_DEC
+    (62) primaria -> . LPAREN expressao LPAREN
+    (63) primaria -> . TEXTO
+
+    MINUS           shift and go to state 32
+    PLUS            shift and go to state 31
+    ID              shift and go to state 58
+    NUM_INT         shift and go to state 37
+    NUM_DEC         shift and go to state 38
+    LPAREN          shift and go to state 36
+    TEXTO           shift and go to state 39
+
+    expressaoAritmetica            shift and go to state 96
+    expressaoMultiplicativa        shift and go to state 30
+    expressaoUnaria                shift and go to state 33
+    expressaoPostfix               shift and go to state 34
+    primaria                       shift and go to state 35
+
+state 63
+
+    (30) expressaoRelacional -> expressaoAritmetica NOTEQUAL . expressaoAritmetica
+    (42) expressaoAritmetica -> . expressaoMultiplicativa
+    (43) expressaoAritmetica -> . expressaoAritmetica PLUS expressaoMultiplicativa
+    (44) expressaoAritmetica -> . expressaoAritmetica MINUS expressaoMultiplicativa
+    (45) expressaoMultiplicativa -> . expressaoMultiplicativa TIMES expressaoUnaria
+    (46) expressaoMultiplicativa -> . expressaoMultiplicativa DIVIDE expressaoUnaria
+    (47) expressaoMultiplicativa -> . expressaoMultiplicativa MODULO expressaoUnaria
+    (48) expressaoMultiplicativa -> . expressaoUnaria
+    (49) expressaoUnaria -> . expressaoPostfix
+    (50) expressaoUnaria -> . MINUS expressaoPostfix
+    (51) expressaoUnaria -> . PLUS PLUS expressaoPostfix
+    (52) expressaoUnaria -> . MINUS MINUS expressaoPostfix
+    (53) expressaoPostfix -> . primaria
+    (54) expressaoPostfix -> . primaria LBRACKET expressao RBRACKET
+    (55) expressaoPostfix -> . primaria LPAREN argumentos RPAREN
+    (56) expressaoPostfix -> . primaria DOT ID
+    (57) expressaoPostfix -> . primaria ARROW ID
+    (59) primaria -> . ID
+    (60) primaria -> . NUM_INT
+    (61) primaria -> . NUM_DEC
+    (62) primaria -> . LPAREN expressao LPAREN
+    (63) primaria -> . TEXTO
+
+    MINUS           shift and go to state 32
+    PLUS            shift and go to state 31
+    ID              shift and go to state 58
+    NUM_INT         shift and go to state 37
+    NUM_DEC         shift and go to state 38
+    LPAREN          shift and go to state 36
+    TEXTO           shift and go to state 39
+
+    expressaoAritmetica            shift and go to state 97
+    expressaoMultiplicativa        shift and go to state 30
+    expressaoUnaria                shift and go to state 33
+    expressaoPostfix               shift and go to state 34
+    primaria                       shift and go to state 35
+
+state 64
+
+    (31) expressaoRelacional -> expressaoAritmetica EQUAL . expressaoAritmetica
+    (42) expressaoAritmetica -> . expressaoMultiplicativa
+    (43) expressaoAritmetica -> . expressaoAritmetica PLUS expressaoMultiplicativa
+    (44) expressaoAritmetica -> . expressaoAritmetica MINUS expressaoMultiplicativa
+    (45) expressaoMultiplicativa -> . expressaoMultiplicativa TIMES expressaoUnaria
+    (46) expressaoMultiplicativa -> . expressaoMultiplicativa DIVIDE expressaoUnaria
+    (47) expressaoMultiplicativa -> . expressaoMultiplicativa MODULO expressaoUnaria
+    (48) expressaoMultiplicativa -> . expressaoUnaria
+    (49) expressaoUnaria -> . expressaoPostfix
+    (50) expressaoUnaria -> . MINUS expressaoPostfix
+    (51) expressaoUnaria -> . PLUS PLUS expressaoPostfix
+    (52) expressaoUnaria -> . MINUS MINUS expressaoPostfix
+    (53) expressaoPostfix -> . primaria
+    (54) expressaoPostfix -> . primaria LBRACKET expressao RBRACKET
+    (55) expressaoPostfix -> . primaria LPAREN argumentos RPAREN
+    (56) expressaoPostfix -> . primaria DOT ID
+    (57) expressaoPostfix -> . primaria ARROW ID
+    (59) primaria -> . ID
+    (60) primaria -> . NUM_INT
+    (61) primaria -> . NUM_DEC
+    (62) primaria -> . LPAREN expressao LPAREN
+    (63) primaria -> . TEXTO
+
+    MINUS           shift and go to state 32
+    PLUS            shift and go to state 31
+    ID              shift and go to state 58
+    NUM_INT         shift and go to state 37
+    NUM_DEC         shift and go to state 38
+    LPAREN          shift and go to state 36
+    TEXTO           shift and go to state 39
+
+    expressaoAritmetica            shift and go to state 98
+    expressaoMultiplicativa        shift and go to state 30
+    expressaoUnaria                shift and go to state 33
+    expressaoPostfix               shift and go to state 34
+    primaria                       shift and go to state 35
+
+state 65
+
+    (43) expressaoAritmetica -> expressaoAritmetica PLUS . expressaoMultiplicativa
+    (45) expressaoMultiplicativa -> . expressaoMultiplicativa TIMES expressaoUnaria
+    (46) expressaoMultiplicativa -> . expressaoMultiplicativa DIVIDE expressaoUnaria
+    (47) expressaoMultiplicativa -> . expressaoMultiplicativa MODULO expressaoUnaria
+    (48) expressaoMultiplicativa -> . expressaoUnaria
+    (49) expressaoUnaria -> . expressaoPostfix
+    (50) expressaoUnaria -> . MINUS expressaoPostfix
+    (51) expressaoUnaria -> . PLUS PLUS expressaoPostfix
+    (52) expressaoUnaria -> . MINUS MINUS expressaoPostfix
+    (53) expressaoPostfix -> . primaria
+    (54) expressaoPostfix -> . primaria LBRACKET expressao RBRACKET
+    (55) expressaoPostfix -> . primaria LPAREN argumentos RPAREN
+    (56) expressaoPostfix -> . primaria DOT ID
+    (57) expressaoPostfix -> . primaria ARROW ID
+    (59) primaria -> . ID
+    (60) primaria -> . NUM_INT
+    (61) primaria -> . NUM_DEC
+    (62) primaria -> . LPAREN expressao LPAREN
+    (63) primaria -> . TEXTO
+
+    MINUS           shift and go to state 32
+    PLUS            shift and go to state 31
+    ID              shift and go to state 58
+    NUM_INT         shift and go to state 37
+    NUM_DEC         shift and go to state 38
+    LPAREN          shift and go to state 36
+    TEXTO           shift and go to state 39
+
+    expressaoMultiplicativa        shift and go to state 99
+    expressaoUnaria                shift and go to state 33
+    expressaoPostfix               shift and go to state 34
+    primaria                       shift and go to state 35
+
+state 66
+
+    (44) expressaoAritmetica -> expressaoAritmetica MINUS . expressaoMultiplicativa
+    (45) expressaoMultiplicativa -> . expressaoMultiplicativa TIMES expressaoUnaria
+    (46) expressaoMultiplicativa -> . expressaoMultiplicativa DIVIDE expressaoUnaria
+    (47) expressaoMultiplicativa -> . expressaoMultiplicativa MODULO expressaoUnaria
+    (48) expressaoMultiplicativa -> . expressaoUnaria
+    (49) expressaoUnaria -> . expressaoPostfix
+    (50) expressaoUnaria -> . MINUS expressaoPostfix
+    (51) expressaoUnaria -> . PLUS PLUS expressaoPostfix
+    (52) expressaoUnaria -> . MINUS MINUS expressaoPostfix
+    (53) expressaoPostfix -> . primaria
+    (54) expressaoPostfix -> . primaria LBRACKET expressao RBRACKET
+    (55) expressaoPostfix -> . primaria LPAREN argumentos RPAREN
+    (56) expressaoPostfix -> . primaria DOT ID
+    (57) expressaoPostfix -> . primaria ARROW ID
+    (59) primaria -> . ID
+    (60) primaria -> . NUM_INT
+    (61) primaria -> . NUM_DEC
+    (62) primaria -> . LPAREN expressao LPAREN
+    (63) primaria -> . TEXTO
+
+    MINUS           shift and go to state 32
+    PLUS            shift and go to state 31
+    ID              shift and go to state 58
+    NUM_INT         shift and go to state 37
+    NUM_DEC         shift and go to state 38
+    LPAREN          shift and go to state 36
+    TEXTO           shift and go to state 39
+
+    expressaoMultiplicativa        shift and go to state 100
+    expressaoUnaria                shift and go to state 33
+    expressaoPostfix               shift and go to state 34
+    primaria                       shift and go to state 35
+
+state 67
+
+    (45) expressaoMultiplicativa -> expressaoMultiplicativa TIMES . expressaoUnaria
+    (49) expressaoUnaria -> . expressaoPostfix
+    (50) expressaoUnaria -> . MINUS expressaoPostfix
+    (51) expressaoUnaria -> . PLUS PLUS expressaoPostfix
+    (52) expressaoUnaria -> . MINUS MINUS expressaoPostfix
+    (53) expressaoPostfix -> . primaria
+    (54) expressaoPostfix -> . primaria LBRACKET expressao RBRACKET
+    (55) expressaoPostfix -> . primaria LPAREN argumentos RPAREN
+    (56) expressaoPostfix -> . primaria DOT ID
+    (57) expressaoPostfix -> . primaria ARROW ID
+    (59) primaria -> . ID
+    (60) primaria -> . NUM_INT
+    (61) primaria -> . NUM_DEC
+    (62) primaria -> . LPAREN expressao LPAREN
+    (63) primaria -> . TEXTO
+
+    MINUS           shift and go to state 32
+    PLUS            shift and go to state 31
+    ID              shift and go to state 58
+    NUM_INT         shift and go to state 37
+    NUM_DEC         shift and go to state 38
+    LPAREN          shift and go to state 36
+    TEXTO           shift and go to state 39
+
+    expressaoUnaria                shift and go to state 101
+    expressaoPostfix               shift and go to state 34
+    primaria                       shift and go to state 35
+
+state 68
+
+    (46) expressaoMultiplicativa -> expressaoMultiplicativa DIVIDE . expressaoUnaria
+    (49) expressaoUnaria -> . expressaoPostfix
+    (50) expressaoUnaria -> . MINUS expressaoPostfix
+    (51) expressaoUnaria -> . PLUS PLUS expressaoPostfix
+    (52) expressaoUnaria -> . MINUS MINUS expressaoPostfix
+    (53) expressaoPostfix -> . primaria
+    (54) expressaoPostfix -> . primaria LBRACKET expressao RBRACKET
+    (55) expressaoPostfix -> . primaria LPAREN argumentos RPAREN
+    (56) expressaoPostfix -> . primaria DOT ID
+    (57) expressaoPostfix -> . primaria ARROW ID
+    (59) primaria -> . ID
+    (60) primaria -> . NUM_INT
+    (61) primaria -> . NUM_DEC
+    (62) primaria -> . LPAREN expressao LPAREN
+    (63) primaria -> . TEXTO
+
+    MINUS           shift and go to state 32
+    PLUS            shift and go to state 31
+    ID              shift and go to state 58
+    NUM_INT         shift and go to state 37
+    NUM_DEC         shift and go to state 38
+    LPAREN          shift and go to state 36
+    TEXTO           shift and go to state 39
+
+    expressaoUnaria                shift and go to state 102
+    expressaoPostfix               shift and go to state 34
+    primaria                       shift and go to state 35
+
+state 69
+
+    (47) expressaoMultiplicativa -> expressaoMultiplicativa MODULO . expressaoUnaria
+    (49) expressaoUnaria -> . expressaoPostfix
+    (50) expressaoUnaria -> . MINUS expressaoPostfix
+    (51) expressaoUnaria -> . PLUS PLUS expressaoPostfix
+    (52) expressaoUnaria -> . MINUS MINUS expressaoPostfix
+    (53) expressaoPostfix -> . primaria
+    (54) expressaoPostfix -> . primaria LBRACKET expressao RBRACKET
+    (55) expressaoPostfix -> . primaria LPAREN argumentos RPAREN
+    (56) expressaoPostfix -> . primaria DOT ID
+    (57) expressaoPostfix -> . primaria ARROW ID
+    (59) primaria -> . ID
+    (60) primaria -> . NUM_INT
+    (61) primaria -> . NUM_DEC
+    (62) primaria -> . LPAREN expressao LPAREN
+    (63) primaria -> . TEXTO
+
+    MINUS           shift and go to state 32
+    PLUS            shift and go to state 31
+    ID              shift and go to state 58
+    NUM_INT         shift and go to state 37
+    NUM_DEC         shift and go to state 38
+    LPAREN          shift and go to state 36
+    TEXTO           shift and go to state 39
+
+    expressaoUnaria                shift and go to state 103
+    expressaoPostfix               shift and go to state 34
+    primaria                       shift and go to state 35
+
+state 70
+
+    (51) expressaoUnaria -> PLUS PLUS . expressaoPostfix
+    (53) expressaoPostfix -> . primaria
+    (54) expressaoPostfix -> . primaria LBRACKET expressao RBRACKET
+    (55) expressaoPostfix -> . primaria LPAREN argumentos RPAREN
+    (56) expressaoPostfix -> . primaria DOT ID
+    (57) expressaoPostfix -> . primaria ARROW ID
+    (59) primaria -> . ID
+    (60) primaria -> . NUM_INT
+    (61) primaria -> . NUM_DEC
+    (62) primaria -> . LPAREN expressao LPAREN
+    (63) primaria -> . TEXTO
+
+    ID              shift and go to state 58
+    NUM_INT         shift and go to state 37
+    NUM_DEC         shift and go to state 38
+    LPAREN          shift and go to state 36
+    TEXTO           shift and go to state 39
+
+    expressaoPostfix               shift and go to state 104
+    primaria                       shift and go to state 35
+
+state 71
+
+    (52) expressaoUnaria -> MINUS MINUS . expressaoPostfix
+    (53) expressaoPostfix -> . primaria
+    (54) expressaoPostfix -> . primaria LBRACKET expressao RBRACKET
+    (55) expressaoPostfix -> . primaria LPAREN argumentos RPAREN
+    (56) expressaoPostfix -> . primaria DOT ID
+    (57) expressaoPostfix -> . primaria ARROW ID
+    (59) primaria -> . ID
+    (60) primaria -> . NUM_INT
+    (61) primaria -> . NUM_DEC
+    (62) primaria -> . LPAREN expressao LPAREN
+    (63) primaria -> . TEXTO
+
+    ID              shift and go to state 58
+    NUM_INT         shift and go to state 37
+    NUM_DEC         shift and go to state 38
+    LPAREN          shift and go to state 36
+    TEXTO           shift and go to state 39
+
+    expressaoPostfix               shift and go to state 105
+    primaria                       shift and go to state 35
+
+state 72
+
+    (50) expressaoUnaria -> MINUS expressaoPostfix .
+
+    TIMES           reduce using rule 50 (expressaoUnaria -> MINUS expressaoPostfix .)
+    DIVIDE          reduce using rule 50 (expressaoUnaria -> MINUS expressaoPostfix .)
+    MODULO          reduce using rule 50 (expressaoUnaria -> MINUS expressaoPostfix .)
+    GREATER         reduce using rule 50 (expressaoUnaria -> MINUS expressaoPostfix .)
+    LESS            reduce using rule 50 (expressaoUnaria -> MINUS expressaoPostfix .)
+    GREATEREQUAL    reduce using rule 50 (expressaoUnaria -> MINUS expressaoPostfix .)
+    LESSEQUAL       reduce using rule 50 (expressaoUnaria -> MINUS expressaoPostfix .)
+    NOTEQUAL        reduce using rule 50 (expressaoUnaria -> MINUS expressaoPostfix .)
+    EQUAL           reduce using rule 50 (expressaoUnaria -> MINUS expressaoPostfix .)
+    PLUS            reduce using rule 50 (expressaoUnaria -> MINUS expressaoPostfix .)
+    MINUS           reduce using rule 50 (expressaoUnaria -> MINUS expressaoPostfix .)
+    OROR            reduce using rule 50 (expressaoUnaria -> MINUS expressaoPostfix .)
+    ANDAND          reduce using rule 50 (expressaoUnaria -> MINUS expressaoPostfix .)
+    SEMICOLON       reduce using rule 50 (expressaoUnaria -> MINUS expressaoPostfix .)
+    LPAREN          reduce using rule 50 (expressaoUnaria -> MINUS expressaoPostfix .)
+    RBRACKET        reduce using rule 50 (expressaoUnaria -> MINUS expressaoPostfix .)
+
+
+state 73
+
+    (54) expressaoPostfix -> primaria LBRACKET . expressao RBRACKET
     (32) expressao -> . expressaoLogica
+    (33) expressao -> . atribuicao
     (21) expressaoLogica -> . expressaoRelacional
     (22) expressaoLogica -> . expressaoLogica OROR expressaoRelacional
     (23) expressaoLogica -> . expressaoLogica ANDAND expressaoRelacional
     (24) expressaoLogica -> . NOT expressaoRelacional
+    (34) atribuicao -> . ID EQUALS expressao
+    (35) atribuicao -> . ID PLUSEQUAL expressao
+    (36) atribuicao -> . ID MINUSEQUAL expressao
+    (37) atribuicao -> . ID TIMESEQUAL expressao
+    (38) atribuicao -> . ID DIVEQUAL expressao
+    (39) atribuicao -> . ID MODEQUAL expressao
+    (40) atribuicao -> . ID ANDANDEQUAL expressao
+    (41) atribuicao -> . ID OROREQUAL expressao
     (25) expressaoRelacional -> . expressaoAritmetica
     (26) expressaoRelacional -> . expressaoAritmetica GREATER expressaoAritmetica
     (27) expressaoRelacional -> . expressaoAritmetica LESS expressaoAritmetica
@@ -1405,114 +2087,118 @@ state 62
     (29) expressaoRelacional -> . expressaoAritmetica LESSEQUAL expressaoAritmetica
     (30) expressaoRelacional -> . expressaoAritmetica NOTEQUAL expressaoAritmetica
     (31) expressaoRelacional -> . expressaoAritmetica EQUAL expressaoAritmetica
-    (33) expressaoAritmetica -> . expressaoMultiplicativa
-    (34) expressaoAritmetica -> . expressaoMultiplicativa PLUS expressaoMultiplicativa
-    (35) expressaoAritmetica -> . expressaoMultiplicativa MINUS expressaoMultiplicativa
-    (36) expressaoMultiplicativa -> . expressaoMultiplicativa TIMES expressaoUnaria
-    (37) expressaoMultiplicativa -> . expressaoMultiplicativa DIVIDE expressaoUnaria
-    (38) expressaoMultiplicativa -> . expressaoMultiplicativa MODULO expressaoUnaria
-    (39) expressaoMultiplicativa -> . expressaoUnaria
-    (40) expressaoUnaria -> . expressaoPostfix
-    (41) expressaoUnaria -> . MINUS expressaoPostfix
-    (42) expressaoUnaria -> . PLUS PLUS expressaoPostfix
-    (43) expressaoUnaria -> . MINUS MINUS expressaoPostfix
-    (44) expressaoPostfix -> . primaria
-    (45) expressaoPostfix -> . primaria LBRACKET expressao RBRACKET
-    (46) expressaoPostfix -> . primaria LPAREN argumentos RPAREN
-    (47) expressaoPostfix -> . primaria DOT ID
-    (48) expressaoPostfix -> . primaria ARROW ID
-    (50) primaria -> . ID
-    (51) primaria -> . NUM_INT
-    (52) primaria -> . NUM_DEC
-    (53) primaria -> . LPAREN expressao LPAREN
+    (42) expressaoAritmetica -> . expressaoMultiplicativa
+    (43) expressaoAritmetica -> . expressaoAritmetica PLUS expressaoMultiplicativa
+    (44) expressaoAritmetica -> . expressaoAritmetica MINUS expressaoMultiplicativa
+    (45) expressaoMultiplicativa -> . expressaoMultiplicativa TIMES expressaoUnaria
+    (46) expressaoMultiplicativa -> . expressaoMultiplicativa DIVIDE expressaoUnaria
+    (47) expressaoMultiplicativa -> . expressaoMultiplicativa MODULO expressaoUnaria
+    (48) expressaoMultiplicativa -> . expressaoUnaria
+    (49) expressaoUnaria -> . expressaoPostfix
+    (50) expressaoUnaria -> . MINUS expressaoPostfix
+    (51) expressaoUnaria -> . PLUS PLUS expressaoPostfix
+    (52) expressaoUnaria -> . MINUS MINUS expressaoPostfix
+    (53) expressaoPostfix -> . primaria
+    (54) expressaoPostfix -> . primaria LBRACKET expressao RBRACKET
+    (55) expressaoPostfix -> . primaria LPAREN argumentos RPAREN
+    (56) expressaoPostfix -> . primaria DOT ID
+    (57) expressaoPostfix -> . primaria ARROW ID
+    (59) primaria -> . ID
+    (60) primaria -> . NUM_INT
+    (61) primaria -> . NUM_DEC
+    (62) primaria -> . LPAREN expressao LPAREN
+    (63) primaria -> . TEXTO
 
-    NOT             shift and go to state 27
-    MINUS           shift and go to state 31
-    PLUS            shift and go to state 30
+    NOT             shift and go to state 28
     ID              shift and go to state 23
-    NUM_INT         shift and go to state 36
-    NUM_DEC         shift and go to state 37
-    LPAREN          shift and go to state 35
+    MINUS           shift and go to state 32
+    PLUS            shift and go to state 31
+    NUM_INT         shift and go to state 37
+    NUM_DEC         shift and go to state 38
+    LPAREN          shift and go to state 36
+    TEXTO           shift and go to state 39
 
-    primaria                       shift and go to state 34
-    expressao                      shift and go to state 87
+    primaria                       shift and go to state 35
+    expressao                      shift and go to state 106
     expressaoLogica                shift and go to state 25
-    expressaoRelacional            shift and go to state 26
-    expressaoAritmetica            shift and go to state 28
-    expressaoMultiplicativa        shift and go to state 29
-    expressaoUnaria                shift and go to state 32
-    expressaoPostfix               shift and go to state 33
+    atribuicao                     shift and go to state 26
+    expressaoRelacional            shift and go to state 27
+    expressaoAritmetica            shift and go to state 29
+    expressaoMultiplicativa        shift and go to state 30
+    expressaoUnaria                shift and go to state 33
+    expressaoPostfix               shift and go to state 34
 
-state 63
+state 74
 
-    (46) expressaoPostfix -> primaria LPAREN . argumentos RPAREN
-    (49) argumentos -> .
+    (55) expressaoPostfix -> primaria LPAREN . argumentos RPAREN
+    (58) argumentos -> .
 
-    RPAREN          reduce using rule 49 (argumentos -> .)
+    RPAREN          reduce using rule 58 (argumentos -> .)
 
-    argumentos                     shift and go to state 88
+    argumentos                     shift and go to state 107
 
-state 64
+state 75
 
-    (47) expressaoPostfix -> primaria DOT . ID
+    (56) expressaoPostfix -> primaria DOT . ID
 
-    ID              shift and go to state 89
-
-
-state 65
-
-    (48) expressaoPostfix -> primaria ARROW . ID
-
-    ID              shift and go to state 90
+    ID              shift and go to state 108
 
 
-state 66
+state 76
 
-    (53) primaria -> LPAREN expressao . LPAREN
+    (57) expressaoPostfix -> primaria ARROW . ID
 
-    LPAREN          shift and go to state 91
-
-
-state 67
-
-    (15) parametros -> TIPO ID .
-    (16) parametros -> TIPO ID . LBRACKET RBRACKET
-
-    RPAREN          reduce using rule 15 (parametros -> TIPO ID .)
-    LBRACKET        shift and go to state 92
+    ID              shift and go to state 109
 
 
-state 68
+state 77
 
-    (17) parametros -> TIPO DOTDOTDOT . ID
+    (62) primaria -> LPAREN expressao . LPAREN
 
-    ID              shift and go to state 93
+    LPAREN          shift and go to state 110
 
 
-state 69
+state 78
+
+    (15) parametro -> TIPO ID .
+    (16) parametro -> TIPO ID . LBRACKET RBRACKET
+
+    COMMA           reduce using rule 15 (parametro -> TIPO ID .)
+    RPAREN          reduce using rule 15 (parametro -> TIPO ID .)
+    LBRACKET        shift and go to state 111
+
+
+state 79
+
+    (17) parametro -> TIPO DOTDOTDOT . ID
+
+    ID              shift and go to state 112
+
+
+state 80
 
     (12) declaracaoFuncao -> TIPO ID LPAREN parametros RPAREN . bloco
     (19) bloco -> . LBRACE declaracao RBRACE
 
-    LBRACE          shift and go to state 95
+    LBRACE          shift and go to state 114
 
-    bloco                          shift and go to state 94
+    bloco                          shift and go to state 113
 
-state 70
+state 81
 
-    (14) parametros -> PARAMETRO COMMA . parametros
-    (13) parametros -> . PARAMETRO
-    (14) parametros -> . PARAMETRO COMMA parametros
-    (15) parametros -> . TIPO ID
-    (16) parametros -> . TIPO ID LBRACKET RBRACKET
-    (17) parametros -> . TIPO DOTDOTDOT ID
+    (14) parametros -> parametro COMMA . parametros
+    (13) parametros -> . parametro
+    (14) parametros -> . parametro COMMA parametros
+    (15) parametro -> . TIPO ID
+    (16) parametro -> . TIPO ID LBRACKET RBRACKET
+    (17) parametro -> . TIPO DOTDOTDOT ID
 
-    PARAMETRO       shift and go to state 40
-    TIPO            shift and go to state 38
+    TIPO            shift and go to state 40
 
-    parametros                     shift and go to state 96
+    parametro                      shift and go to state 42
+    parametros                     shift and go to state 115
 
-state 71
+state 82
 
     (10) declaracaoVariavel -> TIPO array EQUALS TEXTO SEMICOLON .
 
@@ -1523,7 +2209,79 @@ state 71
     RBRACE          reduce using rule 10 (declaracaoVariavel -> TIPO array EQUALS TEXTO SEMICOLON .)
 
 
-state 72
+state 83
+
+    (34) atribuicao -> ID EQUALS expressao .
+
+    SEMICOLON       reduce using rule 34 (atribuicao -> ID EQUALS expressao .)
+    LPAREN          reduce using rule 34 (atribuicao -> ID EQUALS expressao .)
+    RBRACKET        reduce using rule 34 (atribuicao -> ID EQUALS expressao .)
+
+
+state 84
+
+    (35) atribuicao -> ID PLUSEQUAL expressao .
+
+    SEMICOLON       reduce using rule 35 (atribuicao -> ID PLUSEQUAL expressao .)
+    LPAREN          reduce using rule 35 (atribuicao -> ID PLUSEQUAL expressao .)
+    RBRACKET        reduce using rule 35 (atribuicao -> ID PLUSEQUAL expressao .)
+
+
+state 85
+
+    (36) atribuicao -> ID MINUSEQUAL expressao .
+
+    SEMICOLON       reduce using rule 36 (atribuicao -> ID MINUSEQUAL expressao .)
+    LPAREN          reduce using rule 36 (atribuicao -> ID MINUSEQUAL expressao .)
+    RBRACKET        reduce using rule 36 (atribuicao -> ID MINUSEQUAL expressao .)
+
+
+state 86
+
+    (37) atribuicao -> ID TIMESEQUAL expressao .
+
+    SEMICOLON       reduce using rule 37 (atribuicao -> ID TIMESEQUAL expressao .)
+    LPAREN          reduce using rule 37 (atribuicao -> ID TIMESEQUAL expressao .)
+    RBRACKET        reduce using rule 37 (atribuicao -> ID TIMESEQUAL expressao .)
+
+
+state 87
+
+    (38) atribuicao -> ID DIVEQUAL expressao .
+
+    SEMICOLON       reduce using rule 38 (atribuicao -> ID DIVEQUAL expressao .)
+    LPAREN          reduce using rule 38 (atribuicao -> ID DIVEQUAL expressao .)
+    RBRACKET        reduce using rule 38 (atribuicao -> ID DIVEQUAL expressao .)
+
+
+state 88
+
+    (39) atribuicao -> ID MODEQUAL expressao .
+
+    SEMICOLON       reduce using rule 39 (atribuicao -> ID MODEQUAL expressao .)
+    LPAREN          reduce using rule 39 (atribuicao -> ID MODEQUAL expressao .)
+    RBRACKET        reduce using rule 39 (atribuicao -> ID MODEQUAL expressao .)
+
+
+state 89
+
+    (40) atribuicao -> ID ANDANDEQUAL expressao .
+
+    SEMICOLON       reduce using rule 40 (atribuicao -> ID ANDANDEQUAL expressao .)
+    LPAREN          reduce using rule 40 (atribuicao -> ID ANDANDEQUAL expressao .)
+    RBRACKET        reduce using rule 40 (atribuicao -> ID ANDANDEQUAL expressao .)
+
+
+state 90
+
+    (41) atribuicao -> ID OROREQUAL expressao .
+
+    SEMICOLON       reduce using rule 41 (atribuicao -> ID OROREQUAL expressao .)
+    LPAREN          reduce using rule 41 (atribuicao -> ID OROREQUAL expressao .)
+    RBRACKET        reduce using rule 41 (atribuicao -> ID OROREQUAL expressao .)
+
+
+state 91
 
     (22) expressaoLogica -> expressaoLogica OROR expressaoRelacional .
 
@@ -1534,7 +2292,7 @@ state 72
     RBRACKET        reduce using rule 22 (expressaoLogica -> expressaoLogica OROR expressaoRelacional .)
 
 
-state 73
+state 92
 
     (23) expressaoLogica -> expressaoLogica ANDAND expressaoRelacional .
 
@@ -1545,326 +2303,355 @@ state 73
     RBRACKET        reduce using rule 23 (expressaoLogica -> expressaoLogica ANDAND expressaoRelacional .)
 
 
-state 74
+state 93
 
     (26) expressaoRelacional -> expressaoAritmetica GREATER expressaoAritmetica .
+    (43) expressaoAritmetica -> expressaoAritmetica . PLUS expressaoMultiplicativa
+    (44) expressaoAritmetica -> expressaoAritmetica . MINUS expressaoMultiplicativa
 
     OROR            reduce using rule 26 (expressaoRelacional -> expressaoAritmetica GREATER expressaoAritmetica .)
     ANDAND          reduce using rule 26 (expressaoRelacional -> expressaoAritmetica GREATER expressaoAritmetica .)
     SEMICOLON       reduce using rule 26 (expressaoRelacional -> expressaoAritmetica GREATER expressaoAritmetica .)
     LPAREN          reduce using rule 26 (expressaoRelacional -> expressaoAritmetica GREATER expressaoAritmetica .)
     RBRACKET        reduce using rule 26 (expressaoRelacional -> expressaoAritmetica GREATER expressaoAritmetica .)
+    PLUS            shift and go to state 65
+    MINUS           shift and go to state 66
 
 
-state 75
+state 94
 
     (27) expressaoRelacional -> expressaoAritmetica LESS expressaoAritmetica .
+    (43) expressaoAritmetica -> expressaoAritmetica . PLUS expressaoMultiplicativa
+    (44) expressaoAritmetica -> expressaoAritmetica . MINUS expressaoMultiplicativa
 
     OROR            reduce using rule 27 (expressaoRelacional -> expressaoAritmetica LESS expressaoAritmetica .)
     ANDAND          reduce using rule 27 (expressaoRelacional -> expressaoAritmetica LESS expressaoAritmetica .)
     SEMICOLON       reduce using rule 27 (expressaoRelacional -> expressaoAritmetica LESS expressaoAritmetica .)
     LPAREN          reduce using rule 27 (expressaoRelacional -> expressaoAritmetica LESS expressaoAritmetica .)
     RBRACKET        reduce using rule 27 (expressaoRelacional -> expressaoAritmetica LESS expressaoAritmetica .)
+    PLUS            shift and go to state 65
+    MINUS           shift and go to state 66
 
 
-state 76
+state 95
 
     (28) expressaoRelacional -> expressaoAritmetica GREATEREQUAL expressaoAritmetica .
+    (43) expressaoAritmetica -> expressaoAritmetica . PLUS expressaoMultiplicativa
+    (44) expressaoAritmetica -> expressaoAritmetica . MINUS expressaoMultiplicativa
 
     OROR            reduce using rule 28 (expressaoRelacional -> expressaoAritmetica GREATEREQUAL expressaoAritmetica .)
     ANDAND          reduce using rule 28 (expressaoRelacional -> expressaoAritmetica GREATEREQUAL expressaoAritmetica .)
     SEMICOLON       reduce using rule 28 (expressaoRelacional -> expressaoAritmetica GREATEREQUAL expressaoAritmetica .)
     LPAREN          reduce using rule 28 (expressaoRelacional -> expressaoAritmetica GREATEREQUAL expressaoAritmetica .)
     RBRACKET        reduce using rule 28 (expressaoRelacional -> expressaoAritmetica GREATEREQUAL expressaoAritmetica .)
+    PLUS            shift and go to state 65
+    MINUS           shift and go to state 66
 
 
-state 77
+state 96
 
     (29) expressaoRelacional -> expressaoAritmetica LESSEQUAL expressaoAritmetica .
+    (43) expressaoAritmetica -> expressaoAritmetica . PLUS expressaoMultiplicativa
+    (44) expressaoAritmetica -> expressaoAritmetica . MINUS expressaoMultiplicativa
 
     OROR            reduce using rule 29 (expressaoRelacional -> expressaoAritmetica LESSEQUAL expressaoAritmetica .)
     ANDAND          reduce using rule 29 (expressaoRelacional -> expressaoAritmetica LESSEQUAL expressaoAritmetica .)
     SEMICOLON       reduce using rule 29 (expressaoRelacional -> expressaoAritmetica LESSEQUAL expressaoAritmetica .)
     LPAREN          reduce using rule 29 (expressaoRelacional -> expressaoAritmetica LESSEQUAL expressaoAritmetica .)
     RBRACKET        reduce using rule 29 (expressaoRelacional -> expressaoAritmetica LESSEQUAL expressaoAritmetica .)
+    PLUS            shift and go to state 65
+    MINUS           shift and go to state 66
 
 
-state 78
+state 97
 
     (30) expressaoRelacional -> expressaoAritmetica NOTEQUAL expressaoAritmetica .
+    (43) expressaoAritmetica -> expressaoAritmetica . PLUS expressaoMultiplicativa
+    (44) expressaoAritmetica -> expressaoAritmetica . MINUS expressaoMultiplicativa
 
     OROR            reduce using rule 30 (expressaoRelacional -> expressaoAritmetica NOTEQUAL expressaoAritmetica .)
     ANDAND          reduce using rule 30 (expressaoRelacional -> expressaoAritmetica NOTEQUAL expressaoAritmetica .)
     SEMICOLON       reduce using rule 30 (expressaoRelacional -> expressaoAritmetica NOTEQUAL expressaoAritmetica .)
     LPAREN          reduce using rule 30 (expressaoRelacional -> expressaoAritmetica NOTEQUAL expressaoAritmetica .)
     RBRACKET        reduce using rule 30 (expressaoRelacional -> expressaoAritmetica NOTEQUAL expressaoAritmetica .)
+    PLUS            shift and go to state 65
+    MINUS           shift and go to state 66
 
 
-state 79
+state 98
 
     (31) expressaoRelacional -> expressaoAritmetica EQUAL expressaoAritmetica .
+    (43) expressaoAritmetica -> expressaoAritmetica . PLUS expressaoMultiplicativa
+    (44) expressaoAritmetica -> expressaoAritmetica . MINUS expressaoMultiplicativa
 
     OROR            reduce using rule 31 (expressaoRelacional -> expressaoAritmetica EQUAL expressaoAritmetica .)
     ANDAND          reduce using rule 31 (expressaoRelacional -> expressaoAritmetica EQUAL expressaoAritmetica .)
     SEMICOLON       reduce using rule 31 (expressaoRelacional -> expressaoAritmetica EQUAL expressaoAritmetica .)
     LPAREN          reduce using rule 31 (expressaoRelacional -> expressaoAritmetica EQUAL expressaoAritmetica .)
     RBRACKET        reduce using rule 31 (expressaoRelacional -> expressaoAritmetica EQUAL expressaoAritmetica .)
+    PLUS            shift and go to state 65
+    MINUS           shift and go to state 66
 
 
-state 80
+state 99
 
-    (34) expressaoAritmetica -> expressaoMultiplicativa PLUS expressaoMultiplicativa .
-    (36) expressaoMultiplicativa -> expressaoMultiplicativa . TIMES expressaoUnaria
-    (37) expressaoMultiplicativa -> expressaoMultiplicativa . DIVIDE expressaoUnaria
-    (38) expressaoMultiplicativa -> expressaoMultiplicativa . MODULO expressaoUnaria
+    (43) expressaoAritmetica -> expressaoAritmetica PLUS expressaoMultiplicativa .
+    (45) expressaoMultiplicativa -> expressaoMultiplicativa . TIMES expressaoUnaria
+    (46) expressaoMultiplicativa -> expressaoMultiplicativa . DIVIDE expressaoUnaria
+    (47) expressaoMultiplicativa -> expressaoMultiplicativa . MODULO expressaoUnaria
 
-    GREATER         reduce using rule 34 (expressaoAritmetica -> expressaoMultiplicativa PLUS expressaoMultiplicativa .)
-    LESS            reduce using rule 34 (expressaoAritmetica -> expressaoMultiplicativa PLUS expressaoMultiplicativa .)
-    GREATEREQUAL    reduce using rule 34 (expressaoAritmetica -> expressaoMultiplicativa PLUS expressaoMultiplicativa .)
-    LESSEQUAL       reduce using rule 34 (expressaoAritmetica -> expressaoMultiplicativa PLUS expressaoMultiplicativa .)
-    NOTEQUAL        reduce using rule 34 (expressaoAritmetica -> expressaoMultiplicativa PLUS expressaoMultiplicativa .)
-    EQUAL           reduce using rule 34 (expressaoAritmetica -> expressaoMultiplicativa PLUS expressaoMultiplicativa .)
-    OROR            reduce using rule 34 (expressaoAritmetica -> expressaoMultiplicativa PLUS expressaoMultiplicativa .)
-    ANDAND          reduce using rule 34 (expressaoAritmetica -> expressaoMultiplicativa PLUS expressaoMultiplicativa .)
-    SEMICOLON       reduce using rule 34 (expressaoAritmetica -> expressaoMultiplicativa PLUS expressaoMultiplicativa .)
-    LPAREN          reduce using rule 34 (expressaoAritmetica -> expressaoMultiplicativa PLUS expressaoMultiplicativa .)
-    RBRACKET        reduce using rule 34 (expressaoAritmetica -> expressaoMultiplicativa PLUS expressaoMultiplicativa .)
-    TIMES           shift and go to state 56
-    DIVIDE          shift and go to state 57
-    MODULO          shift and go to state 58
-
-
-state 81
-
-    (35) expressaoAritmetica -> expressaoMultiplicativa MINUS expressaoMultiplicativa .
-    (36) expressaoMultiplicativa -> expressaoMultiplicativa . TIMES expressaoUnaria
-    (37) expressaoMultiplicativa -> expressaoMultiplicativa . DIVIDE expressaoUnaria
-    (38) expressaoMultiplicativa -> expressaoMultiplicativa . MODULO expressaoUnaria
-
-    GREATER         reduce using rule 35 (expressaoAritmetica -> expressaoMultiplicativa MINUS expressaoMultiplicativa .)
-    LESS            reduce using rule 35 (expressaoAritmetica -> expressaoMultiplicativa MINUS expressaoMultiplicativa .)
-    GREATEREQUAL    reduce using rule 35 (expressaoAritmetica -> expressaoMultiplicativa MINUS expressaoMultiplicativa .)
-    LESSEQUAL       reduce using rule 35 (expressaoAritmetica -> expressaoMultiplicativa MINUS expressaoMultiplicativa .)
-    NOTEQUAL        reduce using rule 35 (expressaoAritmetica -> expressaoMultiplicativa MINUS expressaoMultiplicativa .)
-    EQUAL           reduce using rule 35 (expressaoAritmetica -> expressaoMultiplicativa MINUS expressaoMultiplicativa .)
-    OROR            reduce using rule 35 (expressaoAritmetica -> expressaoMultiplicativa MINUS expressaoMultiplicativa .)
-    ANDAND          reduce using rule 35 (expressaoAritmetica -> expressaoMultiplicativa MINUS expressaoMultiplicativa .)
-    SEMICOLON       reduce using rule 35 (expressaoAritmetica -> expressaoMultiplicativa MINUS expressaoMultiplicativa .)
-    LPAREN          reduce using rule 35 (expressaoAritmetica -> expressaoMultiplicativa MINUS expressaoMultiplicativa .)
-    RBRACKET        reduce using rule 35 (expressaoAritmetica -> expressaoMultiplicativa MINUS expressaoMultiplicativa .)
-    TIMES           shift and go to state 56
-    DIVIDE          shift and go to state 57
-    MODULO          shift and go to state 58
+    GREATER         reduce using rule 43 (expressaoAritmetica -> expressaoAritmetica PLUS expressaoMultiplicativa .)
+    LESS            reduce using rule 43 (expressaoAritmetica -> expressaoAritmetica PLUS expressaoMultiplicativa .)
+    GREATEREQUAL    reduce using rule 43 (expressaoAritmetica -> expressaoAritmetica PLUS expressaoMultiplicativa .)
+    LESSEQUAL       reduce using rule 43 (expressaoAritmetica -> expressaoAritmetica PLUS expressaoMultiplicativa .)
+    NOTEQUAL        reduce using rule 43 (expressaoAritmetica -> expressaoAritmetica PLUS expressaoMultiplicativa .)
+    EQUAL           reduce using rule 43 (expressaoAritmetica -> expressaoAritmetica PLUS expressaoMultiplicativa .)
+    PLUS            reduce using rule 43 (expressaoAritmetica -> expressaoAritmetica PLUS expressaoMultiplicativa .)
+    MINUS           reduce using rule 43 (expressaoAritmetica -> expressaoAritmetica PLUS expressaoMultiplicativa .)
+    OROR            reduce using rule 43 (expressaoAritmetica -> expressaoAritmetica PLUS expressaoMultiplicativa .)
+    ANDAND          reduce using rule 43 (expressaoAritmetica -> expressaoAritmetica PLUS expressaoMultiplicativa .)
+    SEMICOLON       reduce using rule 43 (expressaoAritmetica -> expressaoAritmetica PLUS expressaoMultiplicativa .)
+    LPAREN          reduce using rule 43 (expressaoAritmetica -> expressaoAritmetica PLUS expressaoMultiplicativa .)
+    RBRACKET        reduce using rule 43 (expressaoAritmetica -> expressaoAritmetica PLUS expressaoMultiplicativa .)
+    TIMES           shift and go to state 67
+    DIVIDE          shift and go to state 68
+    MODULO          shift and go to state 69
 
 
-state 82
+state 100
 
-    (36) expressaoMultiplicativa -> expressaoMultiplicativa TIMES expressaoUnaria .
+    (44) expressaoAritmetica -> expressaoAritmetica MINUS expressaoMultiplicativa .
+    (45) expressaoMultiplicativa -> expressaoMultiplicativa . TIMES expressaoUnaria
+    (46) expressaoMultiplicativa -> expressaoMultiplicativa . DIVIDE expressaoUnaria
+    (47) expressaoMultiplicativa -> expressaoMultiplicativa . MODULO expressaoUnaria
 
-    PLUS            reduce using rule 36 (expressaoMultiplicativa -> expressaoMultiplicativa TIMES expressaoUnaria .)
-    MINUS           reduce using rule 36 (expressaoMultiplicativa -> expressaoMultiplicativa TIMES expressaoUnaria .)
-    TIMES           reduce using rule 36 (expressaoMultiplicativa -> expressaoMultiplicativa TIMES expressaoUnaria .)
-    DIVIDE          reduce using rule 36 (expressaoMultiplicativa -> expressaoMultiplicativa TIMES expressaoUnaria .)
-    MODULO          reduce using rule 36 (expressaoMultiplicativa -> expressaoMultiplicativa TIMES expressaoUnaria .)
-    GREATER         reduce using rule 36 (expressaoMultiplicativa -> expressaoMultiplicativa TIMES expressaoUnaria .)
-    LESS            reduce using rule 36 (expressaoMultiplicativa -> expressaoMultiplicativa TIMES expressaoUnaria .)
-    GREATEREQUAL    reduce using rule 36 (expressaoMultiplicativa -> expressaoMultiplicativa TIMES expressaoUnaria .)
-    LESSEQUAL       reduce using rule 36 (expressaoMultiplicativa -> expressaoMultiplicativa TIMES expressaoUnaria .)
-    NOTEQUAL        reduce using rule 36 (expressaoMultiplicativa -> expressaoMultiplicativa TIMES expressaoUnaria .)
-    EQUAL           reduce using rule 36 (expressaoMultiplicativa -> expressaoMultiplicativa TIMES expressaoUnaria .)
-    OROR            reduce using rule 36 (expressaoMultiplicativa -> expressaoMultiplicativa TIMES expressaoUnaria .)
-    ANDAND          reduce using rule 36 (expressaoMultiplicativa -> expressaoMultiplicativa TIMES expressaoUnaria .)
-    SEMICOLON       reduce using rule 36 (expressaoMultiplicativa -> expressaoMultiplicativa TIMES expressaoUnaria .)
-    LPAREN          reduce using rule 36 (expressaoMultiplicativa -> expressaoMultiplicativa TIMES expressaoUnaria .)
-    RBRACKET        reduce using rule 36 (expressaoMultiplicativa -> expressaoMultiplicativa TIMES expressaoUnaria .)
-
-
-state 83
-
-    (37) expressaoMultiplicativa -> expressaoMultiplicativa DIVIDE expressaoUnaria .
-
-    PLUS            reduce using rule 37 (expressaoMultiplicativa -> expressaoMultiplicativa DIVIDE expressaoUnaria .)
-    MINUS           reduce using rule 37 (expressaoMultiplicativa -> expressaoMultiplicativa DIVIDE expressaoUnaria .)
-    TIMES           reduce using rule 37 (expressaoMultiplicativa -> expressaoMultiplicativa DIVIDE expressaoUnaria .)
-    DIVIDE          reduce using rule 37 (expressaoMultiplicativa -> expressaoMultiplicativa DIVIDE expressaoUnaria .)
-    MODULO          reduce using rule 37 (expressaoMultiplicativa -> expressaoMultiplicativa DIVIDE expressaoUnaria .)
-    GREATER         reduce using rule 37 (expressaoMultiplicativa -> expressaoMultiplicativa DIVIDE expressaoUnaria .)
-    LESS            reduce using rule 37 (expressaoMultiplicativa -> expressaoMultiplicativa DIVIDE expressaoUnaria .)
-    GREATEREQUAL    reduce using rule 37 (expressaoMultiplicativa -> expressaoMultiplicativa DIVIDE expressaoUnaria .)
-    LESSEQUAL       reduce using rule 37 (expressaoMultiplicativa -> expressaoMultiplicativa DIVIDE expressaoUnaria .)
-    NOTEQUAL        reduce using rule 37 (expressaoMultiplicativa -> expressaoMultiplicativa DIVIDE expressaoUnaria .)
-    EQUAL           reduce using rule 37 (expressaoMultiplicativa -> expressaoMultiplicativa DIVIDE expressaoUnaria .)
-    OROR            reduce using rule 37 (expressaoMultiplicativa -> expressaoMultiplicativa DIVIDE expressaoUnaria .)
-    ANDAND          reduce using rule 37 (expressaoMultiplicativa -> expressaoMultiplicativa DIVIDE expressaoUnaria .)
-    SEMICOLON       reduce using rule 37 (expressaoMultiplicativa -> expressaoMultiplicativa DIVIDE expressaoUnaria .)
-    LPAREN          reduce using rule 37 (expressaoMultiplicativa -> expressaoMultiplicativa DIVIDE expressaoUnaria .)
-    RBRACKET        reduce using rule 37 (expressaoMultiplicativa -> expressaoMultiplicativa DIVIDE expressaoUnaria .)
+    GREATER         reduce using rule 44 (expressaoAritmetica -> expressaoAritmetica MINUS expressaoMultiplicativa .)
+    LESS            reduce using rule 44 (expressaoAritmetica -> expressaoAritmetica MINUS expressaoMultiplicativa .)
+    GREATEREQUAL    reduce using rule 44 (expressaoAritmetica -> expressaoAritmetica MINUS expressaoMultiplicativa .)
+    LESSEQUAL       reduce using rule 44 (expressaoAritmetica -> expressaoAritmetica MINUS expressaoMultiplicativa .)
+    NOTEQUAL        reduce using rule 44 (expressaoAritmetica -> expressaoAritmetica MINUS expressaoMultiplicativa .)
+    EQUAL           reduce using rule 44 (expressaoAritmetica -> expressaoAritmetica MINUS expressaoMultiplicativa .)
+    PLUS            reduce using rule 44 (expressaoAritmetica -> expressaoAritmetica MINUS expressaoMultiplicativa .)
+    MINUS           reduce using rule 44 (expressaoAritmetica -> expressaoAritmetica MINUS expressaoMultiplicativa .)
+    OROR            reduce using rule 44 (expressaoAritmetica -> expressaoAritmetica MINUS expressaoMultiplicativa .)
+    ANDAND          reduce using rule 44 (expressaoAritmetica -> expressaoAritmetica MINUS expressaoMultiplicativa .)
+    SEMICOLON       reduce using rule 44 (expressaoAritmetica -> expressaoAritmetica MINUS expressaoMultiplicativa .)
+    LPAREN          reduce using rule 44 (expressaoAritmetica -> expressaoAritmetica MINUS expressaoMultiplicativa .)
+    RBRACKET        reduce using rule 44 (expressaoAritmetica -> expressaoAritmetica MINUS expressaoMultiplicativa .)
+    TIMES           shift and go to state 67
+    DIVIDE          shift and go to state 68
+    MODULO          shift and go to state 69
 
 
-state 84
+state 101
 
-    (38) expressaoMultiplicativa -> expressaoMultiplicativa MODULO expressaoUnaria .
+    (45) expressaoMultiplicativa -> expressaoMultiplicativa TIMES expressaoUnaria .
 
-    PLUS            reduce using rule 38 (expressaoMultiplicativa -> expressaoMultiplicativa MODULO expressaoUnaria .)
-    MINUS           reduce using rule 38 (expressaoMultiplicativa -> expressaoMultiplicativa MODULO expressaoUnaria .)
-    TIMES           reduce using rule 38 (expressaoMultiplicativa -> expressaoMultiplicativa MODULO expressaoUnaria .)
-    DIVIDE          reduce using rule 38 (expressaoMultiplicativa -> expressaoMultiplicativa MODULO expressaoUnaria .)
-    MODULO          reduce using rule 38 (expressaoMultiplicativa -> expressaoMultiplicativa MODULO expressaoUnaria .)
-    GREATER         reduce using rule 38 (expressaoMultiplicativa -> expressaoMultiplicativa MODULO expressaoUnaria .)
-    LESS            reduce using rule 38 (expressaoMultiplicativa -> expressaoMultiplicativa MODULO expressaoUnaria .)
-    GREATEREQUAL    reduce using rule 38 (expressaoMultiplicativa -> expressaoMultiplicativa MODULO expressaoUnaria .)
-    LESSEQUAL       reduce using rule 38 (expressaoMultiplicativa -> expressaoMultiplicativa MODULO expressaoUnaria .)
-    NOTEQUAL        reduce using rule 38 (expressaoMultiplicativa -> expressaoMultiplicativa MODULO expressaoUnaria .)
-    EQUAL           reduce using rule 38 (expressaoMultiplicativa -> expressaoMultiplicativa MODULO expressaoUnaria .)
-    OROR            reduce using rule 38 (expressaoMultiplicativa -> expressaoMultiplicativa MODULO expressaoUnaria .)
-    ANDAND          reduce using rule 38 (expressaoMultiplicativa -> expressaoMultiplicativa MODULO expressaoUnaria .)
-    SEMICOLON       reduce using rule 38 (expressaoMultiplicativa -> expressaoMultiplicativa MODULO expressaoUnaria .)
-    LPAREN          reduce using rule 38 (expressaoMultiplicativa -> expressaoMultiplicativa MODULO expressaoUnaria .)
-    RBRACKET        reduce using rule 38 (expressaoMultiplicativa -> expressaoMultiplicativa MODULO expressaoUnaria .)
-
-
-state 85
-
-    (42) expressaoUnaria -> PLUS PLUS expressaoPostfix .
-
-    PLUS            reduce using rule 42 (expressaoUnaria -> PLUS PLUS expressaoPostfix .)
-    MINUS           reduce using rule 42 (expressaoUnaria -> PLUS PLUS expressaoPostfix .)
-    TIMES           reduce using rule 42 (expressaoUnaria -> PLUS PLUS expressaoPostfix .)
-    DIVIDE          reduce using rule 42 (expressaoUnaria -> PLUS PLUS expressaoPostfix .)
-    MODULO          reduce using rule 42 (expressaoUnaria -> PLUS PLUS expressaoPostfix .)
-    GREATER         reduce using rule 42 (expressaoUnaria -> PLUS PLUS expressaoPostfix .)
-    LESS            reduce using rule 42 (expressaoUnaria -> PLUS PLUS expressaoPostfix .)
-    GREATEREQUAL    reduce using rule 42 (expressaoUnaria -> PLUS PLUS expressaoPostfix .)
-    LESSEQUAL       reduce using rule 42 (expressaoUnaria -> PLUS PLUS expressaoPostfix .)
-    NOTEQUAL        reduce using rule 42 (expressaoUnaria -> PLUS PLUS expressaoPostfix .)
-    EQUAL           reduce using rule 42 (expressaoUnaria -> PLUS PLUS expressaoPostfix .)
-    OROR            reduce using rule 42 (expressaoUnaria -> PLUS PLUS expressaoPostfix .)
-    ANDAND          reduce using rule 42 (expressaoUnaria -> PLUS PLUS expressaoPostfix .)
-    SEMICOLON       reduce using rule 42 (expressaoUnaria -> PLUS PLUS expressaoPostfix .)
-    LPAREN          reduce using rule 42 (expressaoUnaria -> PLUS PLUS expressaoPostfix .)
-    RBRACKET        reduce using rule 42 (expressaoUnaria -> PLUS PLUS expressaoPostfix .)
+    TIMES           reduce using rule 45 (expressaoMultiplicativa -> expressaoMultiplicativa TIMES expressaoUnaria .)
+    DIVIDE          reduce using rule 45 (expressaoMultiplicativa -> expressaoMultiplicativa TIMES expressaoUnaria .)
+    MODULO          reduce using rule 45 (expressaoMultiplicativa -> expressaoMultiplicativa TIMES expressaoUnaria .)
+    GREATER         reduce using rule 45 (expressaoMultiplicativa -> expressaoMultiplicativa TIMES expressaoUnaria .)
+    LESS            reduce using rule 45 (expressaoMultiplicativa -> expressaoMultiplicativa TIMES expressaoUnaria .)
+    GREATEREQUAL    reduce using rule 45 (expressaoMultiplicativa -> expressaoMultiplicativa TIMES expressaoUnaria .)
+    LESSEQUAL       reduce using rule 45 (expressaoMultiplicativa -> expressaoMultiplicativa TIMES expressaoUnaria .)
+    NOTEQUAL        reduce using rule 45 (expressaoMultiplicativa -> expressaoMultiplicativa TIMES expressaoUnaria .)
+    EQUAL           reduce using rule 45 (expressaoMultiplicativa -> expressaoMultiplicativa TIMES expressaoUnaria .)
+    PLUS            reduce using rule 45 (expressaoMultiplicativa -> expressaoMultiplicativa TIMES expressaoUnaria .)
+    MINUS           reduce using rule 45 (expressaoMultiplicativa -> expressaoMultiplicativa TIMES expressaoUnaria .)
+    OROR            reduce using rule 45 (expressaoMultiplicativa -> expressaoMultiplicativa TIMES expressaoUnaria .)
+    ANDAND          reduce using rule 45 (expressaoMultiplicativa -> expressaoMultiplicativa TIMES expressaoUnaria .)
+    SEMICOLON       reduce using rule 45 (expressaoMultiplicativa -> expressaoMultiplicativa TIMES expressaoUnaria .)
+    LPAREN          reduce using rule 45 (expressaoMultiplicativa -> expressaoMultiplicativa TIMES expressaoUnaria .)
+    RBRACKET        reduce using rule 45 (expressaoMultiplicativa -> expressaoMultiplicativa TIMES expressaoUnaria .)
 
 
-state 86
+state 102
 
-    (43) expressaoUnaria -> MINUS MINUS expressaoPostfix .
+    (46) expressaoMultiplicativa -> expressaoMultiplicativa DIVIDE expressaoUnaria .
 
-    PLUS            reduce using rule 43 (expressaoUnaria -> MINUS MINUS expressaoPostfix .)
-    MINUS           reduce using rule 43 (expressaoUnaria -> MINUS MINUS expressaoPostfix .)
-    TIMES           reduce using rule 43 (expressaoUnaria -> MINUS MINUS expressaoPostfix .)
-    DIVIDE          reduce using rule 43 (expressaoUnaria -> MINUS MINUS expressaoPostfix .)
-    MODULO          reduce using rule 43 (expressaoUnaria -> MINUS MINUS expressaoPostfix .)
-    GREATER         reduce using rule 43 (expressaoUnaria -> MINUS MINUS expressaoPostfix .)
-    LESS            reduce using rule 43 (expressaoUnaria -> MINUS MINUS expressaoPostfix .)
-    GREATEREQUAL    reduce using rule 43 (expressaoUnaria -> MINUS MINUS expressaoPostfix .)
-    LESSEQUAL       reduce using rule 43 (expressaoUnaria -> MINUS MINUS expressaoPostfix .)
-    NOTEQUAL        reduce using rule 43 (expressaoUnaria -> MINUS MINUS expressaoPostfix .)
-    EQUAL           reduce using rule 43 (expressaoUnaria -> MINUS MINUS expressaoPostfix .)
-    OROR            reduce using rule 43 (expressaoUnaria -> MINUS MINUS expressaoPostfix .)
-    ANDAND          reduce using rule 43 (expressaoUnaria -> MINUS MINUS expressaoPostfix .)
-    SEMICOLON       reduce using rule 43 (expressaoUnaria -> MINUS MINUS expressaoPostfix .)
-    LPAREN          reduce using rule 43 (expressaoUnaria -> MINUS MINUS expressaoPostfix .)
-    RBRACKET        reduce using rule 43 (expressaoUnaria -> MINUS MINUS expressaoPostfix .)
-
-
-state 87
-
-    (45) expressaoPostfix -> primaria LBRACKET expressao . RBRACKET
-
-    RBRACKET        shift and go to state 97
+    TIMES           reduce using rule 46 (expressaoMultiplicativa -> expressaoMultiplicativa DIVIDE expressaoUnaria .)
+    DIVIDE          reduce using rule 46 (expressaoMultiplicativa -> expressaoMultiplicativa DIVIDE expressaoUnaria .)
+    MODULO          reduce using rule 46 (expressaoMultiplicativa -> expressaoMultiplicativa DIVIDE expressaoUnaria .)
+    GREATER         reduce using rule 46 (expressaoMultiplicativa -> expressaoMultiplicativa DIVIDE expressaoUnaria .)
+    LESS            reduce using rule 46 (expressaoMultiplicativa -> expressaoMultiplicativa DIVIDE expressaoUnaria .)
+    GREATEREQUAL    reduce using rule 46 (expressaoMultiplicativa -> expressaoMultiplicativa DIVIDE expressaoUnaria .)
+    LESSEQUAL       reduce using rule 46 (expressaoMultiplicativa -> expressaoMultiplicativa DIVIDE expressaoUnaria .)
+    NOTEQUAL        reduce using rule 46 (expressaoMultiplicativa -> expressaoMultiplicativa DIVIDE expressaoUnaria .)
+    EQUAL           reduce using rule 46 (expressaoMultiplicativa -> expressaoMultiplicativa DIVIDE expressaoUnaria .)
+    PLUS            reduce using rule 46 (expressaoMultiplicativa -> expressaoMultiplicativa DIVIDE expressaoUnaria .)
+    MINUS           reduce using rule 46 (expressaoMultiplicativa -> expressaoMultiplicativa DIVIDE expressaoUnaria .)
+    OROR            reduce using rule 46 (expressaoMultiplicativa -> expressaoMultiplicativa DIVIDE expressaoUnaria .)
+    ANDAND          reduce using rule 46 (expressaoMultiplicativa -> expressaoMultiplicativa DIVIDE expressaoUnaria .)
+    SEMICOLON       reduce using rule 46 (expressaoMultiplicativa -> expressaoMultiplicativa DIVIDE expressaoUnaria .)
+    LPAREN          reduce using rule 46 (expressaoMultiplicativa -> expressaoMultiplicativa DIVIDE expressaoUnaria .)
+    RBRACKET        reduce using rule 46 (expressaoMultiplicativa -> expressaoMultiplicativa DIVIDE expressaoUnaria .)
 
 
-state 88
+state 103
 
-    (46) expressaoPostfix -> primaria LPAREN argumentos . RPAREN
+    (47) expressaoMultiplicativa -> expressaoMultiplicativa MODULO expressaoUnaria .
 
-    RPAREN          shift and go to state 98
-
-
-state 89
-
-    (47) expressaoPostfix -> primaria DOT ID .
-
-    PLUS            reduce using rule 47 (expressaoPostfix -> primaria DOT ID .)
-    MINUS           reduce using rule 47 (expressaoPostfix -> primaria DOT ID .)
-    TIMES           reduce using rule 47 (expressaoPostfix -> primaria DOT ID .)
-    DIVIDE          reduce using rule 47 (expressaoPostfix -> primaria DOT ID .)
-    MODULO          reduce using rule 47 (expressaoPostfix -> primaria DOT ID .)
-    GREATER         reduce using rule 47 (expressaoPostfix -> primaria DOT ID .)
-    LESS            reduce using rule 47 (expressaoPostfix -> primaria DOT ID .)
-    GREATEREQUAL    reduce using rule 47 (expressaoPostfix -> primaria DOT ID .)
-    LESSEQUAL       reduce using rule 47 (expressaoPostfix -> primaria DOT ID .)
-    NOTEQUAL        reduce using rule 47 (expressaoPostfix -> primaria DOT ID .)
-    EQUAL           reduce using rule 47 (expressaoPostfix -> primaria DOT ID .)
-    OROR            reduce using rule 47 (expressaoPostfix -> primaria DOT ID .)
-    ANDAND          reduce using rule 47 (expressaoPostfix -> primaria DOT ID .)
-    SEMICOLON       reduce using rule 47 (expressaoPostfix -> primaria DOT ID .)
-    LPAREN          reduce using rule 47 (expressaoPostfix -> primaria DOT ID .)
-    RBRACKET        reduce using rule 47 (expressaoPostfix -> primaria DOT ID .)
+    TIMES           reduce using rule 47 (expressaoMultiplicativa -> expressaoMultiplicativa MODULO expressaoUnaria .)
+    DIVIDE          reduce using rule 47 (expressaoMultiplicativa -> expressaoMultiplicativa MODULO expressaoUnaria .)
+    MODULO          reduce using rule 47 (expressaoMultiplicativa -> expressaoMultiplicativa MODULO expressaoUnaria .)
+    GREATER         reduce using rule 47 (expressaoMultiplicativa -> expressaoMultiplicativa MODULO expressaoUnaria .)
+    LESS            reduce using rule 47 (expressaoMultiplicativa -> expressaoMultiplicativa MODULO expressaoUnaria .)
+    GREATEREQUAL    reduce using rule 47 (expressaoMultiplicativa -> expressaoMultiplicativa MODULO expressaoUnaria .)
+    LESSEQUAL       reduce using rule 47 (expressaoMultiplicativa -> expressaoMultiplicativa MODULO expressaoUnaria .)
+    NOTEQUAL        reduce using rule 47 (expressaoMultiplicativa -> expressaoMultiplicativa MODULO expressaoUnaria .)
+    EQUAL           reduce using rule 47 (expressaoMultiplicativa -> expressaoMultiplicativa MODULO expressaoUnaria .)
+    PLUS            reduce using rule 47 (expressaoMultiplicativa -> expressaoMultiplicativa MODULO expressaoUnaria .)
+    MINUS           reduce using rule 47 (expressaoMultiplicativa -> expressaoMultiplicativa MODULO expressaoUnaria .)
+    OROR            reduce using rule 47 (expressaoMultiplicativa -> expressaoMultiplicativa MODULO expressaoUnaria .)
+    ANDAND          reduce using rule 47 (expressaoMultiplicativa -> expressaoMultiplicativa MODULO expressaoUnaria .)
+    SEMICOLON       reduce using rule 47 (expressaoMultiplicativa -> expressaoMultiplicativa MODULO expressaoUnaria .)
+    LPAREN          reduce using rule 47 (expressaoMultiplicativa -> expressaoMultiplicativa MODULO expressaoUnaria .)
+    RBRACKET        reduce using rule 47 (expressaoMultiplicativa -> expressaoMultiplicativa MODULO expressaoUnaria .)
 
 
-state 90
+state 104
 
-    (48) expressaoPostfix -> primaria ARROW ID .
+    (51) expressaoUnaria -> PLUS PLUS expressaoPostfix .
 
-    PLUS            reduce using rule 48 (expressaoPostfix -> primaria ARROW ID .)
-    MINUS           reduce using rule 48 (expressaoPostfix -> primaria ARROW ID .)
-    TIMES           reduce using rule 48 (expressaoPostfix -> primaria ARROW ID .)
-    DIVIDE          reduce using rule 48 (expressaoPostfix -> primaria ARROW ID .)
-    MODULO          reduce using rule 48 (expressaoPostfix -> primaria ARROW ID .)
-    GREATER         reduce using rule 48 (expressaoPostfix -> primaria ARROW ID .)
-    LESS            reduce using rule 48 (expressaoPostfix -> primaria ARROW ID .)
-    GREATEREQUAL    reduce using rule 48 (expressaoPostfix -> primaria ARROW ID .)
-    LESSEQUAL       reduce using rule 48 (expressaoPostfix -> primaria ARROW ID .)
-    NOTEQUAL        reduce using rule 48 (expressaoPostfix -> primaria ARROW ID .)
-    EQUAL           reduce using rule 48 (expressaoPostfix -> primaria ARROW ID .)
-    OROR            reduce using rule 48 (expressaoPostfix -> primaria ARROW ID .)
-    ANDAND          reduce using rule 48 (expressaoPostfix -> primaria ARROW ID .)
-    SEMICOLON       reduce using rule 48 (expressaoPostfix -> primaria ARROW ID .)
-    LPAREN          reduce using rule 48 (expressaoPostfix -> primaria ARROW ID .)
-    RBRACKET        reduce using rule 48 (expressaoPostfix -> primaria ARROW ID .)
-
-
-state 91
-
-    (53) primaria -> LPAREN expressao LPAREN .
-
-    LBRACKET        reduce using rule 53 (primaria -> LPAREN expressao LPAREN .)
-    LPAREN          reduce using rule 53 (primaria -> LPAREN expressao LPAREN .)
-    DOT             reduce using rule 53 (primaria -> LPAREN expressao LPAREN .)
-    ARROW           reduce using rule 53 (primaria -> LPAREN expressao LPAREN .)
-    PLUS            reduce using rule 53 (primaria -> LPAREN expressao LPAREN .)
-    MINUS           reduce using rule 53 (primaria -> LPAREN expressao LPAREN .)
-    TIMES           reduce using rule 53 (primaria -> LPAREN expressao LPAREN .)
-    DIVIDE          reduce using rule 53 (primaria -> LPAREN expressao LPAREN .)
-    MODULO          reduce using rule 53 (primaria -> LPAREN expressao LPAREN .)
-    GREATER         reduce using rule 53 (primaria -> LPAREN expressao LPAREN .)
-    LESS            reduce using rule 53 (primaria -> LPAREN expressao LPAREN .)
-    GREATEREQUAL    reduce using rule 53 (primaria -> LPAREN expressao LPAREN .)
-    LESSEQUAL       reduce using rule 53 (primaria -> LPAREN expressao LPAREN .)
-    NOTEQUAL        reduce using rule 53 (primaria -> LPAREN expressao LPAREN .)
-    EQUAL           reduce using rule 53 (primaria -> LPAREN expressao LPAREN .)
-    OROR            reduce using rule 53 (primaria -> LPAREN expressao LPAREN .)
-    ANDAND          reduce using rule 53 (primaria -> LPAREN expressao LPAREN .)
-    SEMICOLON       reduce using rule 53 (primaria -> LPAREN expressao LPAREN .)
-    RBRACKET        reduce using rule 53 (primaria -> LPAREN expressao LPAREN .)
+    TIMES           reduce using rule 51 (expressaoUnaria -> PLUS PLUS expressaoPostfix .)
+    DIVIDE          reduce using rule 51 (expressaoUnaria -> PLUS PLUS expressaoPostfix .)
+    MODULO          reduce using rule 51 (expressaoUnaria -> PLUS PLUS expressaoPostfix .)
+    GREATER         reduce using rule 51 (expressaoUnaria -> PLUS PLUS expressaoPostfix .)
+    LESS            reduce using rule 51 (expressaoUnaria -> PLUS PLUS expressaoPostfix .)
+    GREATEREQUAL    reduce using rule 51 (expressaoUnaria -> PLUS PLUS expressaoPostfix .)
+    LESSEQUAL       reduce using rule 51 (expressaoUnaria -> PLUS PLUS expressaoPostfix .)
+    NOTEQUAL        reduce using rule 51 (expressaoUnaria -> PLUS PLUS expressaoPostfix .)
+    EQUAL           reduce using rule 51 (expressaoUnaria -> PLUS PLUS expressaoPostfix .)
+    PLUS            reduce using rule 51 (expressaoUnaria -> PLUS PLUS expressaoPostfix .)
+    MINUS           reduce using rule 51 (expressaoUnaria -> PLUS PLUS expressaoPostfix .)
+    OROR            reduce using rule 51 (expressaoUnaria -> PLUS PLUS expressaoPostfix .)
+    ANDAND          reduce using rule 51 (expressaoUnaria -> PLUS PLUS expressaoPostfix .)
+    SEMICOLON       reduce using rule 51 (expressaoUnaria -> PLUS PLUS expressaoPostfix .)
+    LPAREN          reduce using rule 51 (expressaoUnaria -> PLUS PLUS expressaoPostfix .)
+    RBRACKET        reduce using rule 51 (expressaoUnaria -> PLUS PLUS expressaoPostfix .)
 
 
-state 92
+state 105
 
-    (16) parametros -> TIPO ID LBRACKET . RBRACKET
+    (52) expressaoUnaria -> MINUS MINUS expressaoPostfix .
 
-    RBRACKET        shift and go to state 99
+    TIMES           reduce using rule 52 (expressaoUnaria -> MINUS MINUS expressaoPostfix .)
+    DIVIDE          reduce using rule 52 (expressaoUnaria -> MINUS MINUS expressaoPostfix .)
+    MODULO          reduce using rule 52 (expressaoUnaria -> MINUS MINUS expressaoPostfix .)
+    GREATER         reduce using rule 52 (expressaoUnaria -> MINUS MINUS expressaoPostfix .)
+    LESS            reduce using rule 52 (expressaoUnaria -> MINUS MINUS expressaoPostfix .)
+    GREATEREQUAL    reduce using rule 52 (expressaoUnaria -> MINUS MINUS expressaoPostfix .)
+    LESSEQUAL       reduce using rule 52 (expressaoUnaria -> MINUS MINUS expressaoPostfix .)
+    NOTEQUAL        reduce using rule 52 (expressaoUnaria -> MINUS MINUS expressaoPostfix .)
+    EQUAL           reduce using rule 52 (expressaoUnaria -> MINUS MINUS expressaoPostfix .)
+    PLUS            reduce using rule 52 (expressaoUnaria -> MINUS MINUS expressaoPostfix .)
+    MINUS           reduce using rule 52 (expressaoUnaria -> MINUS MINUS expressaoPostfix .)
+    OROR            reduce using rule 52 (expressaoUnaria -> MINUS MINUS expressaoPostfix .)
+    ANDAND          reduce using rule 52 (expressaoUnaria -> MINUS MINUS expressaoPostfix .)
+    SEMICOLON       reduce using rule 52 (expressaoUnaria -> MINUS MINUS expressaoPostfix .)
+    LPAREN          reduce using rule 52 (expressaoUnaria -> MINUS MINUS expressaoPostfix .)
+    RBRACKET        reduce using rule 52 (expressaoUnaria -> MINUS MINUS expressaoPostfix .)
 
 
-state 93
+state 106
 
-    (17) parametros -> TIPO DOTDOTDOT ID .
+    (54) expressaoPostfix -> primaria LBRACKET expressao . RBRACKET
 
-    RPAREN          reduce using rule 17 (parametros -> TIPO DOTDOTDOT ID .)
+    RBRACKET        shift and go to state 116
 
 
-state 94
+state 107
+
+    (55) expressaoPostfix -> primaria LPAREN argumentos . RPAREN
+
+    RPAREN          shift and go to state 117
+
+
+state 108
+
+    (56) expressaoPostfix -> primaria DOT ID .
+
+    TIMES           reduce using rule 56 (expressaoPostfix -> primaria DOT ID .)
+    DIVIDE          reduce using rule 56 (expressaoPostfix -> primaria DOT ID .)
+    MODULO          reduce using rule 56 (expressaoPostfix -> primaria DOT ID .)
+    GREATER         reduce using rule 56 (expressaoPostfix -> primaria DOT ID .)
+    LESS            reduce using rule 56 (expressaoPostfix -> primaria DOT ID .)
+    GREATEREQUAL    reduce using rule 56 (expressaoPostfix -> primaria DOT ID .)
+    LESSEQUAL       reduce using rule 56 (expressaoPostfix -> primaria DOT ID .)
+    NOTEQUAL        reduce using rule 56 (expressaoPostfix -> primaria DOT ID .)
+    EQUAL           reduce using rule 56 (expressaoPostfix -> primaria DOT ID .)
+    PLUS            reduce using rule 56 (expressaoPostfix -> primaria DOT ID .)
+    MINUS           reduce using rule 56 (expressaoPostfix -> primaria DOT ID .)
+    OROR            reduce using rule 56 (expressaoPostfix -> primaria DOT ID .)
+    ANDAND          reduce using rule 56 (expressaoPostfix -> primaria DOT ID .)
+    SEMICOLON       reduce using rule 56 (expressaoPostfix -> primaria DOT ID .)
+    LPAREN          reduce using rule 56 (expressaoPostfix -> primaria DOT ID .)
+    RBRACKET        reduce using rule 56 (expressaoPostfix -> primaria DOT ID .)
+
+
+state 109
+
+    (57) expressaoPostfix -> primaria ARROW ID .
+
+    TIMES           reduce using rule 57 (expressaoPostfix -> primaria ARROW ID .)
+    DIVIDE          reduce using rule 57 (expressaoPostfix -> primaria ARROW ID .)
+    MODULO          reduce using rule 57 (expressaoPostfix -> primaria ARROW ID .)
+    GREATER         reduce using rule 57 (expressaoPostfix -> primaria ARROW ID .)
+    LESS            reduce using rule 57 (expressaoPostfix -> primaria ARROW ID .)
+    GREATEREQUAL    reduce using rule 57 (expressaoPostfix -> primaria ARROW ID .)
+    LESSEQUAL       reduce using rule 57 (expressaoPostfix -> primaria ARROW ID .)
+    NOTEQUAL        reduce using rule 57 (expressaoPostfix -> primaria ARROW ID .)
+    EQUAL           reduce using rule 57 (expressaoPostfix -> primaria ARROW ID .)
+    PLUS            reduce using rule 57 (expressaoPostfix -> primaria ARROW ID .)
+    MINUS           reduce using rule 57 (expressaoPostfix -> primaria ARROW ID .)
+    OROR            reduce using rule 57 (expressaoPostfix -> primaria ARROW ID .)
+    ANDAND          reduce using rule 57 (expressaoPostfix -> primaria ARROW ID .)
+    SEMICOLON       reduce using rule 57 (expressaoPostfix -> primaria ARROW ID .)
+    LPAREN          reduce using rule 57 (expressaoPostfix -> primaria ARROW ID .)
+    RBRACKET        reduce using rule 57 (expressaoPostfix -> primaria ARROW ID .)
+
+
+state 110
+
+    (62) primaria -> LPAREN expressao LPAREN .
+
+    LBRACKET        reduce using rule 62 (primaria -> LPAREN expressao LPAREN .)
+    LPAREN          reduce using rule 62 (primaria -> LPAREN expressao LPAREN .)
+    DOT             reduce using rule 62 (primaria -> LPAREN expressao LPAREN .)
+    ARROW           reduce using rule 62 (primaria -> LPAREN expressao LPAREN .)
+    TIMES           reduce using rule 62 (primaria -> LPAREN expressao LPAREN .)
+    DIVIDE          reduce using rule 62 (primaria -> LPAREN expressao LPAREN .)
+    MODULO          reduce using rule 62 (primaria -> LPAREN expressao LPAREN .)
+    GREATER         reduce using rule 62 (primaria -> LPAREN expressao LPAREN .)
+    LESS            reduce using rule 62 (primaria -> LPAREN expressao LPAREN .)
+    GREATEREQUAL    reduce using rule 62 (primaria -> LPAREN expressao LPAREN .)
+    LESSEQUAL       reduce using rule 62 (primaria -> LPAREN expressao LPAREN .)
+    NOTEQUAL        reduce using rule 62 (primaria -> LPAREN expressao LPAREN .)
+    EQUAL           reduce using rule 62 (primaria -> LPAREN expressao LPAREN .)
+    PLUS            reduce using rule 62 (primaria -> LPAREN expressao LPAREN .)
+    MINUS           reduce using rule 62 (primaria -> LPAREN expressao LPAREN .)
+    OROR            reduce using rule 62 (primaria -> LPAREN expressao LPAREN .)
+    ANDAND          reduce using rule 62 (primaria -> LPAREN expressao LPAREN .)
+    SEMICOLON       reduce using rule 62 (primaria -> LPAREN expressao LPAREN .)
+    RBRACKET        reduce using rule 62 (primaria -> LPAREN expressao LPAREN .)
+
+
+state 111
+
+    (16) parametro -> TIPO ID LBRACKET . RBRACKET
+
+    RBRACKET        shift and go to state 118
+
+
+state 112
+
+    (17) parametro -> TIPO DOTDOTDOT ID .
+
+    COMMA           reduce using rule 17 (parametro -> TIPO DOTDOTDOT ID .)
+    RPAREN          reduce using rule 17 (parametro -> TIPO DOTDOTDOT ID .)
+
+
+state 113
 
     (12) declaracaoFuncao -> TIPO ID LPAREN parametros RPAREN bloco .
 
@@ -1875,7 +2662,7 @@ state 94
     RBRACE          reduce using rule 12 (declaracaoFuncao -> TIPO ID LPAREN parametros RPAREN bloco .)
 
 
-state 95
+state 114
 
     (19) bloco -> LBRACE . declaracao RBRACE
     (3) declaracao -> . declaracaoVariavel
@@ -1894,78 +2681,79 @@ state 95
     LBRACE          shift and go to state 8
     COMMENT         shift and go to state 9
 
-    declaracao                     shift and go to state 100
+    declaracao                     shift and go to state 119
     declaracaoVariavel             shift and go to state 3
     declaracaoFuncao               shift and go to state 4
     declaracaoEstrutura            shift and go to state 5
     comentario                     shift and go to state 6
 
-state 96
+state 115
 
-    (14) parametros -> PARAMETRO COMMA parametros .
+    (14) parametros -> parametro COMMA parametros .
 
-    RPAREN          reduce using rule 14 (parametros -> PARAMETRO COMMA parametros .)
-
-
-state 97
-
-    (45) expressaoPostfix -> primaria LBRACKET expressao RBRACKET .
-
-    PLUS            reduce using rule 45 (expressaoPostfix -> primaria LBRACKET expressao RBRACKET .)
-    MINUS           reduce using rule 45 (expressaoPostfix -> primaria LBRACKET expressao RBRACKET .)
-    TIMES           reduce using rule 45 (expressaoPostfix -> primaria LBRACKET expressao RBRACKET .)
-    DIVIDE          reduce using rule 45 (expressaoPostfix -> primaria LBRACKET expressao RBRACKET .)
-    MODULO          reduce using rule 45 (expressaoPostfix -> primaria LBRACKET expressao RBRACKET .)
-    GREATER         reduce using rule 45 (expressaoPostfix -> primaria LBRACKET expressao RBRACKET .)
-    LESS            reduce using rule 45 (expressaoPostfix -> primaria LBRACKET expressao RBRACKET .)
-    GREATEREQUAL    reduce using rule 45 (expressaoPostfix -> primaria LBRACKET expressao RBRACKET .)
-    LESSEQUAL       reduce using rule 45 (expressaoPostfix -> primaria LBRACKET expressao RBRACKET .)
-    NOTEQUAL        reduce using rule 45 (expressaoPostfix -> primaria LBRACKET expressao RBRACKET .)
-    EQUAL           reduce using rule 45 (expressaoPostfix -> primaria LBRACKET expressao RBRACKET .)
-    OROR            reduce using rule 45 (expressaoPostfix -> primaria LBRACKET expressao RBRACKET .)
-    ANDAND          reduce using rule 45 (expressaoPostfix -> primaria LBRACKET expressao RBRACKET .)
-    SEMICOLON       reduce using rule 45 (expressaoPostfix -> primaria LBRACKET expressao RBRACKET .)
-    LPAREN          reduce using rule 45 (expressaoPostfix -> primaria LBRACKET expressao RBRACKET .)
-    RBRACKET        reduce using rule 45 (expressaoPostfix -> primaria LBRACKET expressao RBRACKET .)
+    RPAREN          reduce using rule 14 (parametros -> parametro COMMA parametros .)
 
 
-state 98
+state 116
 
-    (46) expressaoPostfix -> primaria LPAREN argumentos RPAREN .
+    (54) expressaoPostfix -> primaria LBRACKET expressao RBRACKET .
 
-    PLUS            reduce using rule 46 (expressaoPostfix -> primaria LPAREN argumentos RPAREN .)
-    MINUS           reduce using rule 46 (expressaoPostfix -> primaria LPAREN argumentos RPAREN .)
-    TIMES           reduce using rule 46 (expressaoPostfix -> primaria LPAREN argumentos RPAREN .)
-    DIVIDE          reduce using rule 46 (expressaoPostfix -> primaria LPAREN argumentos RPAREN .)
-    MODULO          reduce using rule 46 (expressaoPostfix -> primaria LPAREN argumentos RPAREN .)
-    GREATER         reduce using rule 46 (expressaoPostfix -> primaria LPAREN argumentos RPAREN .)
-    LESS            reduce using rule 46 (expressaoPostfix -> primaria LPAREN argumentos RPAREN .)
-    GREATEREQUAL    reduce using rule 46 (expressaoPostfix -> primaria LPAREN argumentos RPAREN .)
-    LESSEQUAL       reduce using rule 46 (expressaoPostfix -> primaria LPAREN argumentos RPAREN .)
-    NOTEQUAL        reduce using rule 46 (expressaoPostfix -> primaria LPAREN argumentos RPAREN .)
-    EQUAL           reduce using rule 46 (expressaoPostfix -> primaria LPAREN argumentos RPAREN .)
-    OROR            reduce using rule 46 (expressaoPostfix -> primaria LPAREN argumentos RPAREN .)
-    ANDAND          reduce using rule 46 (expressaoPostfix -> primaria LPAREN argumentos RPAREN .)
-    SEMICOLON       reduce using rule 46 (expressaoPostfix -> primaria LPAREN argumentos RPAREN .)
-    LPAREN          reduce using rule 46 (expressaoPostfix -> primaria LPAREN argumentos RPAREN .)
-    RBRACKET        reduce using rule 46 (expressaoPostfix -> primaria LPAREN argumentos RPAREN .)
-
-
-state 99
-
-    (16) parametros -> TIPO ID LBRACKET RBRACKET .
-
-    RPAREN          reduce using rule 16 (parametros -> TIPO ID LBRACKET RBRACKET .)
+    TIMES           reduce using rule 54 (expressaoPostfix -> primaria LBRACKET expressao RBRACKET .)
+    DIVIDE          reduce using rule 54 (expressaoPostfix -> primaria LBRACKET expressao RBRACKET .)
+    MODULO          reduce using rule 54 (expressaoPostfix -> primaria LBRACKET expressao RBRACKET .)
+    GREATER         reduce using rule 54 (expressaoPostfix -> primaria LBRACKET expressao RBRACKET .)
+    LESS            reduce using rule 54 (expressaoPostfix -> primaria LBRACKET expressao RBRACKET .)
+    GREATEREQUAL    reduce using rule 54 (expressaoPostfix -> primaria LBRACKET expressao RBRACKET .)
+    LESSEQUAL       reduce using rule 54 (expressaoPostfix -> primaria LBRACKET expressao RBRACKET .)
+    NOTEQUAL        reduce using rule 54 (expressaoPostfix -> primaria LBRACKET expressao RBRACKET .)
+    EQUAL           reduce using rule 54 (expressaoPostfix -> primaria LBRACKET expressao RBRACKET .)
+    PLUS            reduce using rule 54 (expressaoPostfix -> primaria LBRACKET expressao RBRACKET .)
+    MINUS           reduce using rule 54 (expressaoPostfix -> primaria LBRACKET expressao RBRACKET .)
+    OROR            reduce using rule 54 (expressaoPostfix -> primaria LBRACKET expressao RBRACKET .)
+    ANDAND          reduce using rule 54 (expressaoPostfix -> primaria LBRACKET expressao RBRACKET .)
+    SEMICOLON       reduce using rule 54 (expressaoPostfix -> primaria LBRACKET expressao RBRACKET .)
+    LPAREN          reduce using rule 54 (expressaoPostfix -> primaria LBRACKET expressao RBRACKET .)
+    RBRACKET        reduce using rule 54 (expressaoPostfix -> primaria LBRACKET expressao RBRACKET .)
 
 
-state 100
+state 117
+
+    (55) expressaoPostfix -> primaria LPAREN argumentos RPAREN .
+
+    TIMES           reduce using rule 55 (expressaoPostfix -> primaria LPAREN argumentos RPAREN .)
+    DIVIDE          reduce using rule 55 (expressaoPostfix -> primaria LPAREN argumentos RPAREN .)
+    MODULO          reduce using rule 55 (expressaoPostfix -> primaria LPAREN argumentos RPAREN .)
+    GREATER         reduce using rule 55 (expressaoPostfix -> primaria LPAREN argumentos RPAREN .)
+    LESS            reduce using rule 55 (expressaoPostfix -> primaria LPAREN argumentos RPAREN .)
+    GREATEREQUAL    reduce using rule 55 (expressaoPostfix -> primaria LPAREN argumentos RPAREN .)
+    LESSEQUAL       reduce using rule 55 (expressaoPostfix -> primaria LPAREN argumentos RPAREN .)
+    NOTEQUAL        reduce using rule 55 (expressaoPostfix -> primaria LPAREN argumentos RPAREN .)
+    EQUAL           reduce using rule 55 (expressaoPostfix -> primaria LPAREN argumentos RPAREN .)
+    PLUS            reduce using rule 55 (expressaoPostfix -> primaria LPAREN argumentos RPAREN .)
+    MINUS           reduce using rule 55 (expressaoPostfix -> primaria LPAREN argumentos RPAREN .)
+    OROR            reduce using rule 55 (expressaoPostfix -> primaria LPAREN argumentos RPAREN .)
+    ANDAND          reduce using rule 55 (expressaoPostfix -> primaria LPAREN argumentos RPAREN .)
+    SEMICOLON       reduce using rule 55 (expressaoPostfix -> primaria LPAREN argumentos RPAREN .)
+    LPAREN          reduce using rule 55 (expressaoPostfix -> primaria LPAREN argumentos RPAREN .)
+    RBRACKET        reduce using rule 55 (expressaoPostfix -> primaria LPAREN argumentos RPAREN .)
+
+
+state 118
+
+    (16) parametro -> TIPO ID LBRACKET RBRACKET .
+
+    COMMA           reduce using rule 16 (parametro -> TIPO ID LBRACKET RBRACKET .)
+    RPAREN          reduce using rule 16 (parametro -> TIPO ID LBRACKET RBRACKET .)
+
+
+state 119
 
     (19) bloco -> LBRACE declaracao . RBRACE
 
-    RBRACE          shift and go to state 101
+    RBRACE          shift and go to state 120
 
 
-state 101
+state 120
 
     (19) bloco -> LBRACE declaracao RBRACE .
 
@@ -1978,4 +2766,4 @@ state 101
 WARNING: 
 WARNING: Conflicts:
 WARNING: 
-WARNING: shift/reduce conflict for LPAREN in state 34 resolved as shift
+WARNING: shift/reduce conflict for LPAREN in state 35 resolved as shift

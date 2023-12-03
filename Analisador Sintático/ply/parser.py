@@ -46,9 +46,14 @@ def p_declaracaoFuncao(p):
 
 def p_parametros(p):
     """
-    parametros : PARAMETRO
-                | PARAMETRO COMMA parametros
-                | TIPO ID
+    parametros : parametro
+                | parametro COMMA parametros
+    """
+
+
+def p_parametro(p):
+    """
+        parametro : TIPO ID
                 | TIPO ID LBRACKET RBRACKET
                 | TIPO DOTDOTDOT ID
     """
@@ -80,6 +85,7 @@ def p_expressaoLogica(p):
                     | NOT expressaoRelacional
     """
 
+
 def p_expressaoRelacional(p):
     """
     expressaoRelacional : expressaoAritmetica
@@ -95,14 +101,28 @@ def p_expressaoRelacional(p):
 def p_expressao(p):
     """
     expressao : expressaoLogica
+            | atribuicao
+    """
+
+
+def p_atribuicao(p):
+    """
+        atribuicao : ID EQUALS expressao
+                    | ID PLUSEQUAL expressao
+                    | ID MINUSEQUAL expressao
+                    | ID TIMESEQUAL expressao
+                    | ID DIVEQUAL expressao
+                    | ID MODEQUAL expressao
+                    | ID ANDANDEQUAL expressao
+                    | ID OROREQUAL expressao
     """
 
 
 def p_expressaoAritmetica(p):
     """
     expressaoAritmetica : expressaoMultiplicativa
-                        | expressaoMultiplicativa PLUS expressaoMultiplicativa
-                        | expressaoMultiplicativa MINUS expressaoMultiplicativa
+                        | expressaoAritmetica PLUS expressaoMultiplicativa
+                        | expressaoAritmetica MINUS expressaoMultiplicativa
     """
 
 
@@ -147,6 +167,7 @@ def p_primaria(p):
             | NUM_INT
             | NUM_DEC
             | LPAREN expressao LPAREN
+            | TEXTO
     """
 
 
